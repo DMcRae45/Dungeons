@@ -13,6 +13,8 @@
     include 'header.php';
 ?>
 <!-- </head> -->
+<title>Dungeons - Cookie Policy</title>
+
 <div class="container">
   <h1>Cookie Policy for Dungeons</h1>
 
