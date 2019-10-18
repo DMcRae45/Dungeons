@@ -8,7 +8,7 @@
 <html>
 <!-- <head> -->
 <?php
-    include 'session.php';
+    include '../Model/session.php';
     // include the api file here. include....
     include 'header.php';
 ?>

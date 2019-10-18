@@ -8,7 +8,7 @@
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-  <a href="index.php"><img src="images/DPH.png"></a>
+  <a href="index.php"><img src="images/Dungeons.png"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -18,7 +18,7 @@
     <ul class="navbar-nav mr-auto">
 
         <li class="nav-item active">
-            <a class="nav-link" href="index.php">Movies <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="index.php">Dungeons <span class="sr-only">(current)</span></a>
         </li>
 
         <li class="nav-item dropdown active">
@@ -55,14 +55,5 @@
             </div>
         </li>
     </ul>
-
-    <form action='searchResults.php' method='post' class="form-inline my-2 my-lg-0">
-      <div class='input-group input-group-sm'>
-        <input type='text' class='form-control' placeholder="Movie search..." aria-label='Small' aria-describedby='inputGroup-sizing-sm' id='searchTitle' name='searchTitle'>
-        <div class='input-group-append'>
-          <button id='search-by-title-button' name='search-by-title-button' type='submit' class='btn btn-outline-info'>Search</button>
-        </div>
-      </div>
-    </form>
   </div>
 </nav>

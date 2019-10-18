@@ -1,0 +1,33 @@
+/*
+    Description: Custom colour scheme used for the website.
+    to be called after any bootstrap files
+    this will overite the standard bootstrap colours.
+
+    Author: David McRae
+ */
+body, .form-control, .input-group-text, .custom-select, .list-group-item
+{
+  background-color: #17181c;
+  color:#17a2b8;
+}
+
+.card
+{
+  width:100%;
+}
+
+.card-body, .card-title, .card-text, .card-header
+{
+    background-color: #2a2c33;
+    color: #ffffff;
+    text-decoration:none;
+}
+hr
+{
+  background-color: #2a2c33;
+  color: #2a2c33;
+}
+h1, h2, text, .text
+{
+  color: #ffffff;
+}
