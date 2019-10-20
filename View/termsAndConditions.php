@@ -3,7 +3,7 @@
     Description: Dungeons Terms and conditions page explaining simplified cookie usage.
     Author: David McRae
 */
-include 'session.php';
+include '../Model/session.php';
 ?>
 <html>
 <!--<head>-->

@@ -11,23 +11,13 @@ body, .form-control, .input-group-text, .custom-select, .list-group-item
   color:#17a2b8;
 }
 
-.card
+h1, h2, text, .text
 {
-  width:100%;
+  color: #ffffff;
 }
 
-.card-body, .card-title, .card-text, .card-header
-{
-    background-color: #2a2c33;
-    color: #ffffff;
-    text-decoration:none;
-}
 hr
 {
   background-color: #2a2c33;
   color: #2a2c33;
-}
-h1, h2, text, .text
-{
-  color: #ffffff;
 }

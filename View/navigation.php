@@ -39,9 +39,9 @@
             <?php
                 if(!isset($_SESSION['LoggedIn']))
                 {
-                  echo '<a class="dropdown-item" href="customerLogin.php">Login</a>';
+                  echo '<a class="dropdown-item" href="userLogin.php">Login</a>';
                   echo '<div class="dropdown-divider"></div>';  // divider between menu items
-                  echo '<a class="dropdown-item" href="registerCustomer.php">Register</a>';
+                  echo '<a class="dropdown-item" href="userRegister.php">Register</a>';
                 }
                 if(isset($_SESSION['LoggedIn']) && isset($_SESSION['firstname']))
                 {

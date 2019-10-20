@@ -29,9 +29,9 @@
             <a href="https://www.linkedin.com/in/David-McRae-Software/" class="fab fa-linkedin fa-3x"></a>
           </p>
           <p>
-            <a href="http://www.facebook.com/share.php?u=https://mayar.abertay.ac.uk/~1403163/DPH/View/index.php" class="fab fa-facebook-square fa-3x"></a>
-            <a href="https://twitter.com/intent/tweet?url=https://mayar.abertay.ac.uk/~1403163/DPH/View/index.php" class="fab fa-twitter-square fa-3x"></a>
-            <a href="http://instagram.com/share?ref_scr=https://mayar.abertay.ac.uk/~1403163/DPH/View/index.php" class="fab fa-instagram fa-3x"></a>
+            <a href="http://www.facebook.com/share.php?u=https://mayar.abertay.ac.uk/~1403163/Dungeons/View/index.php" class="fab fa-facebook-square fa-3x"></a>
+            <a href="https://twitter.com/intent/tweet?url=https://mayar.abertay.ac.uk/~1403163/Dungeons/View/index.php" class="fab fa-twitter-square fa-3x"></a>
+            <a href="http://instagram.com/share?ref_scr=https://mayar.abertay.ac.uk/~1403163/Dungeons/View/index.php" class="fab fa-instagram fa-3x"></a>
           </p>
         </div>
         <!-- Grid column -->
