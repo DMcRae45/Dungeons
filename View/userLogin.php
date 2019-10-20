@@ -55,7 +55,7 @@
 
     </form>
 
-    <p>Don't have an account? Sign up <a href="registerUser.php">here!</a></p>
+    <p>Don't have an account? Sign up <a href="userRegister.php">here!</a></p>
 
   </div>
   <!-- <footer> -->

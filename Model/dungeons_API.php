@@ -94,7 +94,7 @@ function CreateNewUser()
       $query = $connection->prepare
       ("
 
-      INSERT INTO Dungeons_User (First_Name, Surname, Email, Username, Password)
+      INSERT INTO Dungeons_User (FirstName, Surname, Email, Username, Password)
       VALUES( :firstName, :surname, :email, :username, :password)
 
       ");
