@@ -94,7 +94,7 @@ function CreateNewUser()
       $query = $connection->prepare
       ("
 
-      INSERT INTO Dungeon_User (First_Name, Surname, Email, Username, Password)
+      INSERT INTO Dungeons_User (First_Name, Surname, Email, Username, Password)
       VALUES( :firstName, :surname, :email, :username, :password)
 
       ");
@@ -143,7 +143,7 @@ function AttemptUserLogin()
       $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
       $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
-      $sql = "SELECT * FROM Dungeon_User WHERE Username = :username";
+      $sql = "SELECT * FROM Dungeons_User WHERE Username = :username";
 
       $stmt = $connection->prepare($sql);
       $success = $stmt->execute(['username' => $username]);
