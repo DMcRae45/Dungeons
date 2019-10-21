@@ -9,7 +9,7 @@
 <div class="text-center mt-5">
   <h5 class="text-uppercase">Additional Information</h5>
 
-  <a href="TermsAndConditions.php">Terms And Conditions</a>
+  <a href="termsAndConditions.php">Terms And Conditions</a>
   </br>
 <br>
 </div>

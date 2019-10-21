@@ -130,7 +130,6 @@ function CreateNewUser()
   }
 }
 
-
 //Login Customer
 function AttemptUserLogin()
 {
@@ -182,4 +181,23 @@ function AttemptUserLogin()
     header('Location: ../View/userLogin.php?error='.$errorString);
   }
 }
+
+function GetAllSpells()
+{
+  //$spellName = (filter_input(INPUT_POST, 'spellName', FILTER_SANITIZE_STRING)); //Sanitize the string
+  $spells = file_get_contents("https://api.open5e.com/spells/"); //Get a list of search results from the OMDb API
+  return $spells; //Return the results
+}
+
+function SearchBySpellName()
+{
+  if(isset($_POST['searchBySpellName']))
+  {
+    $spellName = (filter_input(INPUT_POST, 'spellName', FILTER_SANITIZE_STRING)); //Sanitize the string
+    $spellName = str_replace(' ', '-', $spellName); //Replace any whitespace with '+' symbols to work on a url
+    $listOfMovies = file_get_contents("api.open5e.com/spells/".$spellName); //Get a list of search results from the OMDb API
+    return $listOfMovies; //Return the results
+  }
+}
+
 ?>

@@ -15,6 +15,18 @@
 <!-- </head> -->
 <title>Dungeons - Home</title>
 
+
+<?php
+
+?>
+
+
+
+
+
+
+
+
 <!-- <footer> -->
 <?php
   include 'footer.php';
