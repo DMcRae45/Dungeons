@@ -21,11 +21,44 @@
   {
     for ($i=0 ; $i < sizeof($spellsArray->results) ; $i++)
     {
-      echo "<div class='col-md-4'>";
-      echo '<div class="card" style="width: 20rem;">'; // Open card div
-      echo '<h5 class="card-title">'.$spellsArray->results[$i]->name.'</h5>'; // card titleecho '<div class="card-body">';// open card body
-      echo '<h5 class="card-title">'.$spellsArray->results[$i]->range.'</h5>'; // card title
-      echo '</div>';// close card body
+
+      if($spellsArray->results[$i]->level_int > 0)
+      {
+        $level = "LEVEL: ".$spellsArray->results[$i]->level_int;
+      }
+      else
+      {
+        $level = "CANTRIP";
+      }
+
+      echo '<div class="container">';
+      echo '<ul class="list-group">
+
+              <li class="list-group-item d-flex justify-content-between align-items-center">Name: <text>'.$spellsArray->results[$i]->name.'</text>
+                <span class="badge badge-primary badge-pill">'.$level.'</span>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between align-items-center">Components: <text>'.$spellsArray->results[$i]->components.'</text>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between align-items-center">Material: <text>'.$spellsArray->results[$i]->material.'</text>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between align-items-center">Casting Time: <text>'.$spellsArray->results[$i]->casting_time.'</text>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between align-items-center">Range: <text>'.$spellsArray->results[$i]->range.'</text>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between align-items-center"><text>'.nl2br($spellsArray->results[$i]->desc).'</text>
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between align-items-center"><text>'.nl2br($spellsArray->results[$i]->higher_level).'</text>
+              </li>
+            </ul>
+            <hr>
+            ';
+      echo '</div>';
     }
   }
   else
