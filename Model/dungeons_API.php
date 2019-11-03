@@ -184,19 +184,18 @@ function AttemptUserLogin()
 
 function GetAllSpells()
 {
-  //$spellName = (filter_input(INPUT_POST, 'spellName', FILTER_SANITIZE_STRING)); //Sanitize the string
-  $spells = file_get_contents("https://api.open5e.com/spells/"); //Get a list of search results from the OMDb API
+  $spells = file_get_contents("https://api.open5e.com/spells/"); //Get a list of search results from the API
   return $spells; //Return the results
 }
 
-function SearchBySpellName()
+function GetSpellByName()
 {
-  if(isset($_POST['searchBySpellName']))
+  if(isset($_POST['getBySpellName']))
   {
     $spellName = (filter_input(INPUT_POST, 'spellName', FILTER_SANITIZE_STRING)); //Sanitize the string
     $spellName = str_replace(' ', '-', $spellName); //Replace any whitespace with '+' symbols to work on a url
-    $listOfMovies = file_get_contents("https://api.open5e.com/spells/".$spellName); //Get a list of search results from the OMDb API
-    return $listOfMovies; //Return the results
+    $spell = file_get_contents("https://api.open5e.com/spells/".$spellName); //Get a list of search results from the OMDb API
+    return $spell; //Return the results
   }
 }
 

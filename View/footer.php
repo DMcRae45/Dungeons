@@ -38,8 +38,6 @@
 
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">
-      © 2019 Copyright: <a href="https://www.abertay.ac.uk/">Abertay University</a>
-      </br>
       </br>
       Dungeons interactive DM Screen is unofficial Fan Content permitted under the Fan Content Policy. </br>
       Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. </br>
