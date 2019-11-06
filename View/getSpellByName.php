@@ -27,10 +27,7 @@ echo "
 </form>
 ";
 
-
-
-
-  ?>
+?>
 </div>
 <!-- <footer> -->
         <?php include 'footer.php'; ?>

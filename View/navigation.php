@@ -12,7 +12,6 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a href="allSpells.php">All Spells</a>
 
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
@@ -25,11 +24,11 @@
         <li class="nav-item dropdown active">
 
             <?php
-                if(!isset($_SESSION['LoggedIn']))
+                if(!isset($_SESSION['userid']))
                 {
                     echo '<a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>';
                 }
-                if(isset($_SESSION['LoggedIn']))
+                if(isset($_SESSION['userid']))
                 {
                     echo '<a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.$_SESSION['username'].'</a>';
                 }
@@ -38,17 +37,21 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
             <?php
-                if(!isset($_SESSION['LoggedIn']))
+                if(!isset($_SESSION['userid']))
                 {
                   echo '<a class="dropdown-item" href="userLogin.php">Login</a>';
                   echo '<div class="dropdown-divider"></div>';  // divider between menu items
                   echo '<a class="dropdown-item" href="userRegister.php">Register</a>';
                 }
-                if(isset($_SESSION['LoggedIn']) && isset($_SESSION['firstname']))
+                if(isset($_SESSION['userid']))
                 {
                   // logged in users can see this part
+                    echo '<a class="dropdown-item" href="screen.php">DM Screen</a>';
+                    echo '<div class="dropdown-divider"></div>';  // divider between menu items
+                    echo '<a class="dropdown-item" href="allSpells.php">ALL Spells</a>';
+
                 }
-                if(isset($_SESSION['Admin']))
+                if(isset($_SESSION['admin']))
                 {
                   // admins can see this part
                 }

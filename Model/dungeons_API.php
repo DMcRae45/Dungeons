@@ -153,8 +153,7 @@ function AttemptUserLogin()
 
         if ($result && password_verify($password, $result['Password']))
         {
-          $_SESSION['LoggedIn'] = true;
-          $_SESSION['userid'] = $result['Customer_ID'];
+          $_SESSION['userid'] = $result['User_ID'];
           $_SESSION['username'] = $result['Username'];
           $_SESSION['firstname'] = $result['First_Name'];
           header('location: ../View/index.php');
@@ -190,12 +189,29 @@ function GetAllSpells()
 
 function GetSpellByName()
 {
-  if(isset($_POST['getBySpellName']))
+  if(isset($_POST['getSpellByName']))
   {
     $spellName = (filter_input(INPUT_POST, 'spellName', FILTER_SANITIZE_STRING)); //Sanitize the string
     $spellName = str_replace(' ', '-', $spellName); //Replace any whitespace with '+' symbols to work on a url
     $spell = file_get_contents("https://api.open5e.com/spells/".$spellName); //Get a list of search results from the OMDb API
     return $spell; //Return the results
+  }
+}
+
+function GetAllMonsters()
+{
+  $spells = file_get_contents("https://api.open5e.com/spells/"); //Get a list of search results from the API
+  return $spells; //Return the results
+}
+
+function GetMonsterByName()
+{
+  if(isset($_POST['getMonsterByName']))
+  {
+    $monsterName = (filter_input(INPUT_POST, 'monsterName', FILTER_SANITIZE_STRING)); //Sanitize the string
+    $monsterName = str_replace(' ', '-', $monsterName); //Replace any whitespace with '+' symbols to work on a url
+    $monster = file_get_contents("https://api.open5e.com/monsters/".$monsterName); //Get a list of search results from the OMDb API
+    return $monster; //Return the results
   }
 }
 

@@ -8,16 +8,46 @@
 body, .form-control, .input-group-text, .custom-select, .list-group-item
 {
   background-color: #17181c;
-  color:#17a2b8;
+  color:#f7a416;
 }
-
+.bg-Custom
+{
+  background-color: #17181c;
+}
 h1, h2, text, .text
 {
   color: #ffffff;
+  display:inline;
+}
+
+h6, h4
+{
+  display:inline;
 }
 
 hr
 {
   background-color: #2a2c33;
   color: #2a2c33;
+}
+
+.cave
+{
+  background-image: url('images/cave.jpg');
+}
+.parchment
+{
+  background-image: url('images/parchment.jpg');
+}
+
+.parchment-header
+{
+  color: black;
+  display: block;
+  font-size: .83em;
+  margin-top: 1.67em;
+  margin-bottom: 1.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
 }

@@ -4,16 +4,16 @@
 
     Author:David McRae
  */
-if(isset($_POST['getSpellByName']))
+if(isset($_POST['getMonsterByName']))
 {
   include '../Model/session.php';
   include '../Model/dungeons_API.php';
 
 
-  $spell = GetSpellByName();
-  $spellArray = json_decode($spell);
+  $monster = GetMonsterByName();
+  $monsterArray = json_decode($monster);
 
-  $_SESSION['lastSpell'] = $spellArray;
+  $_SESSION['lastMonster'] = $monsterArray;
 
   header('Location: ../View/screen.php');
 }
