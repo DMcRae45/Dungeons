@@ -1,5 +1,5 @@
 <?php
-//Insert new Customer to database
+//Insert new User to database
 function CreateNewUser()
 {
   if ($_COOKIE['cookiebar'] == "CookieAllowed") // User Has Accepted Cookie policy
@@ -8,25 +8,16 @@ function CreateNewUser()
     {
       Require 'connection.php';
 
-      $firstName = (filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_STRING));
-      $surname = (filter_input(INPUT_POST, 'surname', FILTER_SANITIZE_STRING));
       $email = (filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
       $username = (filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING));
       $password = (filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING));
       $passwordConfirm = (filter_input(INPUT_POST, 'passwordConfirm', FILTER_SANITIZE_STRING));
 
       $Error = false;
-      $nameError;
       $emailError;
       $usernameError;
       $passwordError;
       $passwordConfirmError;
-
-      if (!preg_match("/^[a-zA-Z ]*$/",$firstName) || !preg_match("/^[a-zA-Z ]*$/",$surname)) // First & Surname must be Letters
-      {
-        $Error = true;
-        $nameError = ":Your name can only contain letters";
-      }
 
       if (!filter_var($email, FILTER_VALIDATE_EMAIL)) // Email Must be Valid format. e.g. @xxxxx.xx.xx
       {
@@ -34,7 +25,7 @@ function CreateNewUser()
         $emailError = ":Invalid email format";
       }
 
-      if(!preg_match("/^[a-zA-Z0-9]*$/", $username))//Username Must be letters & Numbers
+      if(!preg_match("/^[a-zA-Z0-9]*$/", $username))//Username Must contain only letters & Numbers
       {
         $Error = true;
         $usernameError = ":Username Must Contain only letters and numbers";
@@ -81,7 +72,7 @@ function CreateNewUser()
 
     if($Error == true) // An Error Has Occured
     {
-      $errorString = $nameError.$emailError.$usernameError.$passwordError.$passwordConfirmError;
+      $errorString = $emailError.$usernameError.$passwordError.$passwordConfirmError;
       header('Location: ../View/userRegister.php?error='.$errorString);
     }
     else // Continue with the Registration
@@ -90,20 +81,17 @@ function CreateNewUser()
       $password = password_hash($password, PASSWORD_DEFAULT);
       $passwordConfirm = "";
 
-      // Create SQL Template
       $query = $connection->prepare
       ("
 
-      INSERT INTO Dungeons_User (FirstName, Surname, Email, Username, Password)
-      VALUES( :firstName, :surname, :email, :username, :password)
+      INSERT INTO User (Email, Username, Password)
+      VALUES(:email, :username, :password)
 
       ");
 
       // Runs and executes the query
       $success = $query->execute
       ([
-        'firstName' => $firstName,
-        'surname' => $surname,
         'email' => $email,
         'username' => $username,
         'password' => $password
@@ -130,7 +118,7 @@ function CreateNewUser()
   }
 }
 
-//Login Customer
+//Login User
 function AttemptUserLogin()
 {
   if ($_COOKIE['cookiebar'] == "CookieAllowed") // User Has Accepted Cookie policy
@@ -142,7 +130,7 @@ function AttemptUserLogin()
       $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
       $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
-      $sql = "SELECT * FROM Dungeons_User WHERE Username = :username";
+      $sql = "SELECT * FROM User WHERE Username = :username";
 
       $stmt = $connection->prepare($sql);
       $success = $stmt->execute(['username' => $username]);
@@ -155,7 +143,6 @@ function AttemptUserLogin()
         {
           $_SESSION['userid'] = $result['User_ID'];
           $_SESSION['username'] = $result['Username'];
-          $_SESSION['firstname'] = $result['First_Name'];
           header('location: ../View/index.php');
         }
         else
@@ -191,9 +178,9 @@ function GetSpellByName()
 {
   if(isset($_POST['getSpellByName']))
   {
-    $spellName = (filter_input(INPUT_POST, 'spellName', FILTER_SANITIZE_STRING)); //Sanitize the string
-    $spellName = str_replace(' ', '-', $spellName); //Replace any whitespace with '+' symbols to work on a url
-    $spell = file_get_contents("https://api.open5e.com/spells/".$spellName); //Get a list of search results from the OMDb API
+    $spellName = (filter_input(INPUT_POST, 'spellName', FILTER_SANITIZE_STRING)); // Sanitize the string
+    $spellName = str_replace(' ', '-', $spellName); //Replace any whitespace with '-' symbols to work in the API
+    $spell = file_get_contents("https://api.open5e.com/spells/".$spellName); //Get a list of search results from the Open5E API
     return $spell; //Return the results
   }
 }
@@ -208,10 +195,23 @@ function GetMonsterByName()
 {
   if(isset($_POST['getMonsterByName']))
   {
-    $monsterName = (filter_input(INPUT_POST, 'monsterName', FILTER_SANITIZE_STRING)); //Sanitize the string
-    $monsterName = str_replace(' ', '-', $monsterName); //Replace any whitespace with '+' symbols to work on a url
-    $monster = file_get_contents("https://api.open5e.com/monsters/".$monsterName); //Get a list of search results from the OMDb API
+    $monsterName = (filter_input(INPUT_POST, 'monsterName', FILTER_SANITIZE_STRING)); // Sanitize the string
+    $monsterName = str_replace(' ', '-', $monsterName); // Replace any whitespace with '-' symbols to work on a url
+    $monster = file_get_contents("https://api.open5e.com/monsters/".$monsterName); // Get a list of search results from the Open 5e API
     return $monster; //Return the results
+  }
+}
+
+function Roll()
+{
+  $amount = (filter_input(INPUT_POST, 'amount', FILTER_SANITIZE_NUMBER));
+  $dice = (filter_input(INPUT_POST, 'dice', FILTER_SANITIZE_NUMBER));
+
+  $count = 0;
+  while ($count <= $amount)
+  {
+    $number = Rand(1,$dice);
+    echo $number;
   }
 }
 

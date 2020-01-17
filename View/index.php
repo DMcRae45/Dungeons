@@ -16,15 +16,15 @@
 <title>Dungeons - Home</title>
 
 
-<?php
-
-?>
-
-
-
-
-
-
+<div class='mt-2 row-flex row no-gutters border border-warning rounded'>
+  <div class='col-md-3 border-warning rounded'>
+    <p>5E</br>
+    Database</p>
+  </div>
+  <div class='col-md-9'>
+    <p>big part</p></br>
+  </div>
+</div>
 
 
 <!-- <footer> -->

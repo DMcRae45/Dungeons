@@ -44,6 +44,12 @@
       ©<a href="https://company.wizards.com/">Wizards Of The Coast</a> LLC.
       </br>
       </br>
+      Powered by ©<a href="https://open5e.com/">Open5E</a>
+      </br>
+    </br>
+    DNS server by ©<a href="http://freedns.afraid.org/">Free DNS</a>
+    </br>      
+      </br>
       <a href="cookiePolicy.php">Cookie Policy</a>
       </br>
       </br>

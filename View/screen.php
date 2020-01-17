@@ -132,11 +132,19 @@ echo "<div class='container-fluid mt-2'>"; // container open
             <h6 class='float-right'>Components: <text>".$_SESSION['lastSpell']->components."</text></h6>
           </div>
           <div class='row list-group-item no-gutters d-inline'>
-            <h6>Material: <text>".$_SESSION['lastSpell']->material."</text></h6>
-          </div>
-          <div class='row list-group-item no-gutters d-inline'>
             <h6>Class: <text>".$_SESSION['lastSpell']->dnd_class."</text></h6>
           </div>
+          ";
+          if($_SESSION['lastSpell']->archetype != "")
+          {
+            $string = str_replace('<br/>', ', ', $_SESSION['lastSpell']->archetype);
+            echo"
+            <div class='row list-group-item no-gutters d-inline'>
+              <h6>Archetype: <text>".$string."</text></h6>
+            </div>
+            ";
+          }
+          echo"
           </ul>
         </div>
       </div>
@@ -149,17 +157,15 @@ echo "<div class='container-fluid mt-2'>"; // container open
         <li class='list-group-item d-flex justify-content-between align-items-center'><text>".nl2br($_SESSION['lastSpell']->higher_level)."</text>
         </li>
         ";
-
-        if($_SESSION['lastSpell']->archetype != "")
+        if($_SESSION['lastSpell']->material == "")
         {
-          $string = str_replace('<br/>', ', ', $_SESSION['lastSpell']->archetype);
-          echo"
-          <div class='row list-group-item no-gutters d-inline'>
-            <h6>Archetype: <text>".$string."</text></h6>
-          </div>
-          ";
+          $_SESSION['lastSpell']->material = "N/A";
         }
-        echo "
+        echo"
+          <div class='row list-group-item no-gutters d-inline'>
+            <h6>Material: <text>".$_SESSION['lastSpell']->material."</text></h6>
+          </div>
+
       </div>
       ";
     }
@@ -203,7 +209,7 @@ echo "<div class='container-fluid mt-2'>"; // container open
             </div>
           </div>
 
-          <div class='row no-gutters'>
+          <div class='row no-gutters h-100'>
             <div class='col-2 text-center bg-custom'>
               <h6>STR: </br><text>".$_SESSION['lastMonster']->strength."</text></h6>
             </div>
@@ -232,7 +238,7 @@ echo "<div class='container-fluid mt-2'>"; // container open
             echo "<div class='row no-gutters justify-content-around'>";
             if(isset($_SESSION['lastMonster']->skills->acrobatics))
             {
-              echo "<h6>Acrobatics: <text>+".$_SESSION['lastMonster']->skills->acrobatics."</text></h6>"." ";
+              echo "<h6>Acrobatics: <text>+".$_SESSION['lastMonster']->skills->acrobatics."</text></h6>";
             }
             if(isset($_SESSION['lastMonster']->skills->arcana))
             {
@@ -256,7 +262,7 @@ echo "<div class='container-fluid mt-2'>"; // container open
             }
             if(isset($_SESSION['lastMonster']->skills->intimidation))
             {
-              echo "<h6>Intimidation: <text>+".$_SESSION['lastMonster']->skills->intimidation.' '."</text></h6>";
+              echo "<h6>Intimidation: <text>+".$_SESSION['lastMonster']->skills->intimidation."</text></h6>";
             }
             if(isset($_SESSION['lastMonster']->skills->investigation))
             {
@@ -303,17 +309,37 @@ echo "<div class='container-fluid mt-2'>"; // container open
             </div>";
           }
 
-
           echo "
           <div class='row list-group-item no-gutters d-inline text-center'>
             <h6>Hit Dice: <text>".$_SESSION['lastMonster']->hit_dice."</text></h6>
           </div>
           <div class='row list-group-item no-gutters d-inline'>
-            <h6>Speed: <text>".$_SESSION['lastMonster']->speed->walk."</text></h6>
+            <h6>Speed: <text>".$_SESSION['lastMonster']->speed->walk."</text>\t</h6>
+
+            ";
+            if(isset($_SESSION['lastMonster']->speed->fly))
+            {
+              echo "<h6>Fly: <text>".$_SESSION['lastMonster']->speed->fly."</text>\t</h6>";
+            }
+            if(isset($_SESSION['lastMonster']->speed->hover))
+            {
+              echo "<h6>Hover: <text>".$_SESSION['lastMonster']->speed->hover."</text>\t</h6>";
+            }
+            if(isset($_SESSION['lastMonster']->speed->climb))
+            {
+              echo "<h6>Climb: <text>".$_SESSION['lastMonster']->speed->climb."</text>\t</h6>";
+            }
+            if(isset($_SESSION['lastMonster']->speed->burrow))
+            {
+              echo "<h6>Burrow: <text>".$_SESSION['lastMonster']->speed->burrow."</text>\t</h6>";
+            }
+          echo "
           </div>
         </ul>
       </div>
     ";
+
+
 
     // if($_SESSION['lastMonster']->skills != NULL)
     // {
@@ -322,8 +348,23 @@ echo "<div class='container-fluid mt-2'>"; // container open
     //   echo "Survival: ".$_SESSION['lastMonster']->skills->Survival."</br>";
     // }
 
-
 echo "</div>"; // close row
+
+echo "<div class='col-9 list-group h-100'>";
+
+for($i = 0; $i < sizeof($_SESSION['lastMonster']->actions); $i++)
+{
+  echo "
+  <div class='list-group-item no-gutters d-inline'>
+    <h6>Action: <text>".$_SESSION['lastMonster']->actions[$i]->name."</text></h6>
+
+    <li class='list-group-item d-flex justify-content-between align-items-center'><text> ".nl2br($_SESSION['lastMonster']->actions[$i]->desc)."</text>
+    </li>
+  </div>
+  ";
+}
+
+echo "</div>";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

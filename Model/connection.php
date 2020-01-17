@@ -4,12 +4,20 @@
 
     Author: David McRae
  */
+// Connection To Abertay
 try
 {
-    $host ='lochnagar.abertay.ac.uk';
-    $dbname = 'sql1403163';
-    $un = 'sql1403163';
-    $pw = 'adbhU2vvBINm';
+    // Abertay Credentials
+    // $host ='lochnagar.abertay.ac.uk';
+    // $dbname = 'sql1403163';
+    // $un = 'sql1403163';
+    // $pw = 'adbhU2vvBINm';
+
+    // RPi Credentials
+    $host ='localhost';
+    $dbname = 'Dungeons';
+    $un = 'Pi';
+    $pw = '#R_Pi';
 
     $connection = new PDO ("mysql:host=$host;dbname=$dbname;charset=UTF8",$un,$pw);
     //echo "Connection Successful";
@@ -17,6 +25,7 @@ try
 }
 catch (PDOException $ex)
 {
+  echo $ex;
     Die("Connection Failed");
 }
 ?>
