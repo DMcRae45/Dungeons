@@ -17,7 +17,7 @@ try
     $host ='localhost';
     $dbname = 'Dungeons';
     $un = 'Pi';
-    $pw = '#R_Pi';
+    $pw = '#R_pi';
 
     $connection = new PDO ("mysql:host=$host;dbname=$dbname;charset=UTF8",$un,$pw);
     //echo "Connection Successful";
