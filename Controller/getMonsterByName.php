@@ -1,6 +1,6 @@
 <?php
 /*
-    Description: Get ALL spells from API
+    Description: Get Monster Details by name
 
     Author:David McRae
  */

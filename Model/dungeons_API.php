@@ -168,6 +168,32 @@ function AttemptUserLogin()
   }
 }
 
+// Get Character's details in the DM's Session
+// Testing for only character id 2 just now
+function GetCharacters()
+{
+  require 'connection.php';
+
+  $sessionCharacter = 2;
+
+  $sql = "SELECT * FROM Player_Character Where Character_ID = $sessionCharacter";
+
+  $stmt = $pdo->prepare($sql);
+  $result = $stmt->fetch();
+  $success = $stmt->execute();
+
+  if($success && $stmt->rowCount() > 0)
+  {
+    //  convert to JSON
+    $rows = array();
+    while($r = $stmt->fetch())
+    {
+      $rows[] = $r;
+    }
+    return json_encode($rows);
+  }
+}
+
 function GetAllSpells()
 {
   $spells = file_get_contents("https://api.open5e.com/spells/"); //Get a list of search results from the API
