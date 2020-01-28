@@ -168,9 +168,140 @@ function AttemptUserLogin()
   }
 }
 
+function createCharacter($userid)
+{
+  if ($_COOKIE['cookiebar'] == "CookieAllowed") // User Has Accepted Cookie policy
+  {
+    if (isset($_POST["createCharacterSubmit"]))
+    {
+      Require 'connection.php';
+
+      $name = (filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING));
+      $alignment = (filter_input(INPUT_POST, 'alignment', FILTER_SANITIZE_STRING));
+      $race = (filter_input(INPUT_POST, 'race', FILTER_SANITIZE_STRING));
+      $class = (filter_input(INPUT_POST, 'class', FILTER_SANITIZE_STRING));
+      $exp = (filter_input(INPUT_POST, 'exp', FILTER_SANITIZE_NUMBER));
+      $ac = (filter_input(INPUT_POST, 'ac', FILTER_SANITIZE_NUMBER));
+      $hp = (filter_input(INPUT_POST, 'hp', FILTER_SANITIZE_NUMBER));
+      $STR = (filter_input(INPUT_POST, 'strength', FILTER_SANITIZE_NUMBER));
+      $DEX = (filter_input(INPUT_POST, 'dexterity', FILTER_SANITIZE_NUMBER));
+      $CON = (filter_input(INPUT_POST, 'constitution', FILTER_SANITIZE_NUMBER));
+      $INT = (filter_input(INPUT_POST, 'intelligence', FILTER_SANITIZE_NUMBER));
+      $WIS = (filter_input(INPUT_POST, 'wisdom', FILTER_SANITIZE_NUMBER));
+      $CHA = (filter_input(INPUT_POST, 'charisma', FILTER_SANITIZE_NUMBER));
+
+      foreach($_POST['proficiency'] as $proficiency)
+      {
+        $proficiencies = $proficiency.",";
+      }
+      $proficiencies = substr($proficiencies, 0, -1);
+
+      $Error = false;
+      $NameError;
+      $expError;
+      $acError;
+      $hpError;
+
+      if(!preg_match("/^[a-zA-Z0-9\s]*$/", $name))//Name Must contain only letters & spaces
+      {
+        $Error = true;
+        $NameError = ":Name Must Contain only letters and spaces";
+      }
+      if(!preg_match("/^[0-9]*$/", $exp))//Name Must contain only letters & spaces
+      {
+        $Error = true;
+        $expError = ":EXP must only be a number e.g. 24000";
+      }
+      if(!preg_match("/^[0-9]*$/", $ac))//Name Must contain only letters & spaces
+      {
+        $Error = true;
+        $acError = ":AC must only be a number e.g. 25";
+      }
+      if(!preg_match("/^[0-9]*$/", $hp))//Name Must contain only letters & spaces
+      {
+        $Error = true;
+        $hpError = ":HP must only be a number e.g. 42";
+      }
+
+    }
+
+    if($Error == true) // An Error Has Occured
+    {
+      $errorString = $nameError.$expError.$acError.$hpError;
+      header('Location: ../View/creatCharacter.php?error='.$errorString);
+    }
+    else // Continue with the character creation
+    {
+      $userid = $_SESSION['userid'];
+      $unique = GenerateUniqueCode($userid);
+
+      $query = $connection->prepare
+      ("
+
+      INSERT INTO Player_Character (User_ID, Name, Alignment, RaceName, ClassName, AC, Max_HP, Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma, Proficiencies )
+      VALUES(:user_id, :name, :alignment, :exp, :race, :class, :ac, :hp, :str, :dex, :con, :int, :wis, :cha, :proficiencies)
+
+      ");
+
+      // Runs and executes the query
+      $success = $query->execute
+      ([
+        'user_id' => $userid,
+        'name' => $name,
+        'alignment' => $alignment,
+        'exp' => $exp,
+        'race' => $race,
+        'class' => $class,
+        'ac' => $ac,
+        'hp' => $hp,
+        'str' => $STR,
+        'dex' => $DEX,
+        'con' => $CON,
+        'int' => $INT,
+        'wis' => $WIS,
+        'cha' => $CHA,
+        'proficiencies' => $proficiencies
+      ]);
+
+      // If rows returned is more than 0 Let us know if it inserted or not.
+      $count = $query->rowCount();
+      if($count > 0)
+      {
+        echo "Insert Successful";
+        //header('location: ../View/index.php');
+      }
+      else
+      {
+        echo "Insert Failed";
+      }
+    }
+  }
+  else // User has NOT accepted cookie policy
+  {
+    // redirect user to the register page with an error
+    $errorString = ":You Must Accept the Cookie policy and login to create a character.";
+    header('Location: ../View/userLogin.php?error='.$errorString);
+  }
+}
+
+//Generate Unique Code for characters
+function GenerateUniqueCode($userid)
+{
+  $day = dechex(date('d'));
+  $month = dechex(date('m'));
+  $year = dechex(date('y'));
+  $hour = dechex(date('H'));
+  $minute = dechex(date('i'));
+  $second = dechex(date('s'));
+
+  $code = $day.$month.$year.$hour.$minute.$second.$userid;
+
+  return $code;
+}
+
 // Get Character's details in the DM's Session
 // Testing for only character id 2 just now
-function GetCharacters()
+function GetSessionCharacters()
 {
   require 'connection.php';
 
