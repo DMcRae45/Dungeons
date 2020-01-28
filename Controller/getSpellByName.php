@@ -1,6 +1,6 @@
 <?php
 /*
-    Description: Get ALL spells from API
+    Description: Get spell from API
 
     Author:David McRae
  */

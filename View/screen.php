@@ -11,7 +11,7 @@
 <?php
     include '../Model/session.php';
     include 'header.php';
-    include '../Controller/GetCharacters.php';
+    //include '../Controller/GetCharacters.php';
     //include '../Controller/getSpellByName.php';
 
 
@@ -46,13 +46,6 @@ echo "</div>"; // container close
 
 
 ?>
-
-
-
-
-
-
-
 
 <!-- <footer> -->
 <?php

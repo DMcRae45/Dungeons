@@ -174,17 +174,16 @@ function GetCharacters()
 {
   require 'connection.php';
 
-  $sessionCharacter = 2;
+  $sessionCharacter = 1;
 
-  $sql = "SELECT * FROM Player_Character Where Character_ID = $sessionCharacter";
+  $sql = "SELECT * FROM Player_Character WHERE Character_ID = :characterID";
 
-  $stmt = $pdo->prepare($sql);
-  $result = $stmt->fetch();
-  $success = $stmt->execute();
+  $stmt = $connection->prepare($sql);
+  $success = $stmt->execute(['characterID' => $sessionCharacter]);
 
   if($success && $stmt->rowCount() > 0)
   {
-    //  convert to JSON
+    // convert to JSON
     $rows = array();
     while($r = $stmt->fetch())
     {
@@ -192,6 +191,12 @@ function GetCharacters()
     }
     return json_encode($rows);
   }
+  else
+  {
+    echo "SQL Failed";
+    return null;
+  }
+  $connection = null;
 }
 
 function GetAllSpells()
@@ -213,8 +218,8 @@ function GetSpellByName()
 
 function GetAllMonsters()
 {
-  $spells = file_get_contents("https://api.open5e.com/spells/"); //Get a list of search results from the API
-  return $spells; //Return the results
+  $monsters = file_get_contents("https://api.open5e.com/spells/"); //Get a list of search results from the API
+  return $monsters; //Return the results
 }
 
 function GetMonsterByName()

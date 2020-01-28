@@ -4,16 +4,18 @@
 
     Author:David McRae
  */
- if(isset($_POST['getMonsterByName']))
- {
-   include '../Model/session.php';
-   include '../Model/dungeons_API.php';
+if(isset($_POST['getCharacters']))
+{
+ include '../Model/session.php';
+ include '../Model/dungeons_API.php';
 
+ $character = GetCharacters();
+ $_SESSION['sessionCharacter'] = json_decode($character);
 
-   $character = GetCharacters();
-   $characterArray = json_decode($character);
-
-   $_SESSION['sessionCharacter'] = $characterArray;
-
-   header('Location: ../View/screen.php');
- }
+ header('Location: ../View/screen.php');
+}
+else
+{
+ header('Location: ../View/screen.php?error=ControllerError');
+}
+?>
