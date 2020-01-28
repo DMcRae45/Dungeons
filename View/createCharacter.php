@@ -616,10 +616,9 @@ if(isset($_GET['error']))
             </tr>
           </tbody>
         </table>
-        </div>
           <!-- END PROFICIENY GRID -->
 
-    <button class="form-control" type="submit" name="createCharacterSubmit">Create</button>
+    <button class="form-control btn btn-outline-warning" type="submit" name="createCharacterSubmit">Create</button>
 </form>
 <!-- End Form -->
 </div>
