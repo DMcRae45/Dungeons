@@ -37,7 +37,7 @@ if(isset($_GET['error']))
 }
 ?>
 <!-- Form -->
-<form class="form-group needs-validation" action="../Controller/attempt_registerCustomer.php" method="POST" novalidate>
+<form class="form-group needs-validation" action="../Controller/attemptCreateCharacter.php" method="POST" novalidate>
 
   <!-- TOP ROW > Name + Alignment -->
     <div class="form-row">

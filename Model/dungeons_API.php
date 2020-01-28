@@ -168,7 +168,7 @@ function AttemptUserLogin()
   }
 }
 
-function createCharacter($userid)
+function CreateCharacter($userid)
 {
   if ($_COOKIE['cookiebar'] == "CookieAllowed") // User Has Accepted Cookie policy
   {
@@ -190,11 +190,12 @@ function createCharacter($userid)
       $WIS = (filter_input(INPUT_POST, 'wisdom', FILTER_SANITIZE_NUMBER));
       $CHA = (filter_input(INPUT_POST, 'charisma', FILTER_SANITIZE_NUMBER));
 
+      // create a String of proficiencies for the character
       foreach($_POST['proficiency'] as $proficiency)
       {
         $proficiencies = $proficiency.",";
       }
-      $proficiencies = substr($proficiencies, 0, -1);
+      $proficiencies = substr($proficiencies, 0, -1); // Remove the last comma added in the above foreach
 
       $Error = false;
       $NameError;
