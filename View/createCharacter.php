@@ -368,7 +368,7 @@ if(isset($_GET['error']))
 
         <table class="table border">
           <thead>
-            <tr>
+            <tr class ="text-center">
               <th class="border text-warning col-2" scope="col">Saving Throw</th>
               <th class="border text-warning col-10" scope="col">Proficiencies</th>
             </tr>
@@ -616,7 +616,219 @@ if(isset($_GET['error']))
             </tr>
           </tbody>
         </table>
-          <!-- END PROFICIENY GRID -->
+        <!-- END PROFICIENY GRID -->
+
+        <!-- LANGUAGE GRID -->
+        <table class="table border">
+          <thead>
+            <tr class ="text-center">
+              <th class="border text-warning col-12" scope="col">Languages</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <div class="row">
+                <div class="container border rounded col m-3">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Abyssal</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="abyssal" id="abyssalCheck">
+                  </div>
+                </div>
+                <div class="container border rounded col m-3">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Aquan</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="aquan" id="aquanCheck">
+                  </div>
+                </div>
+                <div class="container border rounded col m-3">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Auran</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="auran" id="auranCheck">
+                  </div>
+                </div>
+                <div class="container border rounded col m-3">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Celestial</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="celestial" id="celestialCheck">
+                  </div>
+                </div>
+                <div class="container border rounded col m-3">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Common</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="common" id="commonCheck">
+                  </div>
+                </div>
+                <div class="container border rounded col m-3">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Deep Speech</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="deepSpeech" id="deepSpeechCheck">
+                  </div>
+                </div>
+              </div>
+            </td>
+              </tr>
+              <tr>
+                <td>
+                <div class="row">
+                <div class="container border rounded col m-3">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Draconic</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="draconic" id="draconicCheck">
+                  </div>
+                </div>
+                <div class="container border rounded col m-3">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Druidic</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="druidic" id="druidicCheck">
+                  </div>
+                </div>
+                <div class="container border rounded col m-3">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Dwarvish</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="dwarvish" id="dwarvishCheck">
+                  </div>
+                </div>
+                <div class="container border rounded col m-3">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Elvish</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="elvish" id="elvishCheck">
+                  </div>
+                </div>
+                <div class="container border rounded col m-3">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Giant</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="giant" id="giantCheck">
+                  </div>
+                </div>
+                <div class="container border rounded col m-3">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Gnomish</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="gnomish" id="gnomishCheck">
+                  </div>
+                </div>
+              </div>
+            </td>
+              </tr>
+              <tr>
+                <td>
+                <div class="row">
+                <div class="container border rounded col m-3">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Goblin</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="goblin" id="goblinCheck">
+                  </div>
+                </div>
+                <div class="container border rounded col m-3">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Gnoll</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="gnoll" id="gnollCheck">
+                  </div>
+                </div>
+                <div class="container border rounded col m-3">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Halfling</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="halfling" id="halflingCheck">
+                  </div>
+                </div>
+                <div class="container border rounded col m-3">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Ignan</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="ignan" id="ignanCheck">
+                  </div>
+                </div>
+                <div class="container border rounded col m-3">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Infernal</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="infernal" id="infernalCheck">
+                  </div>
+                </div>
+                <div class="container border rounded col m-3">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Orc</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="orc" id="orcCheck">
+                  </div>
+                </div>
+              </div>
+            </td>
+              </tr>
+              <tr>
+                <td>
+                <div class="row">
+                <div class="container border rounded col-2">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Primordial</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="primordial" id="primordialCheck">
+                  </div>
+                </div>
+                <div class="container border rounded col-2">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Sylvan</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="sylvan" id="sylvanCheck">
+                  </div>
+                </div>
+                <div class="container border rounded col-2">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Terran</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="terran" id="terranCheck">
+                  </div>
+                </div>
+                <div class="container border rounded col-2">
+                  <div class="row justify-content-center">
+                  <a class="text-warning input-group-text border-0">Undercommon</a>
+                  </div>
+                  <div class="row justify-content-center mb-2">
+                    <input type="checkbox" name="languages[]" value="undercommon" id="undercommoncCheck">
+                  </div>
+                </div>
+            </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <!-- END LANGUAGE GRID -->
 
     <button class="form-control btn btn-outline-warning" type="submit" name="createCharacterSubmit">Create</button>
 </form>

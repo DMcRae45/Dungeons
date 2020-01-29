@@ -4,7 +4,7 @@
 
     Author: David McRae
 */
-if(!isset($_POST["userid"]))
+if(!isset($_POST["createCharacterSubmit"]))
 {
   header('Location: ../View/userLogin.php?error=Must Login to create a character');
 }

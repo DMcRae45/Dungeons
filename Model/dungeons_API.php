@@ -233,14 +233,13 @@ function CreateCharacter($userid)
     }
     else // Continue with the character creation
     {
-      $userid = $_SESSION['userid'];
       $unique = GenerateUniqueCode($userid);
 
       $query = $connection->prepare
       ("
 
-      INSERT INTO Player_Character (User_ID, Name, Alignment, RaceName, ClassName, AC, Max_HP, Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma, Proficiencies )
-      VALUES(:user_id, :name, :alignment, :exp, :race, :class, :ac, :hp, :str, :dex, :con, :int, :wis, :cha, :proficiencies)
+      INSERT INTO Player_Character (User_ID, Unique, Name, Alignment, RaceName, ClassName, AC, Max_HP, Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma, Proficiencies )
+      VALUES(:user_id, :unique, :name, :alignment, :exp, :race, :class, :ac, :hp, :str, :dex, :con, :int, :wis, :cha, :proficiencies)
 
       ");
 
@@ -248,6 +247,7 @@ function CreateCharacter($userid)
       $success = $query->execute
       ([
         'user_id' => $userid,
+        'unique' => $unique,
         'name' => $name,
         'alignment' => $alignment,
         'exp' => $exp,
