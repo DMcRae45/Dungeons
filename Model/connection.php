@@ -16,8 +16,10 @@ try
     // RPi Credentials
     $host ='localhost';
     $dbname = 'Dungeons';
-    $un = 'Pi';
-    $pw = '#R_pi';
+    //$un = 'Pi';
+    //$pw = '#R_pi';
+    $un = 'root';
+    $pw = '';
 
     $connection = new PDO ("mysql:host=$host;dbname=$dbname;charset=UTF8",$un,$pw);
     //echo "Connection Successful";

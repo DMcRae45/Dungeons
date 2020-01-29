@@ -180,22 +180,110 @@ function CreateCharacter($userid)
       $alignment = (filter_input(INPUT_POST, 'alignment', FILTER_SANITIZE_STRING));
       $race = (filter_input(INPUT_POST, 'race', FILTER_SANITIZE_STRING));
       $class = (filter_input(INPUT_POST, 'class', FILTER_SANITIZE_STRING));
-      $exp = (filter_input(INPUT_POST, 'exp', FILTER_SANITIZE_NUMBER));
-      $ac = (filter_input(INPUT_POST, 'ac', FILTER_SANITIZE_NUMBER));
-      $hp = (filter_input(INPUT_POST, 'hp', FILTER_SANITIZE_NUMBER));
-      $STR = (filter_input(INPUT_POST, 'strength', FILTER_SANITIZE_NUMBER));
-      $DEX = (filter_input(INPUT_POST, 'dexterity', FILTER_SANITIZE_NUMBER));
-      $CON = (filter_input(INPUT_POST, 'constitution', FILTER_SANITIZE_NUMBER));
-      $INT = (filter_input(INPUT_POST, 'intelligence', FILTER_SANITIZE_NUMBER));
-      $WIS = (filter_input(INPUT_POST, 'wisdom', FILTER_SANITIZE_NUMBER));
-      $CHA = (filter_input(INPUT_POST, 'charisma', FILTER_SANITIZE_NUMBER));
+      $exp = (filter_input(INPUT_POST, 'exp', FILTER_SANITIZE_STRING));
+      $ac = (filter_input(INPUT_POST, 'ac', FILTER_SANITIZE_STRING));
+      $hp = (filter_input(INPUT_POST, 'hp', FILTER_SANITIZE_STRING));
+      $STR = (filter_input(INPUT_POST, 'strength', FILTER_SANITIZE_STRING));
+      $DEX = (filter_input(INPUT_POST, 'dexterity', FILTER_SANITIZE_STRING));
+      $CON = (filter_input(INPUT_POST, 'constitution', FILTER_SANITIZE_STRING));
+      $INT = (filter_input(INPUT_POST, 'intelligence', FILTER_SANITIZE_STRING));
+      $WIS = (filter_input(INPUT_POST, 'wisdom', FILTER_SANITIZE_STRING));
+      $CHA = (filter_input(INPUT_POST, 'charisma', FILTER_SANITIZE_STRING));
 
-      // create a String of proficiencies for the character
+      // for each index in the proficiency array create a single String
       foreach($_POST['proficiency'] as $proficiency)
       {
         $proficiencies = $proficiency.",";
       }
       $proficiencies = substr($proficiencies, 0, -1); // Remove the last comma added in the above foreach
+
+      // for each index in the language array creata a single string
+      foreach($_POST['languages'] as $language)
+      {
+        $languages = $language.",";
+      }
+      $languages = substr($languages, 0, -1); // Remove the last comma added in the above foreach
+
+      if($exp < 300)
+      {
+        $lvl = 1;
+      }
+      else if ($exp < 900)
+      {
+        $lvl = 2;
+      }
+      else if ($exp < 2700)
+      {
+        $lvl = 3;
+      }
+      else if ($exp < 6500)
+      {
+        $lvl = 4;
+      }
+      else if ($exp < 14000)
+      {
+        $lvl = 5;
+      }
+      else if ($exp < 23000)
+      {
+        $lvl = 6;
+      }
+      else if ($exp < 34000)
+      {
+        $lvl = 7;
+      }
+      else if ($exp < 48000)
+      {
+        $lvl = 8;
+      }
+      else if ($exp < 64000)
+      {
+        $lvl = 9;
+      }
+      else if ($exp < 85000)
+      {
+        $lvl = 10;
+      }
+      else if ($exp < 100000)
+      {
+        $lvl = 11;
+      }
+      else if ($exp < 120000)
+      {
+        $lvl = 12;
+      }
+      else if ($exp < 140000)
+      {
+        $lvl = 13;
+      }
+      else if ($exp < 165000)
+      {
+        $lvl = 14;
+      }
+      else if ($exp < 195000)
+      {
+        $lvl = 15;
+      }
+      else if ($exp < 225000)
+      {
+        $lvl = 16;
+      }
+      else if ($exp < 265000)
+      {
+        $lvl = 17;
+      }
+      else if ($exp < 305000)
+      {
+        $lvl = 18;
+      }
+      else if ($exp < 355000)
+      {
+        $lvl = 19;
+      }
+      else if ($exp >= 355000)
+      {
+        $lvl = 20;
+      }
 
       $Error = false;
       $NameError;
@@ -233,13 +321,13 @@ function CreateCharacter($userid)
     }
     else // Continue with the character creation
     {
-      $unique = GenerateUniqueCode($userid);
+      $code = GenerateUniqueCode($userid);
 
       $query = $connection->prepare
       ("
 
-      INSERT INTO Player_Character (User_ID, Unique, Name, Alignment, RaceName, ClassName, AC, Max_HP, Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma, Proficiencies )
-      VALUES(:user_id, :unique, :name, :alignment, :exp, :race, :class, :ac, :hp, :str, :dex, :con, :int, :wis, :cha, :proficiencies)
+      INSERT INTO Player_Character (User_ID, Code, Name, Alignment, Exp, Level, RaceName, ClassName, AC, Max_HP, Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma, Proficiencies, Language)
+      VALUES(:user_id, :code, :name, :alignment, :exp, :lvl, :race, :class, :ac, :hp, :str, :dex, :con, :int, :wis, :cha, :proficiencies, :languages)
 
       ");
 
@@ -247,10 +335,11 @@ function CreateCharacter($userid)
       $success = $query->execute
       ([
         'user_id' => $userid,
-        'unique' => $unique,
+        'code' => $code,
         'name' => $name,
         'alignment' => $alignment,
         'exp' => $exp,
+        'lvl' => $lvl,
         'race' => $race,
         'class' => $class,
         'ac' => $ac,
@@ -261,19 +350,19 @@ function CreateCharacter($userid)
         'int' => $INT,
         'wis' => $WIS,
         'cha' => $CHA,
-        'proficiencies' => $proficiencies
+        'proficiencies' => $proficiencies,
+        'languages' => $languages
       ]);
 
       // If rows returned is more than 0 Let us know if it inserted or not.
-      $count = $query->rowCount();
-      if($count > 0)
+      if($success && $query->rowCount() > 0)
       {
         echo "Insert Successful";
         //header('location: ../View/index.php');
       }
       else
       {
-        echo "Insert Failed";
+        print_r($query->errorInfo());
       }
     }
   }

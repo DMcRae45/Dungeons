@@ -4,11 +4,7 @@
 
     Author: David McRae
 */
-if(!isset($_POST["createCharacterSubmit"]))
-{
-  header('Location: ../View/userLogin.php?error=Must Login to create a character');
-}
-else
+if(isset($_POST["createCharacterSubmit"]))
 {
   include '../Model/dungeons_API.php';
 
@@ -19,5 +15,9 @@ else
   echo "Sucessfully created a character";
 
   //header('Location: ../View/.php');
+}
+else
+{
+  header('Location: ../View/userLogin.php?error=Must Login to create a character');
 }
 ?>

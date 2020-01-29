@@ -45,7 +45,7 @@ if(isset($_GET['error']))
           <div class="input-group-prepend">
             <span class="input-group-text mt-4" id="inputGroupPrepend">Name</span>
           </div>
-            <input class="form-control mt-4" type="text" id="Name" name="Name" placeholder="Name" required>
+            <input class="form-control mt-4" type="text" id="name" name="name" placeholder="Name" required>
               <div class="invalid-feedback">
                 You cannot Leave This field Empty.
               </div>
