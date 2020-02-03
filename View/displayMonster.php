@@ -1,5 +1,5 @@
 <?php
-
+Var_dump($_SESSION['lastMonster']);
 echo "<div class='mt-2 row-flex row no-gutters border border-warning rounded'>";
 
 echo "

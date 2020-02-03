@@ -4,15 +4,22 @@
 
     Author:David McRae
  */
-if(isset($_POST['getCharacters']))
+if(isset($_POST['getCharacterByCode']))
 {
  include '../Model/session.php';
  include '../Model/dungeons_API.php';
 
- $character = GetSessionCharacters();
- $_SESSION['sessionCharacter'] = json_decode($character);
+  $character = GetSessionCharacters();
+  if(isset($_SESSION['sessionCharacter']))
+  {
+    array_push($_SESSION['sessionCharacter'], json_decode($character)[0]);
+  }
+  else
+  {
+    $_SESSION['sessionCharacter'] = json_decode($character);
+  }
 
- header('Location: ../View/screen.php');
+  header('Location: ../View/screen.php');
 }
 else
 {

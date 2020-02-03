@@ -4,15 +4,15 @@
 
     Author:David McRae
  */
-if(isset($_POST['getCharacters']))
+if(isset($_POST['getSessionCharacters']))
 {
  include '../Model/session.php';
  include '../Model/dungeons_API.php';
 
- $character = GetCharacters();
+ $character = GetSessionCharacters();
  $_SESSION['sessionCharacter'] = json_decode($character);
 
- header('Location: ../View/screen.php');
+ //header('Location: ../View/screen.php');
 }
 else
 {

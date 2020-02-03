@@ -393,31 +393,34 @@ function GenerateUniqueCode($userid)
 // Testing for only character id 2 just now
 function GetSessionCharacters()
 {
-  require 'connection.php';
-
-  $sessionCharacter = 1;
-
-  $sql = "SELECT * FROM Player_Character WHERE Character_ID = :characterID";
-
-  $stmt = $connection->prepare($sql);
-  $success = $stmt->execute(['characterID' => $sessionCharacter]);
-
-  if($success && $stmt->rowCount() > 0)
+  if(isset($_POST['getCharacterByCode']))
   {
-    // convert to JSON
-    $rows = array();
-    while($r = $stmt->fetch())
+    require 'connection.php';
+
+    $code = (filter_input(INPUT_POST, 'characterCode', FILTER_SANITIZE_STRING));
+
+    $sql = "SELECT * FROM Player_Character WHERE Code = :code";
+
+    $stmt = $connection->prepare($sql);
+    $success = $stmt->execute(['code' => $code]);
+
+    if($success && $stmt->rowCount() > 0)
     {
-      $rows[] = $r;
+      // convert to JSON
+      $rows = array();
+      while($r = $stmt->fetch())
+      {
+        $rows[] = $r;
+      }
+      return json_encode($rows);
     }
-    return json_encode($rows);
+    else
+    {
+      echo "Error: GSC"; // error get session character
+      return null;
+    }
+    $connection = null;
   }
-  else
-  {
-    echo "SQL Failed";
-    return null;
-  }
-  $connection = null;
 }
 
 function GetAllSpells()
