@@ -1,8 +1,4 @@
 <?php
-//$_SESSION['lastMonster'] = null;
-var_dump($_SESSION['lastMonster']);
-echo $_SESSION['lastMonster'][0]->name;
-
 echo "
 <div class='mt-2 row-flex row no-gutters border border-warning rounded'>";
   echo "
