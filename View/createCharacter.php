@@ -634,7 +634,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Abyssal</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="abyssal" id="abyssalCheck">
+                    <input type="checkbox" name="language[]" value="abyssal" id="abyssalCheck">
                   </div>
                 </div>
                 <div class="container border rounded col m-3">
@@ -642,7 +642,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Aquan</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="aquan" id="aquanCheck">
+                    <input type="checkbox" name="language[]" value="aquan" id="aquanCheck">
                   </div>
                 </div>
                 <div class="container border rounded col m-3">
@@ -650,7 +650,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Auran</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="auran" id="auranCheck">
+                    <input type="checkbox" name="language[]" value="auran" id="auranCheck">
                   </div>
                 </div>
                 <div class="container border rounded col m-3">
@@ -658,7 +658,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Celestial</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="celestial" id="celestialCheck">
+                    <input type="checkbox" name="language[]" value="celestial" id="celestialCheck">
                   </div>
                 </div>
                 <div class="container border rounded col m-3">
@@ -666,7 +666,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Common</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="common" id="commonCheck">
+                    <input type="checkbox" name="language[]" value="common" id="commonCheck">
                   </div>
                 </div>
                 <div class="container border rounded col m-3">
@@ -674,7 +674,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Deep Speech</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="deepSpeech" id="deepSpeechCheck">
+                    <input type="checkbox" name="language[]" value="deepSpeech" id="deepSpeechCheck">
                   </div>
                 </div>
               </div>
@@ -688,7 +688,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Draconic</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="draconic" id="draconicCheck">
+                    <input type="checkbox" name="language[]" value="draconic" id="draconicCheck">
                   </div>
                 </div>
                 <div class="container border rounded col m-3">
@@ -696,7 +696,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Druidic</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="druidic" id="druidicCheck">
+                    <input type="checkbox" name="language[]" value="druidic" id="druidicCheck">
                   </div>
                 </div>
                 <div class="container border rounded col m-3">
@@ -704,7 +704,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Dwarvish</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="dwarvish" id="dwarvishCheck">
+                    <input type="checkbox" name="language[]" value="dwarvish" id="dwarvishCheck">
                   </div>
                 </div>
                 <div class="container border rounded col m-3">
@@ -712,7 +712,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Elvish</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="elvish" id="elvishCheck">
+                    <input type="checkbox" name="language[]" value="elvish" id="elvishCheck">
                   </div>
                 </div>
                 <div class="container border rounded col m-3">
@@ -720,7 +720,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Giant</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="giant" id="giantCheck">
+                    <input type="checkbox" name="language[]" value="giant" id="giantCheck">
                   </div>
                 </div>
                 <div class="container border rounded col m-3">
@@ -728,7 +728,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Gnomish</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="gnomish" id="gnomishCheck">
+                    <input type="checkbox" name="language[]" value="gnomish" id="gnomishCheck">
                   </div>
                 </div>
               </div>
@@ -742,7 +742,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Goblin</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="goblin" id="goblinCheck">
+                    <input type="checkbox" name="language[]" value="goblin" id="goblinCheck">
                   </div>
                 </div>
                 <div class="container border rounded col m-3">
@@ -750,7 +750,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Gnoll</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="gnoll" id="gnollCheck">
+                    <input type="checkbox" name="language[]" value="gnoll" id="gnollCheck">
                   </div>
                 </div>
                 <div class="container border rounded col m-3">
@@ -758,7 +758,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Halfling</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="halfling" id="halflingCheck">
+                    <input type="checkbox" name="language[]" value="halfling" id="halflingCheck">
                   </div>
                 </div>
                 <div class="container border rounded col m-3">
@@ -766,7 +766,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Ignan</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="ignan" id="ignanCheck">
+                    <input type="checkbox" name="language[]" value="ignan" id="ignanCheck">
                   </div>
                 </div>
                 <div class="container border rounded col m-3">
@@ -774,7 +774,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Infernal</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="infernal" id="infernalCheck">
+                    <input type="checkbox" name="language[]" value="infernal" id="infernalCheck">
                   </div>
                 </div>
                 <div class="container border rounded col m-3">
@@ -782,7 +782,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Orc</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="orc" id="orcCheck">
+                    <input type="checkbox" name="language[]" value="orc" id="orcCheck">
                   </div>
                 </div>
               </div>
@@ -796,7 +796,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Primordial</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="primordial" id="primordialCheck">
+                    <input type="checkbox" name="language[]" value="primordial" id="primordialCheck">
                   </div>
                 </div>
                 <div class="container border rounded col-2">
@@ -804,7 +804,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Sylvan</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="sylvan" id="sylvanCheck">
+                    <input type="checkbox" name="language[]" value="sylvan" id="sylvanCheck">
                   </div>
                 </div>
                 <div class="container border rounded col-2">
@@ -812,7 +812,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Terran</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="terran" id="terranCheck">
+                    <input type="checkbox" name="language[]" value="terran" id="terranCheck">
                   </div>
                 </div>
                 <div class="container border rounded col-2">
@@ -820,7 +820,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Undercommon</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="languages[]" value="undercommon" id="undercommoncCheck">
+                    <input type="checkbox" name="language[]" value="undercommon" id="undercommoncCheck">
                   </div>
                 </div>
             </div>

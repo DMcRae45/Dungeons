@@ -11,16 +11,6 @@
 <?php
     include '../Model/session.php';
     include 'header.php';
-    //include '../Controller/GetCharacters.php';
-    //include '../Controller/getSpellByName.php';
-
-
-  if(!isset($_SESSION['characterDetails']))
-  {
-   //header("location: ../View/screen.php?characterReferenced=Stats");
-   $_SESSION['characterDetails'] = "Stats";
-   $_SESSION['monsterDetails'] = "Stats";
-  }
 ?>
 <!-- </head> -->
 <title>Dungeons - Screen</title>

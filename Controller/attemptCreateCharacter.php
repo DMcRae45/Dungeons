@@ -12,9 +12,7 @@ if(isset($_POST["createCharacterSubmit"]))
   $userid = $_SESSION['userid'];
   CreateCharacter($userid);
 
-  echo "Sucessfully created a character";
-
-  //header('Location: ../View/.php');
+  header('Location: ../View/index.php');
 }
 else
 {

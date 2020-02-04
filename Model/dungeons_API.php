@@ -190,19 +190,22 @@ function CreateCharacter($userid)
       $WIS = (filter_input(INPUT_POST, 'wisdom', FILTER_SANITIZE_STRING));
       $CHA = (filter_input(INPUT_POST, 'charisma', FILTER_SANITIZE_STRING));
 
+      $proficiencies = "";
+      $languages = "";
+
       // for each index in the proficiency array create a single String
-      foreach($_POST['proficiency'] as $proficiency)
+      for($i = 0; $i < sizeof($_POST['proficiency']); $i++)
       {
-        $proficiencies = $proficiency.",";
+        $proficiencies = $proficiencies." ".$_POST['proficiency'][$i].",";
       }
-      $proficiencies = substr($proficiencies, 0, -1); // Remove the last comma added in the above foreach
+      $proficiencies = rtrim($proficiencies, ','); // Remove the last comma added in the above foreach
 
       // for each index in the language array creata a single string
-      foreach($_POST['languages'] as $language)
+      for($i = 0; $i < sizeof($_POST['language']); $i++)
       {
-        $languages = $language.",";
+        $languages = $languages." ".$_POST['language'][$i].",";
       }
-      $languages = substr($languages, 0, -1); // Remove the last comma added in the above foreach
+      $languages = rtrim($languages, ','); // Remove the last comma added in the above foreach
 
       if($exp < 300)
       {
@@ -296,7 +299,7 @@ function CreateCharacter($userid)
         $Error = true;
         $NameError = ":Name Must Contain only letters and spaces";
       }
-      if(!preg_match("/^[0-9]*$/", $exp))//Name Must contain only letters & spaces
+      if(!preg_match("/^[0-9]*$/", $exp))//Name Must contain only numbers
       {
         $Error = true;
         $expError = ":EXP must only be a number e.g. 24000";
@@ -326,8 +329,8 @@ function CreateCharacter($userid)
       $query = $connection->prepare
       ("
 
-      INSERT INTO Player_Character (User_ID, Code, Name, Alignment, Exp, Level, RaceName, ClassName, AC, Max_HP, Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma, Proficiencies, Language)
-      VALUES(:user_id, :code, :name, :alignment, :exp, :lvl, :race, :class, :ac, :hp, :str, :dex, :con, :int, :wis, :cha, :proficiencies, :languages)
+      INSERT INTO Player_Character (User_ID, Code, Name, Alignment, Exp, Level, RaceName, ClassName, AC, Max_HP, HP, Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma, Proficiencies, Language)
+      VALUES(:user_id, :code, :name, :alignment, :exp, :lvl, :race, :class, :ac, :maxhp, :hp, :str, :dex, :con, :int, :wis, :cha, :proficiencies, :languages)
 
       ");
 
@@ -343,6 +346,7 @@ function CreateCharacter($userid)
         'race' => $race,
         'class' => $class,
         'ac' => $ac,
+        'maxhp' => $hp,
         'hp' => $hp,
         'str' => $STR,
         'dex' => $DEX,
@@ -417,7 +421,6 @@ function GetSessionCharacters()
     else
     {
       echo "Error: GSC"; // error get session character
-      return null;
     }
     $connection = null;
   }
@@ -453,7 +456,8 @@ function GetMonsterByName()
     $monsterName = (filter_input(INPUT_POST, 'monsterName', FILTER_SANITIZE_STRING)); // Sanitize the string
     $monsterName = str_replace(' ', '-', $monsterName); // Replace any whitespace with '-' symbols to work on a url
     $monster = file_get_contents("https://api.open5e.com/monsters/".$monsterName); // Get a list of search results from the Open 5e API
-    return $monster; //Return the results
+    //return json_encode($monster); //Return the results
+    return $monster;
   }
 }
 
