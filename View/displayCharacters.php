@@ -2,6 +2,7 @@
 
 //$_SESSION['sessionCharacter'] = null;
 //Var_dump($_SESSION['sessionCharacter']);
+//$_SESSION['sessionCharacter'] = null;
 echo "<div class='mt-2 row-flex row no-gutters border border-warning rounded'>";
 
 echo "

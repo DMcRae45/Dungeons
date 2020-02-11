@@ -394,7 +394,6 @@ function GenerateUniqueCode($userid)
 }
 
 // Get Character's details in the DM's Session
-// Testing for only character id 2 just now
 function GetSessionCharacters()
 {
   if(isset($_POST['getCharacterByCode']))
@@ -459,6 +458,15 @@ function GetMonsterByName()
     //return json_encode($monster); //Return the results
     return $monster;
   }
+}
+
+function RemoveObject($array)
+{
+  $i = (filter_input(INPUT_POST, 'index', FILTER_SANITIZE_STRING));
+
+  array_splice($array, $i, 1);
+
+  return $array;
 }
 
 function Roll()

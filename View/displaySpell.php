@@ -15,7 +15,7 @@ echo "<div class='mt-2 row-flex row no-gutters border border-warning rounded'>";
   </form>
   ";
 
-if($_SESSION['lastSpell']->name != NULL)
+if(isset($_SESSION['lastSpell']))
 {
   if($_SESSION['lastSpell']->level_int > 0)
   {
@@ -83,7 +83,8 @@ if($_SESSION['lastSpell']->name != NULL)
     </div>
     ";
   }
-  else {
+  else
+  {
     echo "</div>"; // close the div after search bar.
   }
 echo "</div>"; // close row

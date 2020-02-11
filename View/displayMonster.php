@@ -30,26 +30,30 @@ echo "
         </div>
       </nav>
       ";
-    }
 
     echo "</div>
-    <div class='col-9 text-center'>Actions</div>";
+    <div class='col-9'></div>";
 
-    if(isset($_SESSION['lastMonster']))
-    {
       echo "
-        <div class='row tab-content no-gutters col-12' id='nav-tabContent'>";
+      <div class='row tab-content no-gutters col-12' id='nav-tabContent'>";
+
           for($i = 0; $i < sizeof($_SESSION['lastMonster']); $i++)
           {
             echo "
-            <div class='no-gutters tab-pane fade col-12 d-flex' id='monster".$i."' role='tabpanel' aria-labelledby='monster".$i."'>
-              <div class='card cave h-100 col-3'>
+            <div class='row no-gutters tab-pane fade col-12' id='monster".$i."' role='tabpanel' aria-labelledby='monster".$i."'>
+
+              <div class='card cave col-3'>
                 <div class='card-body'>
                   <h5 class='card-title'>".$_SESSION['lastMonster'][$i]->name."</h5>
+                  <form action='../Controller/removeMonsterObject.php' method='POST'>
+                    <input type='hidden' id='index' name='index' value='".$i."'>
+                    <button name='removeMonsterObject' type='submit' style='position: absolute; top: 5px; right: 5px;' class='btn btn-outline-warning mt-0 mr-0'>X</button>
+                  </form>
+
                   <h6 class='card-text'>".$_SESSION['lastMonster'][$i]->size." ".$_SESSION['lastMonster'][$i]->type."<span class='float-right badge badge-warning badge-pill'>".$_SESSION['lastMonster'][$i]->alignment."</span></h6>
                 </div>
                 <ul class='list-group list-group-flush'>
-                  <div class='row list-group-item no-gutters d-inline'>
+                  <div class='row list-group-item no-gutters'>
                     <div class='row no-gutters'>
                       <div class='col-6 text-center'>
                         <h4>HP: <text>".$_SESSION['lastMonster'][$i]->hit_points."</text></h4>
@@ -163,7 +167,7 @@ echo "
 
 
                   echo "
-                  <div class='row list-group-item no-gutters d-inline text-center'>
+                  <div class='row list-group-item no-gutters text-center'>
                     <h6>Hit Dice: <text>".$_SESSION['lastMonster'][$i]->hit_dice."</text></h6>
                   </div>
                   <div class='row list-group-item no-gutters'>
@@ -193,15 +197,15 @@ echo "
               </div>"; // CLOSES CARD CAVE
 
               echo "
-              <div class='col-9 list-group h-100'>";
+              <div class='col-9 list-group float-right' style='position: relative; top: 0px;'>";
 
                 for($n = 0; $n < sizeof($_SESSION['lastMonster'][$i]->actions); $n++)
                 {
                   echo "
-                  <div class='list-group-item no-gutters d-inline'>
+                  <div class='list-group-item no-gutters'>
                     <h6>Action: <text>".$_SESSION['lastMonster'][$i]->actions[$n]->name."</text></h6>
 
-                    <li class='list-group-item d-flex justify-content-between align-items-center'><text> ".nl2br($_SESSION['lastMonster'][$i]->actions[$n]->desc)."</text></li>
+                    <li class='list-group-item justify-content-between align-items-center'><text> ".nl2br($_SESSION['lastMonster'][$i]->actions[$n]->desc)."</text></li>
                   </div>
                   ";
                 }

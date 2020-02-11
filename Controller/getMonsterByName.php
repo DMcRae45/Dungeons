@@ -21,6 +21,6 @@ if(isset($_POST['getMonsterByName']))
     $monsterArray = array($monsterObject);
     $_SESSION['lastMonster'] = $monsterArray;
   }
-  //header('Location: ../View/screen.php');
+  header('Location: ../View/screen.php');
 }
 ?>
