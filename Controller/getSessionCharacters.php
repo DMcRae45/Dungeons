@@ -10,19 +10,25 @@ if(isset($_POST['getCharacterByCode']))
  include '../Model/dungeons_API.php';
 
   $character = GetSessionCharacters();
-  if(isset($_SESSION['sessionCharacter']))
+
+  if($character == "error")
   {
-    array_push($_SESSION['sessionCharacter'], json_decode($character)[0]);
+    header('Location: ../View/screen.php?characterError=Character Not Found');
   }
   else
   {
-    $_SESSION['sessionCharacter'] = json_decode($character);
+    if(isset($_SESSION['sessionCharacter']))
+    {
+      array_push($_SESSION['sessionCharacter'], json_decode($character)[0]);
+    }
+    else
+    {
+      $_SESSION['sessionCharacter'] = json_decode($character);
+    }
+    header('Location: ../View/screen.php');
   }
 
-  header('Location: ../View/screen.php');
-}
-else
-{
- header('Location: ../View/screen.php?error=ControllerError');
+
+
 }
 ?>

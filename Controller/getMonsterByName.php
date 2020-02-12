@@ -10,17 +10,26 @@ if(isset($_POST['getMonsterByName']))
   include '../Model/dungeons_API.php';
 
   $monster = GetMonsterByName();
-  $monsterObject = json_decode($monster);
 
-  if(isset($_SESSION['lastMonster']))
+
+  if($monter == "error")
   {
-    array_push($_SESSION['lastMonster'], $monsterObject);
+    header('Location: ../View/screen.php?monsterError=Monster Not Found');
   }
   else
   {
-    $monsterArray = array($monsterObject);
-    $_SESSION['lastMonster'] = $monsterArray;
+    $monsterObject = json_decode($monster);
+
+    if(isset($_SESSION['lastMonster']))
+    {
+      array_push($_SESSION['lastMonster'], $spellObject);
+    }
+    else
+    {
+      $monsterArray = array($monsterObject);
+      $_SESSION['lastMonster'] = $monsterArray;
+    }
+    header('Location: ../View/screen.php');
   }
-  header('Location: ../View/screen.php');
 }
 ?>

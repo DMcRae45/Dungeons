@@ -419,7 +419,8 @@ function GetSessionCharacters()
     }
     else
     {
-      echo "Error: GSC"; // error get session character
+      $error = "error";
+      return $error; // error get session character
     }
     $connection = null;
   }
@@ -437,8 +438,17 @@ function GetSpellByName()
   {
     $spellName = (filter_input(INPUT_POST, 'spellName', FILTER_SANITIZE_STRING)); // Sanitize the string
     $spellName = str_replace(' ', '-', $spellName); //Replace any whitespace with '-' symbols to work in the API
-    $spell = file_get_contents("https://api.open5e.com/spells/".$spellName); //Get a list of search results from the Open5E API
-    return $spell; //Return the results
+
+    if(!$spell = file_get_contents("https://api.open5e.com/spells/".$spellName))
+    {
+      $error = "error";
+      return $error;
+    }
+    else
+    {
+      $spell = file_get_contents("https://api.open5e.com/spells/".$spellName); //Get a list of search results from the Open5E API
+      return $spell;
+    }
   }
 }
 
@@ -454,9 +464,20 @@ function GetMonsterByName()
   {
     $monsterName = (filter_input(INPUT_POST, 'monsterName', FILTER_SANITIZE_STRING)); // Sanitize the string
     $monsterName = str_replace(' ', '-', $monsterName); // Replace any whitespace with '-' symbols to work on a url
-    $monster = file_get_contents("https://api.open5e.com/monsters/".$monsterName); // Get a list of search results from the Open 5e API
-    //return json_encode($monster); //Return the results
-    return $monster;
+
+
+    if(!$monster = file_get_contents("https://api.open5e.com/monsters/".$monsterName))
+    {
+      $error = "error";
+      return $error;
+    }
+    else
+    {
+      $monster = file_get_contents("https://api.open5e.com/monsters/".$monsterName); // Get a list of search results from the Open 5e API
+      return $monster;
+    }
+
+
   }
 }
 

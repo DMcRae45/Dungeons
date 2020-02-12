@@ -9,12 +9,26 @@ if(isset($_POST['getSpellByName']))
   include '../Model/session.php';
   include '../Model/dungeons_API.php';
 
-
   $spell = GetSpellByName();
-  $spellArray = json_decode($spell);
 
-  $_SESSION['lastSpell'] = $spellArray;
+  if($spell == "error")
+  {
+    header('Location: ../View/screen.php?spellError=Spell Not Found');
+  }
+  else
+  {
+    $spellObject = json_decode($spell);
 
-  header('Location: ../View/screen.php');
+    if(isset($_SESSION['lastSpell']))
+    {
+      array_push($_SESSION['lastSpell'], $spellObject);
+    }
+    else
+    {
+      $spellArray = array($spellObject);
+      $_SESSION['lastSpell'] = $spellArray;
+    }
+    header('Location: ../View/screen.php');
+  }
 }
 ?>
