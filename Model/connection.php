@@ -27,7 +27,6 @@ try
 }
 catch (PDOException $ex)
 {
-  echo $ex;
-    Die("Connection Failed");
+  Die("Connection Failed");
 }
 ?>
