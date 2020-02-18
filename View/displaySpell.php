@@ -13,45 +13,45 @@ echo "
   <div class='col-3 list-group no-gutters'>
 
     <form action='../Controller/getSpellByName.php' method='POST' class='mb-0 mr-0 border border-warning rounded'>
-    <div class='input-group input-group-sm'>
-      <input type='text' class='form-control' placeholder='Search by spell name' aria-label='Small' aria-describedby='inputGroup-sizing-sm' id='spellName' name='spellName'>
-      <div class='input-group-append'>
-        <button name='getSpellByName' type='submit' class='btn btn-outline-warning'>Search</button>
+      <div class='input-group input-group-sm'>
+        <input type='text' class='form-control' placeholder='Search by spell name' aria-label='Small' aria-describedby='inputGroup-sizing-sm' id='spellName' name='spellName'>
+        <div class='input-group-append'>
+          <button name='getSpellByName' type='submit' class='btn btn-outline-warning'>Search</button>
+        </div>
       </div>
-    </div>
-  </form>
-  ";
-//$_SESSION['lastSpell'] = null;
-if(isset($_SESSION['lastSpell']))
-{
-  //Tabs for Spells previously searched
-  echo "
-  <nav>
-    <div class='nav nav-tabs' id='spellTab' role='tablist'>
-      ";
-        for($i = 0; $i < sizeof($_SESSION['lastSpell']); $i++)
-        {
-          echo "
-          <a class='nav-item nav-link' id='spellTab".$i."' data-toggle='tab' href='#spell".$i."' role='tab' aria-controls='spell".$i."' aria-selected='true'>".$_SESSION['lastSpell'][$i]->name."</a>
-          ";
-        }
+    </form>
+    ";
+
+    if(isset($_SESSION['lastSpell']))
+    {
+      //Tabs for Spells previously searched
       echo "
-    </div>
-  </nav>
-  ";
+      <nav>
+        <div class='nav nav-tabs' id='spellTab' role='tablist'>
+          ";
+            for($i = 0; $i < sizeof($_SESSION['lastSpell']); $i++)
+            {
+              echo "
+              <a class='nav-item nav-link' id='spellTab".$i."' data-toggle='tab' href='#spell".$i."' role='tab' aria-controls='spell".$i."' aria-selected='true'>".$_SESSION['lastSpell'][$i]->name."</a>
+              ";
+            }
+          echo "
+        </div>
+      </nav>
+      ";
 
   echo "
   </div>
   <div class='col-9'></div>"; // Closes col 3 div and fills rest of the row
 
-  echo "
-  <div class='row tab-content no-gutters col-12' id='nav-tabContent'>";
+      echo "
+      <div class='row tab-content no-gutters col-12' id='nav-tabContent'>";
 
-      for($i = 0; $i < sizeof($_SESSION['lastSpell']); $i++)
-      {
-        echo "
-        <div class='row no-gutters tab-pane fade col-12' id='spell".$i."' role='tabpanel' aria-labelledby='spell".$i."'>
-        ";
+        for($i = 0; $i < sizeof($_SESSION['lastSpell']); $i++)
+        {
+          echo "
+          <div class='row no-gutters tab-pane fade col-12' id='spell".$i."' role='tabpanel' aria-labelledby='spell".$i."'>
+          ";
 
           if($_SESSION['lastSpell'][$i]->level_int > 0)
           {
@@ -62,19 +62,19 @@ if(isset($_SESSION['lastSpell']))
             $level = "CANTRIP";
           }
           echo "
-            <div class='card cave col-3'>
-              <div class='card-body'>
-                <h5 class='card-title'>".$_SESSION['lastSpell'][$i]->name."</h5>
+          <div class='card cave col-3'>
+            <div class='card-body'>
+              <h5 class='card-title'>".$_SESSION['lastSpell'][$i]->name."</h5>
 
-                <form action='../Controller/removeSpellObject.php' method='POST'>
-                  <input type='hidden' id='index' name='index' value='".$i."'>
-                  <button name='removeSpellObject' type='submit' style='position: absolute; top: 5px; right: 5px;' class='btn btn-outline-warning mt-0 mr-0'>X</button>
-                </form>
+              <form action='../Controller/removeSpellObject.php' method='POST'>
+                <input type='hidden' id='index' name='index' value='".$i."'>
+                <button name='removeSpellObject' type='submit' style='position: absolute; top: 5px; right: 5px;' class='btn btn-outline-warning mt-0 mr-0'>X</button>
+              </form>
 
-                <h6 class='card-text'>".$_SESSION['lastSpell'][$i]->school." ".$_SESSION['lastSpell'][$i]->level."<span class='float-right badge badge-warning badge-pill'>".$level."</span></h6>
-              </div>
-              <ul class='list-group list-group-flush'>
+              <h6 class='card-text'>".$_SESSION['lastSpell'][$i]->school." ".$_SESSION['lastSpell'][$i]->level."<span class='float-right badge badge-warning badge-pill'>".$level."</span></h6>
+            </div>
 
+            <ul class='list-group list-group-flush'>
               <div class='row list-group-item no-gutters'>
                 <h6>Casting Time: <text>".$_SESSION['lastSpell'][$i]->casting_time."</text></h6>
                 <h6 class='float-right'>Concentration: <text>".$_SESSION['lastSpell'][$i]->concentration."</text></h6>
@@ -100,9 +100,9 @@ if(isset($_SESSION['lastSpell']))
                 </div>
                 ";
               }
-              echo"
-              </ul>
-            </div>
+            echo"
+            </ul>
+          </div>
 
           <div class='col-9 list-group float-right' style='position: relative; top: 0px;'>
 
@@ -117,18 +117,23 @@ if(isset($_SESSION['lastSpell']))
               $_SESSION['lastSpell'][$i]->material = "N/A";
             }
             echo"
-              <div class='row list-group-item no-gutters '>
-                <h6>Material: <text>".$_SESSION['lastSpell'][$i]->material."</text></h6>
-              </div>
-
+            <div class='row list-group-item no-gutters '>
+              <h6>Material: <text>".$_SESSION['lastSpell'][$i]->material."</text></h6>
+            </div>
           </div>
         </div>
         ";
       }
-
-}
-
-echo "</div>"; // close the div after search bar.
-
-echo "</div>"; // close row
+      echo "<div>";
+    }
+    else
+    {
+      echo "
+      </div>
+      <div class='col-9'></div>"; // Closes col 3 div and fills rest of the row
+    }
+    echo "
+    </div>
+  </div>
+</div>"; // close row
 ?>

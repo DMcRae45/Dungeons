@@ -48,6 +48,10 @@ echo "
             <div class='card cave h-100'>
               <div class='card-body'>
                 <h5 class='card-title'>".$_SESSION['sessionCharacter'][$i]->Name."</h5>
+                <form action='../Controller/removeCharacterObject.php' method='POST'>
+                  <input type='hidden' id='index' name='index' value='".$i."'>
+                  <button name='removeCharacterObject' type='submit' style='position: absolute; top: 5px; right: 5px;' class='btn btn-outline-warning mt-0 mr-0'>X</button>
+                </form>
                 <h6 <span class='float-right badge badge-warning badge-pill'>".$_SESSION['sessionCharacter'][$i]->Alignment."</span></h6>
               </div>
               <ul class='list-group list-group-flush'>
@@ -84,9 +88,10 @@ echo "
                 </div>
 
                 <div class='list-group-item'>
-                <div class='row no-gutters justify-content-around'>
-
-                <h6>Proficiencies: <text>".$_SESSION['sessionCharacter'][$i]->Proficiencies."</text></h6>
+                  <div class='row no-gutters justify-content-around'>
+                    <h6>Proficiencies: <text>".$_SESSION['sessionCharacter'][$i]->Proficiencies."</text></h6>
+                  </div>
+                </div>
 
               </ul>
             </div>

@@ -17,24 +17,24 @@
 <!-- Footer -->
 <footer class="relative-bottom page-footer font-small pt-4 text-light bg-dark">
 
-        <!-- Grid column -->
-        <div class="text-center">
-          <!-- Content -->
-          <h5 class="text-uppercase">Author Details</h5>
+    <!-- Grid column -->
+    <div class="text-center">
+      <!-- Content -->
+      <h5 class="text-uppercase">Author Details</h5>
 
-          <p>
-            David McRae</br>
-            Student No. 1403163 </br>
-            Email: DMcRae45@gmail.com </br>
-            <a href="https://www.linkedin.com/in/David-McRae-Software/" class="fab fa-linkedin fa-3x"></a>
-          </p>
-          <p>
-            <a href="http://www.facebook.com/share.php?u=https://mayar.abertay.ac.uk/~1403163/Dungeons/View/index.php" class="fab fa-facebook-square fa-3x"></a>
-            <a href="https://twitter.com/intent/tweet?url=https://mayar.abertay.ac.uk/~1403163/Dungeons/View/index.php" class="fab fa-twitter-square fa-3x"></a>
-            <a href="http://instagram.com/share?ref_scr=https://mayar.abertay.ac.uk/~1403163/Dungeons/View/index.php" class="fab fa-instagram fa-3x"></a>
-          </p>
-        </div>
-        <!-- Grid column -->
+      <p>
+        David McRae</br>
+        Student No. 1403163 </br>
+        Email: DMcRae45@gmail.com </br>
+        <a href="https://www.linkedin.com/in/David-McRae-Software/" class="fab fa-linkedin fa-3x"></a>
+      </p>
+      <p>
+        <a href="http://www.facebook.com/share.php?u=https://mayar.abertay.ac.uk/~1403163/Dungeons/View/index.php" class="fab fa-facebook-square fa-3x"></a>
+        <a href="https://twitter.com/intent/tweet?url=https://mayar.abertay.ac.uk/~1403163/Dungeons/View/index.php" class="fab fa-twitter-square fa-3x"></a>
+        <a href="http://instagram.com/share?ref_scr=https://mayar.abertay.ac.uk/~1403163/Dungeons/View/index.php" class="fab fa-instagram fa-3x"></a>
+      </p>
+    </div>
+    <!-- Grid column -->
 
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">
@@ -44,11 +44,17 @@
       ©<a href="https://company.wizards.com/">Wizards Of The Coast</a> LLC.
       </br>
       </br>
+      Dungeons interactive DM Screen is an unnoficial production Not approved/endorsed by TableTop Audio.</br>
+      All sounds and some content on this page are the property of </br>
+      ©<a href="https://tabletopaudio.com/">TableTop Audio</a>
+      </br>
+      </br>
       Powered by ©<a href="https://open5e.com/">Open5E</a>
       </br>
-    </br>
-    DNS server by ©<a href="http://freedns.afraid.org/">Free DNS</a>
-    </br>      
+
+      </br>
+      DNS server by ©<a href="http://freedns.afraid.org/">Free DNS</a>
+      </br>
       </br>
       <a href="cookiePolicy.php">Cookie Policy</a>
       </br>

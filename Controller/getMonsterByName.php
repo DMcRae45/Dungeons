@@ -11,7 +11,6 @@ if(isset($_POST['getMonsterByName']))
 
   $monster = GetMonsterByName();
 
-
   if($monter == "error")
   {
     header('Location: ../View/screen.php?monsterError=Monster Not Found');
@@ -22,7 +21,7 @@ if(isset($_POST['getMonsterByName']))
 
     if(isset($_SESSION['lastMonster']))
     {
-      array_push($_SESSION['lastMonster'], $spellObject);
+      array_push($_SESSION['lastMonster'], $monsterObject);
     }
     else
     {

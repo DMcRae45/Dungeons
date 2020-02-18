@@ -438,6 +438,7 @@ function GetSpellByName()
   {
     $spellName = (filter_input(INPUT_POST, 'spellName', FILTER_SANITIZE_STRING)); // Sanitize the string
     $spellName = str_replace(' ', '-', $spellName); //Replace any whitespace with '-' symbols to work in the API
+    $spellName = strtolower($spellName);
 
     if(!$spell = file_get_contents("https://api.open5e.com/spells/".$spellName))
     {
@@ -464,7 +465,7 @@ function GetMonsterByName()
   {
     $monsterName = (filter_input(INPUT_POST, 'monsterName', FILTER_SANITIZE_STRING)); // Sanitize the string
     $monsterName = str_replace(' ', '-', $monsterName); // Replace any whitespace with '-' symbols to work on a url
-
+    $monsterName = strtolower($monsterName);
 
     if(!$monster = file_get_contents("https://api.open5e.com/monsters/".$monsterName))
     {

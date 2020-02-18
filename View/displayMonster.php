@@ -240,6 +240,12 @@ echo "
   echo"
   </div>"; // CLOSES THE DIV HOLDING ALL OF THE HIDDEN CONTENT
 }
+else
+{
+  echo "
+  </div>
+  <div class='col-9'></div>"; // Closes col 3 div and fills rest of the row
+}
 echo "
 </div>"; // CLOSES MONSTER ROW
 ?>
