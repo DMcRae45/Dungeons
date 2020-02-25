@@ -36,9 +36,6 @@ echo "
       </div>
     </nav>
     ";
-    echo "
-    </div>
-    <div class='col-9'></div>"; // Closes col 3 div and fills rest of the row
 
     echo "
     <div class='tab-content' id='nav-tabContent'>
@@ -101,7 +98,7 @@ echo "
             </div>
 
 
-            <div class='col-9'> sook </div>
+
 
 
           </div>
@@ -113,12 +110,7 @@ echo "
     </div>
     ";
   }
-  else
-  {
-    echo "
-    </div>
-    <div class='col-9'></div>"; // Closes col 3 div and fills rest of the row
-  }
+
   echo
   "</div>
 </div>"; // close row
