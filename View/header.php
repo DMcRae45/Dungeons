@@ -28,5 +28,6 @@
     <!-- included Files -->
     <?php
         include 'navigation.php';
+        include '../Controller/diceRoller.js'
     ?>
 </head>

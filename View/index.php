@@ -16,13 +16,9 @@
 <title>Dungeons - Home</title>
 
 
-<div class='mt-2 row-flex row no-gutters border border-warning rounded'>
-  <div class='col-md-3 border-warning rounded'>
-    <p>5E</br>
-    Database</p>
-  </div>
-  <div class='col-md-9'>
-    <p>big part</p></br>
+<div class='mt-2 row-flex row no-gutters '>
+  <div class='border border-warning rounded col-12 border-warning rounded d-flex justify-content-center'>
+    <h1 class='display-1'>Dungeons Interactive DM Screen </h1>
   </div>
 </div>
 

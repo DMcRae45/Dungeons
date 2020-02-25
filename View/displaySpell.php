@@ -55,11 +55,11 @@ echo "
 
           if($_SESSION['lastSpell'][$i]->level_int > 0)
           {
-            $level = "LEVEL: ".$_SESSION['lastSpell'][$i]->level_int;
+            $level = "Level: ".$_SESSION['lastSpell'][$i]->level_int;
           }
           else
           {
-            $level = "CANTRIP";
+            $level = "Cantrip";
           }
           echo "
           <div class='card cave col-3'>
@@ -124,7 +124,9 @@ echo "
         </div>
         ";
       }
-      echo "<div>";
+      echo "<div>
+      </div>
+    </div>";
     }
     else
     {
@@ -133,7 +135,5 @@ echo "
       <div class='col-9'></div>"; // Closes col 3 div and fills rest of the row
     }
     echo "
-    </div>
-  </div>
-</div>"; // close row
+    </div>"; // close row
 ?>

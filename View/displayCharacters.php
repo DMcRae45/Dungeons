@@ -36,6 +36,9 @@ echo "
       </div>
     </nav>
     ";
+    echo "
+    </div>
+    <div class='col-9'></div>"; // Closes col 3 div and fills rest of the row
 
     echo "
     <div class='tab-content' id='nav-tabContent'>
@@ -52,7 +55,8 @@ echo "
                   <input type='hidden' id='index' name='index' value='".$i."'>
                   <button name='removeCharacterObject' type='submit' style='position: absolute; top: 5px; right: 5px;' class='btn btn-outline-warning mt-0 mr-0'>X</button>
                 </form>
-                <h6 <span class='float-right badge badge-warning badge-pill'>".$_SESSION['sessionCharacter'][$i]->Alignment."</span></h6>
+                <h6 <span class='float-right badge badge-warning badge-pill'>Level: ".$_SESSION['sessionCharacter'][$i]->Level."</span></h6>
+                <h6>".$_SESSION['sessionCharacter'][$i]->Alignment."</h6>
               </div>
               <ul class='list-group list-group-flush'>
                 <div class='row list-group-item no-gutters d-inline'>
@@ -95,14 +99,26 @@ echo "
 
               </ul>
             </div>
+
+
+            <div class='col-9'> sook </div>
+
+
           </div>
           ";
+
+
         }
       echo "
     </div>
     ";
   }
-
+  else
+  {
+    echo "
+    </div>
+    <div class='col-9'></div>"; // Closes col 3 div and fills rest of the row
+  }
   echo
   "</div>
 </div>"; // close row

@@ -13,6 +13,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
+
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
     <ul class="navbar-nav mr-auto">
@@ -51,13 +52,35 @@
                     echo '<a class="dropdown-item" href="allSpells.php">ALL Spells</a>';
 
                 }
-                if(isset($_SESSION['admin']))
-                {
-                  // admins can see this part
-                }
             ?>
             </div>
         </li>
     </ul>
   </div>
+    <!-- <a class='float-right'<img src="images/D20_100.png"></a> -->
+
+
+    <div id="sidebar" class="sidebar mx-auto">
+      <div class='row'>
+        <a class="btn" onclick="closeNav()"><img src="images/D20_100.png"></a>
+      </div>
+      <a>Roll For Damage</a>
+      <div class="dropdown-divider"></div>
+      <form>
+        <div class='form-group input-group w-100'>
+          <div class='input-group-prepend'>
+            <span class='input-group-text' id='inputGroupPrepend'>D4: </span>
+          </div>
+          <input class='input-group-text' type="number" name="dice4">
+        </div>
+
+      </form>
+    </div>
+
+    <div id="openDice">
+      <a class="btn" onclick="openNav()"><img src="images/D20_100.png"></a>
+    </div>
+
+
+
 </nav>
