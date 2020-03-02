@@ -1,4 +1,4 @@
-<?php
+/<?php
 //Insert new User to database
 function CreateNewUser()
 {
@@ -207,86 +207,7 @@ function CreateCharacter($userid)
       }
       $languages = rtrim($languages, ','); // Remove the last comma added in the above foreach
 
-      if($exp < 300)
-      {
-        $lvl = 1;
-      }
-      else if ($exp < 900)
-      {
-        $lvl = 2;
-      }
-      else if ($exp < 2700)
-      {
-        $lvl = 3;
-      }
-      else if ($exp < 6500)
-      {
-        $lvl = 4;
-      }
-      else if ($exp < 14000)
-      {
-        $lvl = 5;
-      }
-      else if ($exp < 23000)
-      {
-        $lvl = 6;
-      }
-      else if ($exp < 34000)
-      {
-        $lvl = 7;
-      }
-      else if ($exp < 48000)
-      {
-        $lvl = 8;
-      }
-      else if ($exp < 64000)
-      {
-        $lvl = 9;
-      }
-      else if ($exp < 85000)
-      {
-        $lvl = 10;
-      }
-      else if ($exp < 100000)
-      {
-        $lvl = 11;
-      }
-      else if ($exp < 120000)
-      {
-        $lvl = 12;
-      }
-      else if ($exp < 140000)
-      {
-        $lvl = 13;
-      }
-      else if ($exp < 165000)
-      {
-        $lvl = 14;
-      }
-      else if ($exp < 195000)
-      {
-        $lvl = 15;
-      }
-      else if ($exp < 225000)
-      {
-        $lvl = 16;
-      }
-      else if ($exp < 265000)
-      {
-        $lvl = 17;
-      }
-      else if ($exp < 305000)
-      {
-        $lvl = 18;
-      }
-      else if ($exp < 355000)
-      {
-        $lvl = 19;
-      }
-      else if ($exp >= 355000)
-      {
-        $lvl = 20;
-      }
+      $lvl = ExpToLevel($exp);
 
       $Error = false;
       $NameError;
@@ -378,6 +299,91 @@ function CreateCharacter($userid)
   }
 }
 
+function ExpToLevel($exp)
+{
+  if($exp < 300)
+  {
+    $lvl = 1;
+  }
+  else if ($exp < 900)
+  {
+    $lvl = 2;
+  }
+  else if ($exp < 2700)
+  {
+    $lvl = 3;
+  }
+  else if ($exp < 6500)
+  {
+    $lvl = 4;
+  }
+  else if ($exp < 14000)
+  {
+    $lvl = 5;
+  }
+  else if ($exp < 23000)
+  {
+    $lvl = 6;
+  }
+  else if ($exp < 34000)
+  {
+    $lvl = 7;
+  }
+  else if ($exp < 48000)
+  {
+    $lvl = 8;
+  }
+  else if ($exp < 64000)
+  {
+    $lvl = 9;
+  }
+  else if ($exp < 85000)
+  {
+    $lvl = 10;
+  }
+  else if ($exp < 100000)
+  {
+    $lvl = 11;
+  }
+  else if ($exp < 120000)
+  {
+    $lvl = 12;
+  }
+  else if ($exp < 140000)
+  {
+    $lvl = 13;
+  }
+  else if ($exp < 165000)
+  {
+    $lvl = 14;
+  }
+  else if ($exp < 195000)
+  {
+    $lvl = 15;
+  }
+  else if ($exp < 225000)
+  {
+    $lvl = 16;
+  }
+  else if ($exp < 265000)
+  {
+    $lvl = 17;
+  }
+  else if ($exp < 305000)
+  {
+    $lvl = 18;
+  }
+  else if ($exp < 355000)
+  {
+    $lvl = 19;
+  }
+  else if ($exp >= 355000)
+  {
+    $lvl = 20;
+  }
+  return $lvl;
+}
+
 //Generate Unique Code for characters
 function GenerateUniqueCode($userid)
 {
@@ -421,6 +427,93 @@ function GetSessionCharacters()
     {
       $error = "error";
       return $error; // error get session character
+    }
+    $connection = null;
+  }
+}
+
+function GetCharacterEqipment($equipment_id)
+{
+  if(isset($_POST['getCharacterByCode']))
+  {
+    require 'connection.php';
+
+    $sql = "SELECT * FROM Equipment WHERE Equipment_ID = :equipment_id";
+
+    $stmt = $connection->prepare($sql);
+    $success = $stmt->execute(['equipment_id' => $equipment_id]);
+
+    if($success && $stmt->rowCount() > 0)
+    {
+      $equipmentIDs = array();
+      while($r = $stmt->fetch())
+      {
+        $equipmentIDs[] = $r;
+      }
+      return json_encode($equipmentIDs);
+    }
+    else
+    {
+      $error = "error"; // error finding equipment
+      return $error; // error for Controller file
+    }
+    $connection = null;
+  }
+}
+
+function GetCharacterArmour($armour_id)
+{
+  if(isset($_POST['getCharacterByCode']))
+  {
+    require 'connection.php';
+
+    $search_Armour = "SELECT * FROM Armour WHERE Armour_ID = :armour_id";
+
+    $armourStmt = $connection->prepare($search_Armour);
+    $armourSuccess = $armourStmt->execute(['armour_id' => $armour_id]);
+
+    if($armourSuccess && $armourStmt->rowCount() > 0)
+    {
+      $armourObject = array();
+      while($result = $armourStmt->fetch())
+      {
+        $armourObject[] = $result;
+      }
+      return json_encode($armourObject);
+    }
+    else
+    {
+      $error = "error rty"; // error finding weapojn
+      return $error; // error for Controller file
+    }
+    $connection = null;
+  }
+}
+
+function GetCharacterWeapon($weapon_id)
+{
+  if(isset($_POST['getCharacterByCode']))
+  {
+    require 'connection.php';
+
+    $search_Weapon = "SELECT * FROM Weapon WHERE Weapon_ID = :weapon_id";
+
+    $weaponStmt = $connection->prepare($search_Weapon);
+    $weaponSuccess = $weaponStmt->execute(['weapon_id' => $weapon_id]);
+
+    if($weaponSuccess && $weaponStmt->rowCount() > 0)
+    {
+      $weaponObject = array();
+      while($result = $weaponStmt->fetch())
+      {
+        $weaponObject[] = $result;
+      }
+      return json_encode($weaponObject);
+    }
+    else
+    {
+      $error = "error qwe"; // error finding armour
+      return $error; // error for Controller file
     }
     $connection = null;
   }

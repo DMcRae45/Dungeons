@@ -5,6 +5,15 @@ if(isset($_GET['characterError']))
   echo $characterError;
 }
 
+var_dump($_SESSION['sessionCharacter']);
+echo "</br></br>";
+var_dump($_SESSION['sessionCharacterArmour']);
+echo "</br></br>";
+var_dump($_SESSION['sessionCharacterWeapon']);
+echo "</br></br>";
+
+
+
 echo "<div class='mt-2 row-flex row no-gutters border border-warning rounded'>";
 
 echo "
@@ -36,16 +45,19 @@ echo "
       </div>
     </nav>
     ";
+    echo "
+    </div>
+    <div class='col-9 h-0'></div>"; // Closes col 3 div and fills rest of the row
 
     echo "
-    <div class='tab-content' id='nav-tabContent'>
+    <div class='row tab-content no-gutters col-12' id='nav-tabContent'>
       ";
         for($i = 0; $i < sizeof($_SESSION['sessionCharacter']); $i++)
         {
           echo "
-          <div class='tab-pane fade' id='Character".$i."' role='tabpanel' aria-labelledby='Character".$i."'>
+          <div class='row no-gutters tab-pane fade col-12' id='Character".$i."' role='tabpanel' aria-labelledby='Character".$i."'>
 
-            <div class='card cave h-100'>
+            <div class='card cave h-100 col-3'>
               <div class='card-body'>
                 <h5 class='card-title'>".$_SESSION['sessionCharacter'][$i]->Name."</h5>
                 <form action='../Controller/removeCharacterObject.php' method='POST'>
@@ -98,20 +110,28 @@ echo "
             </div>
 
 
+            <div class='col-9 list-group float-right' style='position: relative; top: 0px;'>
 
+              <li class='list-group-item d-flex justify-content-between align-items-center'><text>".$_SESSION['sessionCharacterArmour'][$i]->Name."</text>
+              </li>
 
+              <li class='list-group-item d-flex justify-content-between align-items-center'><text>".$_SESSION['sessionCharacterArmour'][$i]->AC."</text>
+              </li>
+            </div>
 
-          </div>
-          ";
-
-
+          </div>";// End character specific content (the hidden stuff)
         }
       echo "
     </div>
     ";
   }
-
+  else
+  {
+    echo "
+    </div>
+    <div class='col-9'></div>"; // Closes col 3 div and fills rest of the row
+  }
   echo
-  "</div>
+  "
 </div>"; // close row
 ?>
