@@ -4,7 +4,6 @@
 
     Author: David McRae
  */
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,6 +11,7 @@
 <?php
   include '../Model/session.php';
   include 'header.php';
+  include '../Controller/getEquipmentList.php';
 ?>
 <!-- </head> -->
 <title>D - Create Character</title>
@@ -363,9 +363,50 @@ if(isset($_GET['error']))
         </div>
         <!-- END FOURTH ROW -->
 
+        <!-- FIFTH ROW EQUIPMENT -->
+        <div class="form-row">
+          <div class='col-12'>
+            Equipped Items
+          </div>
+
+          <div class="col-md-6 form-group input-group">
+              <div class='input-group-prepend'>
+                <span class='input-group-text mt-4' id='inputGroupPrepend'>Armour: </span>
+              </div>
+              <select class='custom-select text mt-4' name=armour id=armour required>
+                <?php
+                for($i = 0; $i < sizeof($armourList); $i++)
+                {
+                  echo "<option value='".$armourList[$i]->Armour_ID."'>".$armourList[$i]->Name."</option>";
+                }
+                ?>
+              </select>
+              <div class="invalid-feedback">
+                You cannot Leave This field Empty.
+              </div>
+          </div>
+
+          <div class="col-md-6 form-group input-group">
+              <div class='input-group-prepend'>
+                <span class='input-group-text mt-4' id='inputGroupPrepend'>Weapon: </span>
+              </div>
+              <select class='custom-select text mt-4' name=weapon id=weapon required>
+                <?php
+                for($i = 0; $i < sizeof($weaponList); $i++)
+                {
+                  echo "<option value='".$weaponList[$i]->Weapon_ID."'>".$weaponList[$i]->Name."</option>";
+                }
+                ?>
+              </select>
+              <div class="invalid-feedback">
+                You cannot Leave This field Empty.
+              </div>
+          </div>
+        </div>
+
+        <!-- END FIFTH ROW -->
+
         <!-- PROFICIENY TABLE -->
-
-
         <table class="table border">
           <thead>
             <tr class ="text-center">
@@ -381,7 +422,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Strength</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="proficiency[]" value="strSavingThrow" id="str_STCheck">
+                    <input type="checkbox" name="savingThrow[]" value="Strength" id="str_STCheck">
                   </div>
                 </div>
               </th>
@@ -403,7 +444,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Dexterity</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="proficiency[]" value="dexSavingThrow" id="dex_STCheck">
+                    <input type="checkbox" name="savingThrow[]" value="Dexterity" id="dex_STCheck">
                   </div>
                 </div>
               </th>
@@ -447,7 +488,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Constitution</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="proficiency[]" value="conSavingThrow" id="con_STCheck">
+                    <input type="checkbox" name="savingThrow[]" value="Constitution" id="con_STCheck">
                   </div>
                 </div>
               </th>
@@ -461,7 +502,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Intelligence</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="proficiency[]" value="intSavingThrow" id="int_STCheck">
+                    <input type="checkbox" name="savingThrow[]" value="Intelligence" id="int_STCheck">
                   </div>
                 </div>
               </th>
@@ -517,7 +558,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Wisdom</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="proficiency[]" value="wisSavingThrow" id="wis_STCheck">
+                    <input type="checkbox" name="savingThrow[]" value="Wisdom" id="wis_STCheck">
                   </div>
                 </div>
               </th>
@@ -573,7 +614,7 @@ if(isset($_GET['error']))
                   <a class="text-warning input-group-text border-0">Charisma</a>
                   </div>
                   <div class="row justify-content-center mb-2">
-                    <input type="checkbox" name="proficiency[]" value="chaSavingThrow" id="cha_STCheck">
+                    <input type="checkbox" name="savingThrow[]" value="Charisma" id="cha_STCheck">
                   </div>
                 </div>
               </th>

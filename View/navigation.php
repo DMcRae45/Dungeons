@@ -1,5 +1,4 @@
 <?php
-
 /*
     Description: Dungeons Navigation bar..
 

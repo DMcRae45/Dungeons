@@ -1,4 +1,4 @@
-/<?php
+<?php
 //Insert new User to database
 function CreateNewUser()
 {
@@ -190,8 +190,19 @@ function CreateCharacter($userid)
       $WIS = (filter_input(INPUT_POST, 'wisdom', FILTER_SANITIZE_STRING));
       $CHA = (filter_input(INPUT_POST, 'charisma', FILTER_SANITIZE_STRING));
 
+      $armour = (filter_input(INPUT_POST, 'armour', FILTER_SANITIZE_STRING));
+      $weapon = (filter_input(INPUT_POST, 'weapon', FILTER_SANITIZE_STRING));
+
+      $savingThrows = "";
       $proficiencies = "";
       $languages = "";
+
+      // for each index in the savingThrows array create a single String
+      for($i = 0; $i < sizeof($_POST['savingThrow']); $i++)
+      {
+        $savingThrows = $savingThrows." ".$_POST['savingThrow'][$i].",";
+      }
+      $savingThrows = rtrim($savingThrows, ','); // Remove the last comma added in the above foreach
 
       // for each index in the proficiency array create a single String
       for($i = 0; $i < sizeof($_POST['proficiency']); $i++)
@@ -250,8 +261,8 @@ function CreateCharacter($userid)
       $query = $connection->prepare
       ("
 
-      INSERT INTO Player_Character (User_ID, Code, Name, Alignment, Exp, Level, RaceName, ClassName, AC, Max_HP, HP, Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma, Proficiencies, Language)
-      VALUES(:user_id, :code, :name, :alignment, :exp, :lvl, :race, :class, :ac, :maxhp, :hp, :str, :dex, :con, :int, :wis, :cha, :proficiencies, :languages)
+      INSERT INTO Player_Character (User_ID, Code, Name, Alignment, Exp, Level, RaceName, ClassName, AC, Max_HP, HP, Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma, Saving_Throws, Proficiencies, Language)
+      VALUES(:user_id, :code, :name, :alignment, :exp, :lvl, :race, :class, :ac, :maxhp, :hp, :str, :dex, :con, :int, :wis, :cha, :savingThrows, :proficiencies, :languages)
 
       ");
 
@@ -275,6 +286,7 @@ function CreateCharacter($userid)
         'int' => $INT,
         'wis' => $WIS,
         'cha' => $CHA,
+        'savingThrows' => $savingThrows,
         'proficiencies' => $proficiencies,
         'languages' => $languages
       ]);
@@ -282,12 +294,13 @@ function CreateCharacter($userid)
       // If rows returned is more than 0 Let us know if it inserted or not.
       if($success && $query->rowCount() > 0)
       {
-        echo "Insert Successful";
+        EquipItems($code, $armour, $weapon);
         //header('location: ../View/index.php');
       }
       else
       {
-        print_r($query->errorInfo());
+        echo "oops, something went wrong";
+        //print_r($query->errorInfo());
       }
     }
   }
@@ -297,6 +310,27 @@ function CreateCharacter($userid)
     $errorString = ":You Must Accept the Cookie policy and login to create a character.";
     header('Location: ../View/userLogin.php?error='.$errorString);
   }
+}
+
+function EquipItems($code, $armour, $weapon)
+{
+  require 'connection.php';
+  $query = $connection->prepare
+  ("
+
+  INSERT INTO Equipment
+  VALUES(:code, :armour, :weapon)
+
+  ");
+
+  // Runs and executes the query
+  $success = $query->execute
+  ([
+    'code' => $code,
+    'armour' => $armour,
+    'weapon' => $weapon
+  ]);
+  $connection = null;
 }
 
 function ExpToLevel($exp)
@@ -517,6 +551,58 @@ function GetCharacterWeapon($weapon_id)
     }
     $connection = null;
   }
+}
+
+function GetArmourList()
+{
+  require 'connection.php';
+
+  $sql = "SELECT Armour_ID, Name FROM Armour";
+
+  $armourStmt = $connection->prepare($sql);
+  $weaponSuccess = $armourStmt->execute();
+
+  if($weaponSuccess && $armourStmt->rowCount() > 0)
+  {
+    $armourList = array();
+    while($result = $armourStmt->fetch())
+    {
+      $armourList[] = $result;
+    }
+    return json_encode($armourList);
+  }
+  else
+  {
+    $error = "error"; // error finding weapons
+    return $error; // error for Controller file
+  }
+  $connection = null;
+}
+
+function GetWeaponList()
+{
+  require 'connection.php';
+
+  $sql = "SELECT Weapon_ID, Name FROM Weapon";
+
+  $weaponStmt = $connection->prepare($sql);
+  $weaponSuccess = $weaponStmt->execute();
+
+  if($weaponSuccess && $weaponStmt->rowCount() > 0)
+  {
+    $weaponList = array();
+    while($result = $weaponStmt->fetch())
+    {
+      $weaponList[] = $result;
+    }
+    return json_encode($weaponList);
+  }
+  else
+  {
+    $error = "error"; // error finding weapons
+    return $error; // error for Controller file
+  }
+  $connection = null;
 }
 
 function GetAllSpells()

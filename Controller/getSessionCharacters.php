@@ -18,7 +18,7 @@ if(isset($_POST['getCharacterByCode']))
   else
   {
     $character = json_decode($character);
-    $equipped = json_decode(GetCharacterEqipment($character[0]->Equipment_ID));
+    $equipped = json_decode(GetCharacterEqipment($character[0]->Code));
     $armour = json_decode(GetCharacterArmour($equipped[0]->Armour_ID));
     $weapon = json_decode(GetCharacterWeapon($equipped[0]->Weapon_ID));
 
