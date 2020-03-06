@@ -71,22 +71,22 @@ echo "
                 </div>
 
                 <div class='row no-gutters h-100'>
-                  <div class='col-2 text-center bg-custom'>
+                  <div class='col-2 text-center bg-custom pb-2'>
                     <h6>STR: </br><text>".$_SESSION['lastMonster'][$i]->strength."</text></h6>
                   </div>
-                  <div class='col-2 text-center bg-custom'>
+                  <div class='col-2 text-center bg-custom pb-2'>
                     <h6>INT: </br><text>".$_SESSION['lastMonster'][$i]->intelligence."</text></h6>
                   </div>
-                  <div class='col-2 text-center bg-custom'>
+                  <div class='col-2 text-center bg-custom pb-2'>
                     <h6>CON: </br><text>".$_SESSION['lastMonster'][$i]->constitution."</text></h6>
                   </div>
-                  <div class='col-2 text-center bg-custom'>
+                  <div class='col-2 text-center bg-custom pb-2'>
                     <h6>WIS: </br><text>".$_SESSION['lastMonster'][$i]->wisdom."</text></h6>
                   </div>
-                  <div class='col-2 text-center bg-custom'>
+                  <div class='col-2 text-center bg-custom pb-2'>
                     <h6>DEX: </br><text>".$_SESSION['lastMonster'][$i]->dexterity."</text></h6>
                   </div>
-                  <div class='col-2 text-center bg-custom'>
+                  <div class='col-2 text-center bg-custom pb-2'>
                     <h6>CHA: </br><text>".$_SESSION['lastMonster'][$i]->charisma."</text></h6>
                   </div>
                 </div>
@@ -210,9 +210,8 @@ echo "
                 echo "
                 <div class='list-group-item no-gutters'>
                   <h6>Action: <text>".$_SESSION['lastMonster'][$i]->actions[$n]->name."</text></h6>
-
+                  </div>
                   <li class='list-group-item justify-content-between align-items-center'><text> ".nl2br($_SESSION['lastMonster'][$i]->actions[$n]->desc)."</text></li>
-                </div>
                 ";
               }
               echo "

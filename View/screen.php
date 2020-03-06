@@ -24,14 +24,20 @@ include 'displaySpell.php';
 // Monster Row
 include 'displayMonster.php';
 
-  // Custom sound Board By Tabletop Audio
-  echo "
-  <div class='mt-2 row-flex row no-gutters border border-warning rounded'>
-   <object type='text/html' data='https://tabletopaudio.com/custom_sp.html' class='w-100' style='height: 500px;'></object>
-  </div>
+// Custom sound Board By Tabletop Audio
+echo "
+<div class='mt-2 row-flex row no-gutters border border-warning rounded'>
+ <object type='text/html' data='https://tabletopaudio.com/custom_sp.html' class='w-100' style='height: 500px;'></object>
+</div>
+
 
 </div>"; // main container close
 
+//ORIGINAL SOUND BOARD NOW DOES NOT WORK
+
+
+
+//<iframe class='w-100' style='height: 500px;' src='https://tabletopaudio.com/'></iframe>
 
 ?>
 

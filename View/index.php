@@ -15,13 +15,69 @@
 <!-- </head> -->
 <title>Dungeons - Home</title>
 
+<div class='container mt-5 mb-5'>
+<?php
+  if(isset($_SESSION['userid']) && isset($_SESSION['username']))
+  {
+    echo "
+    <div class='row'>
+      <div class='col-12 mt-5'>
+        <a class='btn btn-outline-warning btn-block'href='play.php'>Play</a>
+      </div>
+    </div>
 
-<div class='mt-2 row-flex row no-gutters '>
-  <div class='border border-warning rounded col-12 border-warning rounded d-flex justify-content-center'>
-    <h1 class='display-1'>Dungeons Interactive DM Screen </h1>
+    <div class='row'>
+      <div class='col-12 mt-5'>
+        <a class='btn btn-outline-Warning btn-block' href='createCharacter.php'>Create Character</a>
+      </div>
+    </div>
+    ";
+  }
+  else
+  {
+    echo "
+    <div class='row'>
+      <div class='col-md-6 mt-5'>
+        <a class='btn btn-outline-warning btn-block'href='userLogin.php'>Login</a>
+      </div>
+
+      <div class='col-md-6 mt-5'>
+        <a class='btn btn-outline-Warning btn-block' href='userRegister.php'>Register</a>
+      </div>
+    </div>
+    ";
+  }
+?>
+  <!-- Manager Access Required -->
+
+
+    <!-- Supervisor Access Required -->
+  <div class='row'>
+    <div class='col-12 mt-5'>
+      <a class='btn btn-outline-Warning btn-block' href='screen.php'>DM Screen</a>
+    </div>
   </div>
-</div>
 
+  <div class='row'>
+    <!-- Manager Access Required -->
+    <div class='col-md-6 mt-5'>
+      <a class='btn btn-outline-warning btn-block'href='allSpells.php'>All Spells</a>
+    </div>
+
+    <!-- Manager Access Required -->
+    <div class='col-md-6 mt-5'>
+      <a class='btn btn-outline-Warning btn-block' href='allMonsters.php'>All Monsters</a>
+    </div>
+  </div>
+
+    <!-- Employee Access Required -->
+  <div class='row'>
+    <div class='col-12 mt-5'>
+      <a class='btn btn-outline-warning btn-block' href='RuleReference.php'>Rules of Play</a>
+    </div>
+  </div>
+
+</div>
 
 <!-- <footer> -->
 <?php

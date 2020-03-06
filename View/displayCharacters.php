@@ -5,15 +5,6 @@ if(isset($_GET['characterError']))
   echo $characterError;
 }
 
-var_dump($_SESSION['sessionCharacter']);
-echo "</br></br>";
-var_dump($_SESSION['sessionCharacterArmour']);
-echo "</br></br>";
-var_dump($_SESSION['sessionCharacterWeapon']);
-echo "</br></br>";
-
-
-
 echo "<div class='mt-2 row-flex row no-gutters border border-warning rounded'>";
 
 echo "
@@ -80,29 +71,41 @@ echo "
                 </div>
 
                 <div class='row no-gutters h-100'>
-                  <div class='col-2 text-center bg-custom'>
+                  <div class='col-2 text-center bg-custom pb-2'>
                     <h6>STR: </br><text>".$_SESSION['sessionCharacter'][$i]->Strength."</text></h6>
                   </div>
-                  <div class='col-2 text-center bg-custom'>
+                  <div class='col-2 text-center bg-custom pb-2'>
                     <h6>INT: </br><text>".$_SESSION['sessionCharacter'][$i]->Intelligence."</text></h6>
                   </div>
-                  <div class='col-2 text-center bg-custom'>
+                  <div class='col-2 text-center bg-custom pb-2'>
                     <h6>CON: </br><text>".$_SESSION['sessionCharacter'][$i]->Constitution."</text></h6>
                   </div>
-                  <div class='col-2 text-center bg-custom'>
+                  <div class='col-2 text-center bg-custom pb-2'>
                     <h6>WIS: </br><text>".$_SESSION['sessionCharacter'][$i]->Wisdom."</text></h6>
                   </div>
-                  <div class='col-2 text-center bg-custom'>
+                  <div class='col-2 text-center bg-custom pb-2'>
                     <h6>DEX: </br><text>".$_SESSION['sessionCharacter'][$i]->Dexterity."</text></h6>
                   </div>
-                  <div class='col-2 text-center bg-custom'>
+                  <div class='col-2 text-center bg-custom pb-2'>
                     <h6>CHA: </br><text>".$_SESSION['sessionCharacter'][$i]->Charisma."</text></h6>
                   </div>
                 </div>
 
                 <div class='list-group-item'>
-                  <div class='row no-gutters justify-content-around'>
+                  <div class='row no-gutters'>
+                    <h6>Saving Throw: <text>".$_SESSION['sessionCharacter'][$i]->Saving_Throws."</text></h6>
+                  </div>
+                </div>
+
+                <div class='list-group-item'>
+                  <div class='row no-gutters'>
                     <h6>Proficiencies: <text>".$_SESSION['sessionCharacter'][$i]->Proficiencies."</text></h6>
+                  </div>
+                </div>
+
+                <div class='list-group-item'>
+                  <div class='row no-gutters'>
+                    <h6>languages: <text>".$_SESSION['sessionCharacter'][$i]->Language."</text></h6>
                   </div>
                 </div>
 
@@ -110,12 +113,27 @@ echo "
             </div>
 
 
-            <div class='col-9 list-group float-right' style='position: relative; top: 0px;'>
-
-              <li class='list-group-item d-flex justify-content-between align-items-center'><text>".$_SESSION['sessionCharacterArmour'][$i]->Name."</text>
+            <div class='col-2 list-group' style='position: relative; top: 0px;'>
+              <li class='list-group-item d-flex'><h6>Armour</h6>
               </li>
+              <li class='list-group-item d-flex justify-content-between align-items-center'><h6>Name: <text>".$_SESSION['sessionCharacterArmour'][$i]->Name."</text></h6>
+              </li>
+              <li class='list-group-item d-flex justify-content-between align-items-center'><h6>AC: <text>".$_SESSION['sessionCharacterArmour'][$i]->AC."</text></h6>
+              </li>
+              <li class='list-group-item d-flex justify-content-between align-items-center'><h6>Stealth: <text>".$_SESSION['sessionCharacterArmour'][$i]->Stealth."</text></h6>
+              </li>
+            </div>
 
-              <li class='list-group-item d-flex justify-content-between align-items-center'><text>".$_SESSION['sessionCharacterArmour'][$i]->AC."</text>
+            <div class='col-2 list-group' style='position: relative; top: 0px;'>
+              <li class='list-group-item d-flex align-items-center'><h6>Weapon</h6>
+              </li>
+              <li class='list-group-item d-flex justify-content-between align-items-center'><h6>Name: <text>".$_SESSION['sessionCharacterWeapon'][$i]->Name."</text></h6>
+              </li>
+              <li class='list-group-item d-flex justify-content-between align-items-center'><h6>Category: <text>".$_SESSION['sessionCharacterWeapon'][$i]->Category."</text></h6>
+              </li>
+              <li class='list-group-item justify-content-between'><h6>Damage: <text>".$_SESSION['sessionCharacterWeapon'][$i]->Damage_Dice." ".$_SESSION['sessionCharacterWeapon'][$i]->Damage_Type."</text></h6>
+              </li>
+              <li class='list-group-item d-flex justify-content-between align-items-center'><h6>Properties: <text>".$_SESSION['sessionCharacterWeapon'][$i]->Properties."</text></h6>
               </li>
             </div>
 

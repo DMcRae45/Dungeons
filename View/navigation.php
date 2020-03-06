@@ -24,32 +24,33 @@
         <li class="nav-item dropdown active">
 
             <?php
-                if(!isset($_SESSION['userid']))
-                {
-                    echo '<a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>';
-                }
-                if(isset($_SESSION['userid']))
+                if(isset($_SESSION['userid']) && isset($_SESSION['username']))
                 {
                     echo '<a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.$_SESSION['username'].'</a>';
+                }
+                else
+                {
+                    echo '<a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>';
                 }
             ?>
 
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
             <?php
-                if(!isset($_SESSION['userid']))
+                if(isset($_SESSION['userid']) && isset($_SESSION['username']))
+                {
+                  // logged in users can see this part
+                  echo '<a class="dropdown-item" href="screen.php">DM Screen</a>';
+                  echo '<div class="dropdown-divider"></div>';  // divider between menu items
+                  echo '<a class="dropdown-item" href="allMagicItems.php">Magical Items</a>';
+                  echo '<a class="dropdown-item" href="allSpells.php">Spells</a>';
+                  echo '<a class="dropdown-item" href="allMonsters.php">Monsters</a>';
+                }
+                else
                 {
                   echo '<a class="dropdown-item" href="userLogin.php">Login</a>';
                   echo '<div class="dropdown-divider"></div>';  // divider between menu items
                   echo '<a class="dropdown-item" href="userRegister.php">Register</a>';
-                }
-                if(isset($_SESSION['userid']))
-                {
-                  // logged in users can see this part
-                    echo '<a class="dropdown-item" href="screen.php">DM Screen</a>';
-                    echo '<div class="dropdown-divider"></div>';  // divider between menu items
-                    echo '<a class="dropdown-item" href="allSpells.php">ALL Spells</a>';
-
                 }
             ?>
             </div>
@@ -57,7 +58,6 @@
     </ul>
   </div>
     <!-- <a class='float-right'<img src="images/D20_100.png"></a> -->
-
 
     <div id="sidebar" class="sidebar mx-auto">
       <div class='row'>
@@ -79,7 +79,4 @@
     <div id="openDice">
       <a class="btn" onclick="openNav()"><img src="images/D20_100.png"></a>
     </div>
-
-
-
 </nav>

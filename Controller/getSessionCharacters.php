@@ -21,6 +21,9 @@ if(isset($_POST['getCharacterByCode']))
     $equipped = json_decode(GetCharacterEqipment($character[0]->Code));
     $armour = json_decode(GetCharacterArmour($equipped[0]->Armour_ID));
     $weapon = json_decode(GetCharacterWeapon($equipped[0]->Weapon_ID));
+    $spells = json_decode(GetCharacterSpells($character[0]->Code));
+    $spellsKnown = json_decode(GetKnownSpells($spells[0]->Known));
+
 
     if($equipped == "error")
     {
@@ -32,12 +35,14 @@ if(isset($_POST['getCharacterByCode']))
       array_push($_SESSION['sessionCharacter'], $character[0]);
       array_push($_SESSION['sessionCharacterArmour'], $armour[0]);
       array_push($_SESSION['sessionCharacterWeapon'], $weapon[0]);
+      array_push($_SESSION['sessionCharacterSpellsKnown'], $spellsKnown[0]);
     }
     else
     {
       $_SESSION['sessionCharacter'] = $character;
       $_SESSION['sessionCharacterArmour'] = $armour;
       $_SESSION['sessionCharacterWeapon'] = $weapon;
+      $_SESSION['sessionCharacterSpellsKnown'] = $spellsKnown;
     }
     header('Location: ../View/screen.php');
   }

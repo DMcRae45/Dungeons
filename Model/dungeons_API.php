@@ -632,9 +632,56 @@ function GetSpellByName()
   }
 }
 
+function GetCharacterSpells($spellBook_id)
+{
+  if(isset($_POST['getCharacterByCode']))
+  {
+    require 'connection.php';
+
+    $sql = "SELECT * FROM SpellBook WHERE SpellBook_ID = :spellBook_id";
+
+    $stmt = $connection->prepare($sql);
+    $success = $stmt->execute(['spellBook_id' => $spellBook_id]);
+
+    if($success && $stmt->rowCount() > 0)
+    {
+      $spellLists = array();
+      while($r = $stmt->fetch())
+      {
+        $spellLists[] = $r;
+      }
+      return json_encode($spellLists);
+    }
+    else
+    {
+      $error = "error"; // error finding equipment
+      return $error; // error for Controller file
+    }
+    $connection = null;
+  }
+}
+
+function GetKnownSpells($spellList)
+{
+  $spellList = strtolower($spellList);
+  $spellList = str_replace(', ', '%2C', $spellList);
+  $spellList = str_replace(' ', '-', $spellList);
+
+  if(!$spelsKnown = file_get_contents("https://api.open5e.com/spells/".$spellList))
+  {
+    $error = "error";
+    return $error;
+  }
+  else
+  {
+    $spellsKnown = file_get_contents("https://api.open5e.com/spells/".$spellList); //Get a list of search results from the Open5E API
+    return $spellsKnown;
+  }
+}
+
 function GetAllMonsters()
 {
-  $monsters = file_get_contents("https://api.open5e.com/spells/"); //Get a list of search results from the API
+  $monsters = file_get_contents("https://api.open5e.com/monsters/"); //Get a list of search results from the API
   return $monsters; //Return the results
 }
 
@@ -656,8 +703,6 @@ function GetMonsterByName()
       $monster = file_get_contents("https://api.open5e.com/monsters/".$monsterName); // Get a list of search results from the Open 5e API
       return $monster;
     }
-
-
   }
 }
 
