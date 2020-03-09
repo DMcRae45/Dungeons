@@ -12,6 +12,7 @@ if(isset($_POST['removeCharacterObject']))
   $_SESSION['sessionCharacter'] = RemoveObject($_SESSION['sessionCharacter']);
   $_SESSION['sessionCharacterArmour'] = RemoveObject($_SESSION['sessionCharacterArmour']);
   $_SESSION['sessionCharacterWeapon'] = RemoveObject($_SESSION['sessionCharacterWeapon']);
+  $_SESSION['sessionCharacterSpellsKnown'] = RemoveObject($_SESSION['sessionCharacterSpellsKnown']);
 
   header('Location: ../View/screen.php');
 }

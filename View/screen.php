@@ -32,13 +32,6 @@ echo "
 
 
 </div>"; // main container close
-
-//ORIGINAL SOUND BOARD NOW DOES NOT WORK
-
-
-
-//<iframe class='w-100' style='height: 500px;' src='https://tabletopaudio.com/'></iframe>
-
 ?>
 
 <!-- <footer> -->
@@ -50,6 +43,8 @@ echo "
 <!-- JavaScript files -->
 <?php
     include '../Controller/bootstrapScript.php';
+    include '../Controller/tabControl.php';
+    include '../Controller/fontAwesome.js';
     include '../Controller/cookieConsent.php';
 ?>
 </body>

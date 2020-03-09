@@ -38,10 +38,10 @@
 
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">
+      ©<a href="https://company.wizards.com/"><h1 class='display-1'><i class="fab fa-wizards-of-the-coast"></i></h1></a>
       </br>
       Dungeons interactive DM Screen is unofficial Fan Content permitted under the Fan Content Policy. </br>
       Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. </br>
-      ©<a href="https://company.wizards.com/">Wizards Of The Coast</a> LLC.
       </br>
       </br>
       Dungeons interactive DM Screen is an unnoficial production Not approved/endorsed by TableTop Audio.</br>

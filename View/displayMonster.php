@@ -14,7 +14,7 @@ echo "
     <div class='input-group input-group-sm'>
       <input type='text' class='form-control' placeholder='Search by monster name' aria-label='Small' aria-describedby='inputGroup-sizing-sm' id='monsterName' name='monsterName'>
       <div class='input-group-append'>
-        <button name='getMonsterByName' type='submit' class='btn btn-outline-warning'>Search</button>
+        <button name='getMonsterByName' type='submit' class='btn btn-outline-warning'><i class='fas fa-plus'></i></button>
       </div>
     </div>
   </form>";
@@ -51,6 +51,7 @@ echo "
             <div class='card cave col-3'>
               <div class='card-body'>
                 <h5 class='card-title'>".$_SESSION['lastMonster'][$i]->name."</h5>
+                <button onclick='minimizeMonster($i)' style='position: absolute; top: 5px; right: 50px;' class='btn btn-outline-warning mt-0 mr-0'><i class='far fa-eye-slash'></i></button>
                 <form action='../Controller/removeMonsterObject.php' method='POST'>
                   <input type='hidden' id='index' name='index' value='".$i."'>
                   <button name='removeMonsterObject' type='submit' style='position: absolute; top: 5px; right: 5px;' class='btn btn-outline-warning mt-0 mr-0'>X</button>

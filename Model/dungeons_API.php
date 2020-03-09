@@ -466,7 +466,7 @@ function GetSessionCharacters()
   }
 }
 
-function GetCharacterEqipment($equipment_id)
+function GetCharacterEquipment($equipment_id)
 {
   if(isset($_POST['getCharacterByCode']))
   {
@@ -667,14 +667,14 @@ function GetKnownSpells($spellList)
   $spellList = str_replace(', ', '%2C', $spellList);
   $spellList = str_replace(' ', '-', $spellList);
 
-  if(!$spelsKnown = file_get_contents("https://api.open5e.com/spells/".$spellList))
+  if(!$spelsKnown = file_get_contents("https://api.open5e.com/spells/?slug_iexact&slug__in=".$spellList))
   {
     $error = "error";
     return $error;
   }
   else
   {
-    $spellsKnown = file_get_contents("https://api.open5e.com/spells/".$spellList); //Get a list of search results from the Open5E API
+    $spellsKnown = file_get_contents("https://api.open5e.com/spells/?slug_iexact&slug__in=".$spellList); //Get a list of search results from the Open5E API
     return $spellsKnown;
   }
 }
