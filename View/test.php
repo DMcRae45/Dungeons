@@ -21,7 +21,7 @@
 
       for($i = 0; $i < sizeof($_SESSION['sessionCharacter']); $i++)
       {
-        if($i = 0)
+        if($i == 0)
         {
           echo "
           <li class='active'>

@@ -35,7 +35,7 @@ echo "<div class='mt-2 row-flex row no-gutters border border-warning rounded'>";
           ";
           for($i = 0; $i < sizeof($_SESSION['sessionCharacter']); $i++)
           {
-            if($i = 0)
+            if($i == 0)
             {
               echo "
               <li class='active'>
@@ -217,6 +217,9 @@ echo "<div class='mt-2 row-flex row no-gutters border border-warning rounded'>";
   }
   echo
   "
+</div>
+</div>
+</div>
 </div>"; // close row
 
     include '../Controller/bootstrapScript.php';

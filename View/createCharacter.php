@@ -403,8 +403,21 @@ if(isset($_GET['error']))
               </div>
           </div>
         </div>
-
         <!-- END FIFTH ROW -->
+
+        <!-- SIXTH ROW SPELLS KNOWN -->
+        <div class="form-row">
+          <div class="col-12 form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text mt-4" id="inputGroupPrepend">Spells Known</span>
+            </div>
+              <input class="form-control mt-4" type="text" id="known" name="known" placeholder="Fireball, Mirror image, etc..." required>
+                <div class="invalid-feedback">
+                  You cannot Leave This field Empty.
+                </div>
+          </div>
+        </div>
+        <!-- END SIXTH ROW -->
 
         <!-- PROFICIENY TABLE -->
         <table class="table border">

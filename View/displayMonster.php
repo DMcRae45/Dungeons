@@ -4,6 +4,11 @@ if(isset($_GET['monsterError']))
   $monsterError = $_GET['monsterError'];
   echo $monsterError;
 }
+$monsterHealth = array();
+for($i = 0; $i < sizeof($_SESSION['lastMonster']); $i++)
+{
+  $monsterHealth[$i] = $_SESSION['lastMonster'][$i]->hit_points;
+}
 
 echo "
 <div class='mt-2 row-flex row no-gutters border border-warning rounded'>";
@@ -63,7 +68,11 @@ echo "
                 <div class='row list-group-item no-gutters'>
                   <div class='row no-gutters'>
                     <div class='col-6 text-center'>
-                      <h4>HP: <text>".$_SESSION['lastMonster'][$i]->hit_points."</text></h4>
+
+                      <button onclick='removeMonsterHealth(".$i.")' class='btn btn-outline-warning mt-0'>-</button>
+                      <h4>HP: <text id='monsterHealthDisplay".$i."'>".$monsterHealth[$i]."</text></h4>
+                      <button onclick='addMonsterHealth(".$i.")' class='btn btn-outline-warning mt-0'>+</button>
+
                     </div>
                     <div class='col-6 text-center'>
                       <h4>AC: <text>".$_SESSION['lastMonster'][$i]->armor_class."</text></h4>

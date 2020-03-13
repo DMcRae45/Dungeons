@@ -4,11 +4,11 @@ if(isset($_GET['characterError']))
   $characterError = $_GET['characterError'];
   echo $characterError;
 }
-
-// unset($_SESSION['sessionCharacter']);
-// unset($_SESSION['sessionCharacterArmour']);
-// unset($_SESSION['sessionCharacterWeapon']);
-// unset($_SESSION['sessionCharacterSpellsKnown']);
+$characterHealth = array();
+for($i = 0; $i < sizeof($_SESSION['sessionCharacter']); $i++)
+{
+  $characterHealth[$i] = $_SESSION['sessionCharacter'][$i]->HP;
+}
 
 echo "<div class='mt-2 row-flex row no-gutters border border-warning rounded'>"; // CHARACTER ROW
 
@@ -35,22 +35,9 @@ echo "<div class='mt-2 row-flex row no-gutters border border-warning rounded'>";
           ";
           for($i = 0; $i < sizeof($_SESSION['sessionCharacter']); $i++)
           {
-            if($i = 0)
-            {
-              echo "
-              <li class='active'>
-              <a class='nav-item nav-link' id='CharacterTab".$i."' data-toggle='tab' href='#Character".$i."' role='tab' aria-controls='Character".$i."' aria-selected='true'>".$_SESSION['sessionCharacter'][$i]->Name."</a>
-              </li>
-              ";
-            }
-            else
-            {
-              echo "
-              <li>
-              <a class='nav-item nav-link' id='CharacterTab".$i."' data-toggle='tab' href='#Character".$i."' role='tab' aria-controls='Character".$i."' aria-selected='true'>".$_SESSION['sessionCharacter'][$i]->Name."</a>
-              </li>
-              ";
-            }
+            echo "
+              <a class='nav-item nav-link' id='characterTab".$i."' href='#characterRow".$i."' data-toggle='tab' role='tab' aria-controls='characterRow".$i."' aria-selected='false'>".$_SESSION['sessionCharacter'][$i]->Name."</a>
+            ";
           }
           echo "
         </div>
@@ -59,38 +46,36 @@ echo "<div class='mt-2 row-flex row no-gutters border border-warning rounded'>";
 
   // CHARACTER EQUIPMENT TABS
   echo "
-  <div class='row tab-content no-gutters col-9' id='nav-tabContent'>
-    <nav>
-      <div class='nav nav-tabs' id='equipmentTab' role='tablist'>
-        ";
-          for($i = 0; $i < sizeof($_SESSION['sessionCharacter']); $i++)
-          {
-            echo "
-            <a class='nav-item nav-link' id='equipmentTab".$i."' data-toggle='tab' href='#Equipment".$i."' role='tab' aria-controls='Equipment".$i."' aria-selected='false'>Equipped</a>
-            <a class='nav-item nav-link' id='equipmentTab".$i."' data-toggle='tab' href='#Spells".$i."' role='tab' aria-controls='Equipment".$i."' aria-selected='false'>Spells</a>
-            ";
-          }
-        echo "
-      </div>
-    </nav>
-  </div>
+  <div class='row tab-content no-gutters col-9' id='characterSubTabs'>";
+
+  for($i = 0; $i < sizeof($_SESSION['sessionCharacter']); $i++)
+  {
+    echo "
+    <div class='row no-gutters tab-pane fade col-9' id='characterSubTabs".$i."' role='tabpanel' aria-labelledby='Character".$i."'>
+      <nav>
+        <div class='nav nav-tabs' id='equipmentTab' role='tablist'>
+              <a class='nav-item nav-link' id='CharacterEquipmentTab".$i."' data-toggle='tab' href='#Equipment".$i."' role='tab' aria-controls='Equipment".$i."' aria-selected='false'>Equipped</a>
+              <a class='nav-item nav-link' id='CharacterSpellTab".$i."' data-toggle='tab' href='#Spells".$i."' role='tab' aria-controls='Equipment".$i."' aria-selected='false'>Spells</a>
+        </div>
+      </nav>
+    </div>";
+  }
+  echo"</div>
 
     ";
 
     echo "
-    <div class='row tab-content no-gutters col-12' id='nav-tabContent'>
+    <div class='row tab-content no-gutters col-12' id='characterInfo'>
       ";
         for($i = 0; $i < sizeof($_SESSION['sessionCharacter']); $i++)
         {
           echo "
-          <div class='row no-gutters tab-pane fade col-12' id='Character".$i."' role='tabpanel' aria-labelledby='Character".$i."'>
+          <div class='row no-gutters tab-pane fade col-12' id='characterRow".$i."' role='tabpanel' aria-labelledby='characterRow".$i."'>
 
             <div class='card cave h-100 col-3'>
               <div class='card-body'>
                 <h5 class='card-title'>".$_SESSION['sessionCharacter'][$i]->Name."</h5>
-
                   <button onclick='minimizeCharacter($i)' style='position: absolute; top: 5px; right: 50px;' class='btn btn-outline-warning mt-0 mr-0'><i class='far fa-eye-slash'></i></button>
-
                 <form action='../Controller/removeCharacterObject.php' method='POST'>
                   <input type='hidden' id='index' name='index' value='".$i."'>
                   <button name='removeCharacterObject' type='submit' style='position: absolute; top: 5px; right: 5px;' class='btn btn-outline-warning mt-0 mr-0'>X</button>
@@ -102,8 +87,12 @@ echo "<div class='mt-2 row-flex row no-gutters border border-warning rounded'>";
                 <div class='row list-group-item no-gutters d-inline'>
                   <div class='row no-gutters'>
                     <div class='col-6 text-center'>
-                      <h4><i class='fas fa-heartbeat'></i> <text>".$_SESSION['sessionCharacter'][$i]->HP."</text></h4>
-                    </div>
+
+                      <button onclick='removeCharacterHealth(".$i.")' class='btn btn-outline-warning mt-0'>-</button>
+                      <h4><i class='fas fa-heartbeat'></i> <text id='characterHealthDisplay".$i."'>".$characterHealth[$i]."</text></h4>
+                      <button onclick='addCharacterHealth(".$i.")' class='btn btn-outline-warning mt-0'>+</button>
+
+                  </div>
                     <div class='col-6 text-center'>
                       <h4><i class='fas fa-shield-alt'></i> <text>".$_SESSION['sessionCharacter'][$i]->AC."</text></h4>
                     </div>
@@ -145,11 +134,20 @@ echo "<div class='mt-2 row-flex row no-gutters border border-warning rounded'>";
 
                 <div class='list-group-item'>
                   <div class='row no-gutters'>
-                    <h6><i class='fas fa-comments'></i> <text>".$_SESSION['sessionCharacter'][$i]->Language."</text></h6>
+                    <h6><i class='fas fa-comment'></i> <text>".$_SESSION['sessionCharacter'][$i]->Language."</text></h6>
                   </div>
                 </div>
 
               </ul>
+            </div>
+
+            <div class='col-9' style='position:absolute; right:0px; top:-42px;' role='tabpanel' aria-labelledby='Character".$i."'>
+              <nav>
+                <div class='nav nav-tabs' id='equipmentTab' role='tablist'>
+                      <a class='nav-item nav-link' id='CharacterEquipmentTab".$i."' data-toggle='tab' href='#Equipment".$i."' role='tab' aria-controls='Equipment".$i."' aria-selected='false'>Equipped</a>
+                      <a class='nav-item nav-link' id='CharacterSpellTab".$i."' data-toggle='tab' href='#Spells".$i."' role='tab' aria-controls='Equipment".$i."' aria-selected='false'>Spells</a>
+                </div>
+              </nav>
             </div>
 
           <!-- EQUIPMENT TABS -->
@@ -165,8 +163,21 @@ echo "<div class='mt-2 row-flex row no-gutters border border-warning rounded'>";
               </li>
             </div>
 
-            <div class='col-2 list-group' style='position: relative; top: 0px;'>
+            <div class='col-3 list-group' style='position: relative; top: 0px;'>
               <li class='list-group-item d-flex align-items-center'><h6>Weapon</h6>
+              </li>
+              <li class='list-group-item d-flex justify-content-between align-items-center'><h6>Name: <text>".$_SESSION['sessionCharacterWeapon'][$i]->Name."</text></h6>
+              </li>
+              <li class='list-group-item d-flex justify-content-between align-items-center'><h6>Category: <text>".$_SESSION['sessionCharacterWeapon'][$i]->Category."</text></h6>
+              </li>
+              <li class='list-group-item justify-content-between'><h6>Damage: <text>".$_SESSION['sessionCharacterWeapon'][$i]->Damage_Dice." ".$_SESSION['sessionCharacterWeapon'][$i]->Damage_Type."</text></h6>
+              </li>
+              <li class='list-group-item d-flex justify-content-between align-items-center'><h6>Properties: <text>".$_SESSION['sessionCharacterWeapon'][$i]->Properties."</text></h6>
+              </li>
+            </div>
+
+            <div class='col-7 list-group' style='position: relative; top: 0px;'>
+              <li class='list-group-item d-flex align-items-center'><h6>BAG</h6>
               </li>
               <li class='list-group-item d-flex justify-content-between align-items-center'><h6>Name: <text>".$_SESSION['sessionCharacterWeapon'][$i]->Name."</text></h6>
               </li>
@@ -179,55 +190,23 @@ echo "<div class='mt-2 row-flex row no-gutters border border-warning rounded'>";
             </div>
           </div>
 
+          ";
+
+
+
+
+          echo "
           <!-- SPELL TABS -->
           <div class='row no-gutters tab-pane fade col-9' style='position:absolute; top:0px; right:0px;' id='Spells".$i."' role='tabpanel' aria-labelledby='Character".$i."'>
-            <div class='col-12 list-group' style='position: relative; top: 0px;'>
-              <li class='list-group-item d-flex'><h6>Spell List</h6>
+            <div class='col-12 row no-gutters' style='position: relative; top: 0px;'>
               </li>
               ";
-
-              $rows = 0;
-              $cols = 6;
-              $counter = 1;
-              $nbsp = $cols - ($rows % $cols);
-              for ($n=0 ; $n < sizeof($_SESSION['sessionCharacterSpellsKnown']) ; $n++)
+              for ($n=0 ; $n < sizeof($_SESSION['sessionCharacterSpellsKnown'][$i]) ; $n++)
               {
-                if (strlen($_SESSION['sessionCharacterSpellsKnown'][$n]->desc) > "75")
-                {
-                  $summary = substr($_SESSION['sessionCharacterSpellsKnown'][$n]->desc, 0, 75);
-                  $summary .= "...";
-                }
-                else
-                {
-                  $summary = $_SESSION['sessionCharacterSpellsKnown'][$n]->desc;
-                }
-
-                if(($counter % $cols) == 1)
-                {
-                  echo '<div class="row no-gutters">';
-                }
-
                 echo "
-                <li class='list-group-item d-flex col-2 pl-3'>
-                  <h6><i class='fas fa-magic'></i> <text>".$_SESSION['sessionCharacterSpellsKnown'][$n]->name."</text></h6>
-                </li>";
-
-                if(($counter % $cols) == 0)
-                {
-                  echo '</div>';
-                }
-                $counter++;
+                <h6 class='list-group-item col-2 pl-2'><i class='fas fa-magic'></i> <text>".$_SESSION['sessionCharacterSpellsKnown'][$i][$n]->name."</text></h6>
+                ";
               }
-
-              if($nbsp > 0)
-              {
-                for ($i = 0; $i < $nbsp; $i++)
-                {
-                 echo'<div class="col-md-4">&nbsp;</div>';
-                }
-              }
-
-              echo '</div>';
 
               echo "
             </div>

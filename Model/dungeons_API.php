@@ -192,6 +192,7 @@ function CreateCharacter($userid)
 
       $armour = (filter_input(INPUT_POST, 'armour', FILTER_SANITIZE_STRING));
       $weapon = (filter_input(INPUT_POST, 'weapon', FILTER_SANITIZE_STRING));
+      $known = (filter_input(INPUT_POST, 'known', FILTER_SANITIZE_STRING));
 
       $savingThrows = "";
       $proficiencies = "";
@@ -295,6 +296,7 @@ function CreateCharacter($userid)
       if($success && $query->rowCount() > 0)
       {
         EquipItems($code, $armour, $weapon);
+        LearnSpells($code, $known);
         //header('location: ../View/index.php');
       }
       else
@@ -314,24 +316,52 @@ function CreateCharacter($userid)
 
 function EquipItems($code, $armour, $weapon)
 {
-  require 'connection.php';
-  $query = $connection->prepare
-  ("
+  if (isset($_POST["createCharacterSubmit"]))
+  {
+    Require 'connection.php';
+    $query = $connection->prepare
+    ("
 
-  INSERT INTO Equipment
-  VALUES(:code, :armour, :weapon)
+    INSERT INTO Equipment
+    VALUES(:code, :armour, :weapon)
 
-  ");
+    ");
 
-  // Runs and executes the query
-  $success = $query->execute
-  ([
-    'code' => $code,
-    'armour' => $armour,
-    'weapon' => $weapon
-  ]);
-  $connection = null;
+    // Runs and executes the query
+    $success = $query->execute
+    ([
+      'code' => $code,
+      'armour' => $armour,
+      'weapon' => $weapon
+    ]);
+    $connection = NULL;
+  }
 }
+
+function LearnSpells($code, $known)
+{
+  if (isset($_POST["createCharacterSubmit"]))
+  {
+    Require 'connection.php';
+    $query = $connection->prepare
+    ("
+
+    INSERT INTO SpellBook
+    VALUES(:code, :known, :prepared)
+
+    ");
+
+    // Runs and executes the query
+    $success = $query->execute
+    ([
+      'code' => $code,
+      'known' => $known,
+      'prepared' => "None"
+    ]);
+    $connection = NULL;
+  }
+}
+
 
 function ExpToLevel($exp)
 {
@@ -433,14 +463,38 @@ function GenerateUniqueCode($userid)
   return $code;
 }
 
+function GetPlayerCharacters($userid)
+{
+  require 'connection.php';
+
+  $sql = "SELECT * FROM Player_Character WHERE User_ID = :userid";
+
+  $stmt = $connection->prepare($sql);
+  $success = $stmt->execute(['userid' => $userid]);
+
+  if($success && $stmt->rowCount() > 0)
+  {
+    $playerCharacters = array();
+    while($r = $stmt->fetch())
+    {
+      $playerCharacters[] = $r;
+    }
+    return json_encode($playerCharacters);
+  }
+  else
+  {
+    $error = "error"; // error finding a players characters
+    return $error; // error for Controller file
+  }
+  $connection = null;
+}
+
 // Get Character's details in the DM's Session
-function GetSessionCharacters()
+function GetSessionCharacters($code)
 {
   if(isset($_POST['getCharacterByCode']))
   {
     require 'connection.php';
-
-    $code = (filter_input(INPUT_POST, 'characterCode', FILTER_SANITIZE_STRING));
 
     $sql = "SELECT * FROM Player_Character WHERE Code = :code";
 
