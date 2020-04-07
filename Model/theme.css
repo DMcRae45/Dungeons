@@ -105,3 +105,40 @@ hr
   transition: margin-right .5s;
   padding: 16px;
 }
+
+/* custom tabs*/
+.tab--container
+{
+  
+}
+
+.tab--bar
+{
+
+}
+
+.tab--button
+{
+
+}
+
+.tab--button:active
+{
+
+}
+
+.tab--button--active
+{
+    font-weight: bold;
+    border-bottom: 2px solid #17181c;
+}
+
+.tab--content
+{
+    display:none;
+}
+
+.tab--content--active
+{
+    display:block;
+}

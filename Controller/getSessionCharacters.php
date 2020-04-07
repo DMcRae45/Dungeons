@@ -11,7 +11,7 @@ if(isset($_POST['getCharacterByCode']))
 
   $code = (filter_input(INPUT_POST, 'characterCode', FILTER_SANITIZE_STRING));
 
-  $character = GetSessionCharacters($code);
+  $character = GetCharacterByCode($code);
 
   if($character == "error")
   {

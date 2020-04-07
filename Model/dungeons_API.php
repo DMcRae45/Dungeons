@@ -362,7 +362,6 @@ function LearnSpells($code, $known)
   }
 }
 
-
 function ExpToLevel($exp)
 {
   if($exp < 300)
@@ -490,7 +489,7 @@ function GetPlayerCharacters($userid)
 }
 
 // Get Character's details in the DM's Session
-function GetSessionCharacters($code)
+function GetCharacterByCode($code)
 {
   if(isset($_POST['getCharacterByCode']))
   {

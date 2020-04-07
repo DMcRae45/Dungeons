@@ -5,10 +5,6 @@ if(isset($_GET['monsterError']))
   echo $monsterError;
 }
 $monsterHealth = array();
-for($i = 0; $i < sizeof($_SESSION['lastMonster']); $i++)
-{
-  $monsterHealth[$i] = $_SESSION['lastMonster'][$i]->hit_points;
-}
 
 echo "
 <div class='mt-2 row-flex row no-gutters border border-warning rounded'>";
@@ -26,6 +22,11 @@ echo "
 
   if(isset($_SESSION['lastMonster']))
   {
+    for($i = 0; $i < sizeof($_SESSION['lastMonster']); $i++)
+    {
+      $monsterHealth[$i] = $_SESSION['lastMonster'][$i]->hit_points;
+    }
+
     echo "
     <nav>
       <div class='nav nav-tabs' id='monsterTab' role='tablist'>

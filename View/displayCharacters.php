@@ -5,10 +5,7 @@ if(isset($_GET['characterError']))
   echo $characterError;
 }
 $characterHealth = array();
-for($i = 0; $i < sizeof($_SESSION['sessionCharacter']); $i++)
-{
-  $characterHealth[$i] = $_SESSION['sessionCharacter'][$i]->HP;
-}
+
 
 echo "<div class='mt-2 row-flex row no-gutters border border-warning rounded'>"; // CHARACTER ROW
 
@@ -29,6 +26,11 @@ echo "<div class='mt-2 row-flex row no-gutters border border-warning rounded'>";
     //CHARACTER TABS
     if(isset($_SESSION['sessionCharacter']))
     {
+      for($i = 0; $i < sizeof($_SESSION['sessionCharacter']); $i++)
+      {
+        $characterHealth[$i] = $_SESSION['sessionCharacter'][$i]->HP;
+      }
+
       echo "
       <nav>
         <div class='nav nav-tabs' id='CharacterTab' role='tablist'>
@@ -179,21 +181,13 @@ echo "<div class='mt-2 row-flex row no-gutters border border-warning rounded'>";
             <div class='col-7 list-group' style='position: relative; top: 0px;'>
               <li class='list-group-item d-flex align-items-center'><h6>BAG</h6>
               </li>
-              <li class='list-group-item d-flex justify-content-between align-items-center'><h6>Name: <text>".$_SESSION['sessionCharacterWeapon'][$i]->Name."</text></h6>
-              </li>
-              <li class='list-group-item d-flex justify-content-between align-items-center'><h6>Category: <text>".$_SESSION['sessionCharacterWeapon'][$i]->Category."</text></h6>
-              </li>
-              <li class='list-group-item justify-content-between'><h6>Damage: <text>".$_SESSION['sessionCharacterWeapon'][$i]->Damage_Dice." ".$_SESSION['sessionCharacterWeapon'][$i]->Damage_Type."</text></h6>
-              </li>
-              <li class='list-group-item d-flex justify-content-between align-items-center'><h6>Properties: <text>".$_SESSION['sessionCharacterWeapon'][$i]->Properties."</text></h6>
-              </li>
+
+              <!-- Enter bag items here -->
+
             </div>
           </div>
 
           ";
-
-
-
 
           echo "
           <!-- SPELL TABS -->

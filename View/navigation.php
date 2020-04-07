@@ -72,7 +72,6 @@
           </div>
           <input class='input-group-text' type="number" name="dice4">
         </div>
-
       </form>
     </div>
 
