@@ -8,18 +8,10 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
   <a href="index.php"><img src="images/Dungeons.png"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
+<div class="row" id="navbarSupportedContent">
 
-<div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-    <ul class="navbar-nav mr-auto">
-
-        <li class="nav-item active">
-            <a class="nav-link" href="index.php">Dungeons <span class="sr-only">(current)</span></a>
-        </li>
+    <ul class="navbar-nav">
 
         <li class="nav-item dropdown active">
 
@@ -66,13 +58,15 @@
       <a>Roll For Damage</a>
       <div class="dropdown-divider"></div>
       <form>
-        <div class='form-group input-group w-100'>
+        <div class='form-group input-group w-100 p-0'>
           <div class='input-group-prepend'>
-            <span class='input-group-text' id='inputGroupPrepend'>D4: </span>
+            <span class='input-group-text' id='inputGroupPrepend'>D20</span>
           </div>
-          <input class='input-group-text' type="number" name="dice4">
+          <input class='input-group-text' type="number" name="dice20">
         </div>
+        <button onclick='roll()' type='button'>Roll</button>
       </form>
+      <h6 id='RollResult'></h6>
     </div>
 
     <div id="openDice">

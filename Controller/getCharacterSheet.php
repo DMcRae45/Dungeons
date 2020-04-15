@@ -16,10 +16,9 @@ else
   $spells = json_decode(GetCharacterSpells($character[0]->Code));
   $spellsObject = json_decode(GetKnownSpells($spells[0]->Known));
 
-
+  $notes = json_decode(GetCharacterNotes($character[0]->Code));
 
   $spellsKnown = array();
   $spellsKnown[0] = $spellsObject->results;
-
 }
 ?>

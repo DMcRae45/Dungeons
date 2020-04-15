@@ -16,10 +16,10 @@
     include '../Controller/getCharacterSheet.php';
     include '../Controller/characterSheetCreation.php';
 
-    if($_SESSION['userid'] != $character[0]->User_ID)
-    {
-      header('location: ../View/selectCharacter.php?error=You do not own this character');
-    }
+    // if($_SESSION['userid'] != $character[0]->User_ID)
+    // {
+    //   header('location: ../View/selectCharacter.php?error=You do not own this character');
+    // }
     // if($characters[$i]->ClassName == "Warlock")
     // {
     //   change style background for class
@@ -49,26 +49,27 @@
 ?>
 
 <!-- </head> -->
-<title>Dungeons - CharacterSheet</title>
+<title>CharacterSheet</title>
 <?php
 ?>
 <body>
 <?php
 echo "
+<div class='container-fluid p-0'>
 <form class='form-group needs-validation' action='../Controller/attemptUpdateCharacter.php' method='POST'>";
 
   echo "
-  <div class='row d-flex'>
-    <div class='col-3 border border-warning d-flex align-items-center justify-content-center'>
+  <div class='row no-gutters border border-warning d-flex'>
+    <div class='col-3 border-left border-top border-warning d-flex align-items-center justify-content-center'>
       <h6 class='card-title'>".$character[0]->Name."</h6>
     </div>
-    <div class='col-9 border border-warning' style='float: right;'>
-      <div class='row border border-warning'>
+    <div class='col-9'>
+      <div class='row no-gutters border border-warning'>
         <h6 class='col-4 d-inline'>Race: <text>".$character[0]->RaceName."</text></h6>
         <h6 class='col-4 d-inline'>Class: <text>".$character[0]->ClassName."</text></h6>
         <h6 class='col-4 d-inline'>Level: <text>".$character[0]->Level."</text></h6>
       </div>
-      <div class='row border border-warning text-center'>
+      <div class='row no-gutters border border-warning text-center'>
         <h6 class=' col-6 d-inline'>Alignment: <text>".$character[0]->Alignment."</text></h6>
         <h6 class='d-inlin'>EXP: <textarea name='exp' class='col-6 d-inline custom-select text-center'>".$character[0]->Exp."</textarea></h6>
       </div>
@@ -77,7 +78,7 @@ echo "
   ";
 
   echo "
-  <div class='row d-flex text-center border border-warning'>
+  <div class='row no-gutters d-flex text-center border border-warning'>
 
     <div class='row d-flex align-items-center justify-content-center col-6 border border-warning'>
       <div class='col-4'>
@@ -103,7 +104,7 @@ echo "
 
   </div>
 
-  <div class='row d-flex text-center border border-warning'>
+  <div class='row no-gutters d-flex text-center border border-warning'>
 
     <div class='row d-flex col-6 text-center border border-warning'>
       <div class='mx-auto'>
@@ -141,124 +142,125 @@ echo "
       </div>
     </div>
 
-    <div class='tab--container row no-gutters col-9' style='position:absolute; right:0px;'>
-        <div class='tab--bar col-12'>
-            <button type='button' class='btn btn-outline-warning tab--button' data-for-tab='1'> Tab #1 </button>
-            <button type='button' class='btn btn-outline-warning tab--button' data-for-tab='2'> Tab #2 </button>
-            <button type='button' class='btn btn-outline-warning tab--button' data-for-tab='3'> Tab #3 </button>
-        </div>
-
-        <div class='tab--content' data-tab='1'>
-
-          <div class='row no-gutters'>
-            <div class='col-6'>
-              <li class='list-group-item '><h6>Armour</h6>
-              </li>
-              <li class='list-group-item'><h6>Name: <text>".$armour[0]->Name."</text></h6>
-              </li>
-              <li class='list-group-item'><h6>AC: <text>".$armour[0]->AC."</text></h6>
-              </li>
-              <li class='list-group-item'><h6>Stealth: <text>".$armour[0]->Stealth."</text></h6>
-              </li>
-            </div>
-
-            <div class='list-group col-6'>
-              <li class='list-group-item d-flex align-items-center'><h6>Weapon</h6>
-              </li>
-              <li class='list-group-item d-flex justify-content-between align-items-center'><h6>Name: <text>".$weapon[0]->Name."</text></h6>
-              </li>
-              <li class='list-group-item d-flex justify-content-between align-items-center'><h6>Category: <text>".$weapon[0]->Category."</text></h6>
-              </li>
-              <li class='list-group-item justify-content-between'><h6>Damage: <text>".$weapon[0]->Damage_Dice." ".$weapon[0]->Damage_Type."</text></h6>
-              </li>
-              <li class='list-group-item d-flex justify-content-between align-items-center'><h6>Properties: <text>".$weapon[0]->Properties."</text></h6>
-              </li>
-            </div>
-          </div>
-
-        </div>
-
-        <div class='tab--content' data-tab='2'>
-
-          <!-- BAG TAB -->
-          <div class='row no-gutters'>
-            <div class='col-6'>
-                <div class='d-flex 'align-items-center justify-content-center'>
-                  <h6>Platinum: </h6><textarea name='platinum' class='col-3 custom-select text-center'></textarea>
-                </div>
-                <div class='d-flex 'align-items-center justify-content-center'>
-                  <h6>Gold: </h6><textarea name='gold' class='col-3 custom-select text-center'></textarea>
-                </div>
-                <div class='d-flex 'align-items-center justify-content-center'>
-                  <h6>Silver: </h6><textarea name='silcer' class='col-3 custom-select text-center'></textarea>
-                </div>
-                <div class='d-flex 'align-items-center justify-content-center'>
-                  <h6>Copper: </h6><textarea name='copper' class='col-3 custom-select text-center'></textarea>
-                </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class='tab--content col-12' data-tab='3'>
-
-          <!-- SPELL TABS -->
-          <div class='no-gutters d-flex' id='Spells'>
-            <div class='col-12 row no-gutters'>
-              ";
-              for ($i=0 ; $i < sizeof($spellsKnown[0]) ; $i++)
-              {
-                echo
-                "
-                  <h6 class='d-inline list-group-item col-4'><i class='fas fa-magic'></i><a class='btn text-light' data-toggle='modal' data-target='#".str_replace(' ', '-', $spellsKnown[0][$i]->name)."'>".$spellsKnown[0][$i]->name."</a></h6>
-                ";
-              }
-
-              for ($i=0 ; $i < sizeof($spellsKnown[0]) ; $i++)
-              {
-                echo "
-                <div class='modal fade' id='".str_replace(' ', '-', $spellsKnown[0][$i]->name)."' tabindex='-1' role='dialog' aria-labelledby='modal' aria-hidden='true'>
-                  ";
-                  echo "
-                  <div class='container modal-dialog' role='document'>
-
-                    <div class='modal-content bg-dark'>
-                      <div class='modal-header'>
-                        <h5 class='modal-title' id='".str_replace(' ', '-', $spellsKnown[0][$i]->name)."'>Spell Details</h5>
-                        <button type='button' class='close btn btn-dark' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-                      </div>
-                    </div>
-
-                    ";
-                    echo '
-                    <ul class="list-group">
-                      <li class="list-group-item d-flex justify-content-between align-items-center">Name: <text>'.$spellsKnown[0][$i]->name.'</text>
-                        <span class="badge badge-primary badge-pill">'.$spellsKnown[0][$i]->level_int.'</span>
-                      </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">Components: <text>'.$spellsKnown[0][$i]->components.'</text>
-                      </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">Material: <text>'.$spellsKnown[0][$i]->material.'</text>
-                      </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">Casting Time: <text>'.$spellsKnown[0][$i]->casting_time.'</text>
-                      </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">Range: <text>'.$spellsKnown[0][$i]->range.'</text>
-                      </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center"><text>'.nl2br($spellsKnown[0][$i]->desc).'</text>
-                      </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center"><text>'.nl2br($spellsKnown[0][$i]->higher_level).'</text>
-                      </li>
-                    </ul>
-                    <hr>
-                    ';
-                  echo "
-                  </div>
-                </div>";
-              }
-              echo "
-            </div>
-          </div>
+    <div class='tab--container row no-gutters col-9 p-0' style='position:absolute; right:0px; overflow:scroll; height:925px;'>
+      <div class='tab--bar col-12'>
+          <button type='button' class='btn btn-outline-warning tab--button' data-for-tab='1'>Equipment</button>
+          <button type='button' class='btn btn-outline-warning tab--button' data-for-tab='2'>Bag</button>
+          <button type='button' class='btn btn-outline-warning tab--button' data-for-tab='3'>Spells</button>
+          <button type='button' class='btn btn-outline-warning tab--button' data-for-tab='4'>Notes</button>
       </div>
-    </div>
+
+      <div class='tab--content row no-gutters col-12' data-tab='1'>
+
+        <div class='row '>
+          <div class='col-6'>
+            <li class='list-group-item '><h6>Armour</h6>
+            </li>
+            <li class='list-group-item'><h6>Name: <text>".$armour[0]->Name."</text></h6>
+            </li>
+            <li class='list-group-item'><h6>AC: <text>".$armour[0]->AC."</text></h6>
+            </li>
+            <li class='list-group-item'><h6>Stealth: <text>".$armour[0]->Stealth."</text></h6>
+            </li>
+          </div>
+
+          <div class='list-group col-6'>
+            <li class='list-group-item d-flex align-items-center'><h6>Weapon</h6>
+            </li>
+            <li class='list-group-item d-flex justify-content-between align-items-center'><h6>Name: <text>".$weapon[0]->Name."</text></h6>
+            </li>
+            <li class='list-group-item d-flex justify-content-between align-items-center'><h6>Category: <text>".$weapon[0]->Category."</text></h6>
+            </li>
+            <li class='list-group-item justify-content-between'><h6>Damage: <text>".$weapon[0]->Damage_Dice." ".$weapon[0]->Damage_Type."</text></h6>
+            </li>
+            <li class='list-group-item d-flex justify-content-between align-items-center'><h6>Properties: <text>".$weapon[0]->Properties."</text></h6>
+            </li>
+          </div>
+        </div>
+        <h6><textarea name='equipmentNotes' class='col-12 parchment border-warning' style='height:800px;'>".$notes[0]->Equipment_Note."</textarea></h6>
+      </div>
+
+
+      <div class='tab--content row no-gutters col-12' data-tab='2'>
+
+        <!-- BAG TAB -->
+          <div class='row no-gutters col-12'>
+          <div class='col-12'>
+            <h6 class='row no-gutters'><textarea name='pp' class='col-2 custom-select text-center'></textarea>Pp</h6>
+            <h6 class='row no-gutters'><textarea name='gp' class='col-2 custom-select text-center'></textarea>Gp</h6>
+            <h6 class='row no-gutters'><textarea name='sp' class='col-2 custom-select text-center'></textarea>Sp</h6>
+            <h6 class='row no-gutters'><textarea name='cp' class='col-2 custom-select text-center'></textarea>Cp</h6>
+          </div>
+
+          <h6 class='col-12'><textarea name='bagNotes' class='col-12 parchment border-warning' style='height:800px;'>".$notes[0]->Bag_Note."</textarea></h6>
+        </div>
+
+      </div>
+
+      <div class='tab--content row no-gutters col-12' data-tab='3'>
+
+        <!-- SPELL TABS -->
+        <div class='no-gutters d-flex' id='Spells'>
+          <div class='col-12 row no-gutters'>
+            ";
+            for ($i=0 ; $i < sizeof($spellsKnown[0]) ; $i++)
+            {
+              echo
+              "
+                <h6 class='d-inline list-group-item col-4'><i class='fas fa-magic'></i><a class='btn text-light' data-toggle='modal' data-target='#".str_replace(' ', '-', $spellsKnown[0][$i]->name)."'>".$spellsKnown[0][$i]->name."</a></h6>
+              ";
+            }
+
+            for ($i=0 ; $i < sizeof($spellsKnown[0]) ; $i++)
+            {
+              echo "
+              <div class='modal fade' id='".str_replace(' ', '-', $spellsKnown[0][$i]->name)."' tabindex='-1' role='dialog' aria-labelledby='modal' aria-hidden='true'>
+                ";
+                echo "
+                <div class='container modal-dialog' role='document'>
+
+                  <div class='modal-content bg-dark'>
+                    <div class='modal-header'>
+                      <h5 class='modal-title' id='".str_replace(' ', '-', $spellsKnown[0][$i]->name)."'>Spell Details</h5>
+                      <button type='button' class='close btn btn-dark' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                    </div>
+                  </div>
+
+                  ";
+                  echo '
+                  <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">Name: <text>'.$spellsKnown[0][$i]->name.'</text>
+                      <span class="badge badge-warning badge-pill">'.$spellsKnown[0][$i]->level_int.'</span>
+                    </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center">Components: <text>'.$spellsKnown[0][$i]->components.'</text>
+                    </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center">Material: <text>'.$spellsKnown[0][$i]->material.'</text>
+                    </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center">Casting Time: <text>'.$spellsKnown[0][$i]->casting_time.'</text>
+                    </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center">Range: <text>'.$spellsKnown[0][$i]->range.'</text>
+                    </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center"><text>'.nl2br($spellsKnown[0][$i]->desc).'</text>
+                    </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center"><text>'.nl2br($spellsKnown[0][$i]->higher_level).'</text>
+                    </li>
+                  </ul>
+                  ';
+                echo "
+                </div>
+              </div>";
+            }
+            echo "
+          </div>
+        </div>
+        <h6><textarea name='spellNotes' class='col-12 parchment border-warning' style='height:500px'>".$notes[0]->Spell_Note."</textarea></h6>
+      </div>
+
+      <div class='tab--content row no-gutters col-12' data-tab='4'>
+        <h6><textarea name='noteNotes' class='col-12 parchment border-warning' style='height:900px;'>".$notes[0]->Notes_Note."</textarea></h6>
+      </div>
+
+  </div> <!-- end tab--container -->
 
   </div> "; // END ROW FOR PROFICIENY BONUS, PASSIVE PERCEPTION & INSPIRATION
 
@@ -266,11 +268,11 @@ echo "
   <div class='col-3 border border-warning'>
 
     <div class='row d-flex align-items-center border-bottom border-warning'>
-      <div class='col-5'>
+      <div class='col-4'>
         <h6 class='d-flex justify-content-center'>STR: <text>".$character[0]->Strength."</text></h6>
         <h6 class='d-flex justify-content-center'>Mod: <text>".GetModifier($character[0]->Strength)."</text></h6>
       </div>
-      <div class='col-7 d-flex border-left border-warning'>
+      <div class='col-8 d-flex border-left border-warning p-0 pl-3'>
         <ul class='p-0 ml-2 no-border'>
         ";
         if(strpos($character[0]->Saving_Throws, "Strength") !== false)
@@ -297,11 +299,11 @@ echo "
     </div>
 
     <div class='row d-flex align-items-center border-bottom border-warning'>
-      <div class='col-5'>
+      <div class='col-4'>
         <h6 class='d-flex justify-content-center'>DEX: <text>".$character[0]->Dexterity."</text></h6>
         <h6 class='d-flex justify-content-center'>Mod: <text>".GetModifier($character[0]->Dexterity)."</text></h6>
       </div>
-      <div class='col-7 d-flex border-left border-warning'>
+      <div class='col-8 d-flex border-left border-warning p-0 pl-3'>
         <ul class='p-0 ml-2 no-border'>
         ";
         if(strpos($character[0]->Saving_Throws, "Dexterity") !== false)
@@ -347,11 +349,11 @@ echo "
 
 
     <div class='row d-flex align-items-center border-bottom border-warning'>
-      <div class='col-5 border-right border-warning'>
+      <div class='col-4 border-right border-warning'>
         <h6 class='d-flex justify-content-center'>CON: <text>".$character[0]->Constitution."</text></h6>
         <h6 class='d-flex justify-content-center'>Mod: <text>".GetModifier($character[0]->Constitution)."</text></h6>
       </div>
-      <div class='col-7 d-flex'>
+      <div class='col-8 d-flex p-0 pl-3'>
         <ul class='p-0 ml-2 no-border'>
         ";
         if(strpos($character[0]->Saving_Throws, "Constitution") !== false)
@@ -369,11 +371,11 @@ echo "
     </div>
 
     <div class='row d-flex align-items-center border-bottom border-warning'>
-      <div class='col-5'>
+      <div class='col-4'>
         <h6 class='d-flex justify-content-center'>INT: <text>".$character[0]->Intelligence."</text></h6>
         <h6 class='d-flex justify-content-center'>Mod: <text>".GetModifier($character[0]->Intelligence)."</text></h6>
       </div>
-      <div class='col-7 d-flex border-left border-warning'>
+      <div class='col-8 d-flex border-left border-warning p-0 pl-3'>
         <ul class='p-0 ml-2 no-border'>
         ";
         if(strpos($character[0]->Saving_Throws, "Intelligence") !== false)
@@ -436,11 +438,11 @@ echo "
     </div>
 
     <div class='row d-flex align-items-center border-bottom border-warning'>
-      <div class='col-5'>
+      <div class='col-4'>
         <h6 class='d-flex justify-content-center'>WIS: <text>".$character[0]->Wisdom."</text></h6>
         <h6 class='d-flex justify-content-center'>Mod: <text>".GetModifier($character[0]->Wisdom)."</text></h6>
       </div>
-      <div class='col-7 d-flex border-left border-warning'>
+      <div class='col-8 d-flex border-left border-warning p-0 pl-3'>
         <ul class='p-0 ml-2 no-border'>
         ";
         if(strpos($character[0]->Saving_Throws, "Wisdom") !== false)
@@ -503,11 +505,11 @@ echo "
     </div>
 
     <div class='row d-flex align-items-center'>
-      <div class='col-5'>
+      <div class='col-4'>
         <h6 class='d-flex justify-content-center'>CHA: <text>".$character[0]->Charisma."</text></h6>
         <h6 class='d-flex justify-content-center'>Mod: <text>".GetModifier($character[0]->Charisma)."</text></h6>
       </div>
-      <div class='col-7 d-flex border-left border-warning'>
+      <div class='col-8 d-flex border-left border-warning p-0 pl-3'>
         <ul class='p-0 ml-2 no-border'>
         ";
         if(strpos($character[0]->Saving_Throws, "Charisma") !== false)
@@ -565,8 +567,9 @@ echo "
   ";
 
 echo "
-  <button class='form-control btn btn-outline-warning' type='submit' name='UpdateCharacterSubmit'>Save</button>
-</form>";
+  <button class='form-control btn btn-outline-warning mt-2' type='submit' name='UpdateCharacterSubmit'>Save</button>
+</form>
+</div>";
 ?>
 
 <!-- <footer> -->

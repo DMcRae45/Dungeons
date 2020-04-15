@@ -40,9 +40,9 @@ echo "
         for ($i=0 ; $i < sizeof($characters) ; $i++)
         {
           echo "<tr>";
-          echo "<td>".$characters[$i]->Name."</td>";
-          echo "<td>".$characters[$i]->Level."</td>";
-          echo "<td>".$characters[$i]->ClassName."</td>";
+          echo "<td><text>".$characters[$i]->Name."</text></td>";
+          echo "<td><text>".$characters[$i]->Level."</text></td>";
+          echo "<td><text>".$characters[$i]->ClassName."</text></td>";
           echo "<td><a class='btn btn-success' href='playerCharacter.php?characterID=".$characters[$i]->Code."'>Select</a></td>";
 
           echo "<td> <a class='btn btn-danger text-light' data-toggle='modal' data-target='#delete".$characters[$i]->Code."Modal'>DELETE</a> </td>";
@@ -61,7 +61,7 @@ echo "
                 </div>
                 <div class='modal-footer'>
                   <button type='button' class='btn btn-outline-warning' data-dismiss='modal'>No!</button>
-                  <a class='btn btn-outline-danger' role='button' href='../Controller/attempt_deleteCharacter.php?id=".$characters[$i]->Code."'>DELETE</a>
+                  <a class='btn btn-outline-danger' role='button' href='../Controller/attempt_deleteCharacter.php?characterid=".$characters[$i]->Code."'>DELETE</a>
                 </div>
               </div>
             </div>

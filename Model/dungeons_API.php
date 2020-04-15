@@ -194,6 +194,8 @@ function CreateCharacter($userid)
       $weapon = (filter_input(INPUT_POST, 'weapon', FILTER_SANITIZE_STRING));
       $known = (filter_input(INPUT_POST, 'known', FILTER_SANITIZE_STRING));
 
+      $notes = (filter_input(INPUT_POST, 'notes', FILTER_SANITIZE_STRING));
+
       $savingThrows = "";
       $proficiencies = "";
       $languages = "";
@@ -297,6 +299,7 @@ function CreateCharacter($userid)
       {
         EquipItems($code, $armour, $weapon);
         LearnSpells($code, $known);
+        TakeNotes($code, $notes);
         //header('location: ../View/index.php');
       }
       else
@@ -359,6 +362,62 @@ function LearnSpells($code, $known)
       'prepared' => "None"
     ]);
     $connection = NULL;
+  }
+}
+
+function TakeNotes($code, $notes)
+{
+  if (isset($_POST["createCharacterSubmit"]))
+  {
+    Require 'connection.php';
+    $query = $connection->prepare
+    ("
+
+    INSERT INTO Notes
+    VALUES(:code, :equipmentNotes, :bagNotes, :spellNotes, :noteNotes)
+
+    ");
+
+    // Runs and executes the query
+    $success = $query->execute
+    ([
+      'code' => $code,
+      'equipmentNotes' => "Take notes for equipment here",
+      'bagNotes'=> "Take notes for you bag here",
+      'spellNotes'=> "Take notes for spells here",
+      'notes' => $notes
+    ]);
+    $connection = NULL;
+  }
+}
+
+function GetCharacterNotes($code)
+{
+  if(isset($_POST['getCharacterByCode']))
+  {
+    require 'connection.php';
+
+    $sql = "SELECT * FROM Notes WHERE Note_ID = :code";
+
+    $stmt = $connection->prepare($sql);
+    $success = $stmt->execute(['code' => $code]);
+
+    if($success && $stmt->rowCount() > 0)
+    {
+      // convert to JSON
+      $rows = array();
+      while($r = $stmt->fetch())
+      {
+        $rows[] = $r;
+      }
+      return json_encode($rows);
+    }
+    else
+    {
+      $error = "error";
+      return $error; // error get session character
+    }
+    $connection = null;
   }
 }
 
@@ -685,16 +744,16 @@ function GetSpellByName()
   }
 }
 
-function GetCharacterSpells($spellBook_id)
+function GetCharacterSpells($spellbook_id)
 {
   if(isset($_POST['getCharacterByCode']))
   {
     require 'connection.php';
 
-    $sql = "SELECT * FROM SpellBook WHERE SpellBook_ID = :spellBook_id";
+    $sql = "SELECT * FROM Spellbook WHERE Spellbook_ID = :spellbook_id";
 
     $stmt = $connection->prepare($sql);
-    $success = $stmt->execute(['spellBook_id' => $spellBook_id]);
+    $success = $stmt->execute(['spellbook_id' => $spellbook_id]);
 
     if($success && $stmt->rowCount() > 0)
     {
@@ -781,4 +840,50 @@ function Roll()
   }
 }
 
+function DeleteCharacterByCode($code)
+{
+  require 'connection.php';
+
+  // Delete Notes
+  $stmtNotes = $connection->prepare
+  (
+    "DELETE FROM Notes WHERE Note_ID = :code"
+  );
+  $success = $stmtNotes->execute
+  ([
+    'code' => $code
+  ]);
+  // Delete EQUIPMENT
+  $stmtEquipment = $connection->prepare
+  (
+    "DELETE FROM Equipment WHERE Equipment_ID = :code"
+  );
+  $success = $stmtEquipment->execute
+  ([
+    'code' => $code
+  ]);
+  // Delete Spells
+  $stmtSpells = $connection->prepare
+  (
+    "DELETE FROM Spellbook WHERE Spellbook_ID = :code"
+  );
+  $success = $stmtSpells->execute
+  ([
+    'code' => $code
+  ]);
+  // Delete Character
+  $stmtCharacter = $connection->prepare
+  (
+    "DELETE FROM Player_Character WHERE Code = :code"
+  );
+  $success = $stmtCharacter->execute
+  ([
+    'code' => $code
+  ]);
+}
+
+function SaveCharacterSheet()
+{
+  
+}
 ?>

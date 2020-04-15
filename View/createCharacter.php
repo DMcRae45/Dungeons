@@ -405,7 +405,66 @@ if(isset($_GET['error']))
         </div>
         <!-- END FIFTH ROW -->
 
+        <div class="form-row">
+          <div class='col-12'>
+            Player Backpack
+          </div>
+
+          <div class="col-md-3 form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text mt-4" id="inputGroupPrepend">Platinum</span>
+            </div>
+              <input class="form-control mt-4" type="number" id="pp" name="pp" required>
+                <div class="invalid-feedback">
+                  You cannot Leave This field Empty.
+                </div>
+          </div>
+          <div class="col-md-3 form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text mt-4" id="inputGroupPrepend">Gold</span>
+            </div>
+              <input class="form-control mt-4" type="number" id="gp" name="gp" required>
+                <div class="invalid-feedback">
+                  You cannot Leave This field Empty.
+                </div>
+          </div>
+          <div class="col-md-3 form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text mt-4" id="inputGroupPrepend">Silver</span>
+            </div>
+              <input class="form-control mt-4" type="number" id="sp" name="sp" required>
+                <div class="invalid-feedback">
+                  You cannot Leave This field Empty.
+                </div>
+          </div>
+          <div class="col-md-3 form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text mt-4" id="inputGroupPrepend">Copper</span>
+            </div>
+              <input class="form-control mt-4" type="number" id="cp" name="cp" required>
+                <div class="invalid-feedback">
+                  You cannot Leave This field Empty.
+                </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-12 form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text mt-4" id="inputGroupPrepend">Bag Note</span>
+            </div>
+              <input class="form-control mt-4" type="text" id="bagNote" name="bagNote" placeholder="e.g. 4x healing potion (10Hp)" required>
+                <div class="invalid-feedback">
+                  You cannot Leave This field Empty.
+                </div>
+          </div>
+        </div>
+
         <!-- SIXTH ROW SPELLS KNOWN -->
+        <div class='col-12'>
+          Spells
+        </div>
+
         <div class="form-row">
           <div class="col-12 form-group input-group">
             <div class="input-group-prepend">
@@ -883,6 +942,9 @@ if(isset($_GET['error']))
           </tbody>
         </table>
         <!-- END LANGUAGE GRID -->
+
+        <textarea name='notes' class='col-12 parchment border-warning' placeholder='Take some notes on this parchment'></textarea>
+
 
     <button class="form-control btn btn-outline-warning" type="submit" name="createCharacterSubmit">Create</button>
 </form>

@@ -38,6 +38,9 @@ hr
 .parchment
 {
   background-image: url('images/parchment.jpg');
+  font-family: 'Bad Script', cursive;
+  font-weight: bold;
+  font-size: 30px;
 }
 
 .parchment-header
@@ -109,7 +112,7 @@ hr
 /* custom tabs*/
 .tab--container
 {
-  
+
 }
 
 .tab--bar
@@ -130,7 +133,8 @@ hr
 .tab--button--active
 {
     font-weight: bold;
-    border-bottom: 2px solid #17181c;
+    background: #ffc107;
+    color:#17181C;
 }
 
 .tab--content
