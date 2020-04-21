@@ -15,13 +15,13 @@
     include '../Controller/getPlayerCharacters.php';
 ?>
 <!-- </head> -->
-<title>Dungeons - Home</title>
+<title>Select Character</title>
 <?php
 echo "
 <body>
   <div class='container'>
     <div class='page-header'>
-        <h1>Manage Users</h1>
+        <h1>Select Character</h1>
     </div>
     ";
 
@@ -33,6 +33,7 @@ echo "
             <th scope='col'>Level</th>
             <th scope='col'>Class</th>
             <th scope='col'>Select</th>
+            <th scope='col'>Update</th>
             <th scope='col'>Delete</th>
           </tr>
         </thead>";
@@ -44,6 +45,7 @@ echo "
           echo "<td><text>".$characters[$i]->Level."</text></td>";
           echo "<td><text>".$characters[$i]->ClassName."</text></td>";
           echo "<td><a class='btn btn-success' href='playerCharacter.php?characterID=".$characters[$i]->Code."'>Select</a></td>";
+          echo "<td><a class='btn btn-warning' href='updateCharacter.php?characterID=".$characters[$i]->Code."'>Update</a></td>";
 
           echo "<td> <a class='btn btn-danger text-light' data-toggle='modal' data-target='#delete".$characters[$i]->Code."Modal'>DELETE</a> </td>";
           echo "<tr>";

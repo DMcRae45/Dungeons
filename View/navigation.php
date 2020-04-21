@@ -9,7 +9,11 @@
 
   <a href="index.php"><img src="images/Dungeons.png"></a>
 
-<div class="row" id="navbarSupportedContent">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
 
     <ul class="navbar-nav">
 

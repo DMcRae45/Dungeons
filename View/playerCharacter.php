@@ -56,7 +56,7 @@
 <?php
 echo "
 <div class='container-fluid p-0'>
-<form class='form-group needs-validation' action='../Controller/attemptUpdateCharacter.php' method='POST'>";
+<form class='form-group needs-validation' action='../Controller/attemptSaveCharacter.php?characterID=".$character[0]->Code."' method='POST'>";
 
   echo "
   <div class='row no-gutters border border-warning d-flex'>
@@ -68,10 +68,11 @@ echo "
         <h6 class='col-4 d-inline'>Race: <text>".$character[0]->RaceName."</text></h6>
         <h6 class='col-4 d-inline'>Class: <text>".$character[0]->ClassName."</text></h6>
         <h6 class='col-4 d-inline'>Level: <text>".$character[0]->Level."</text></h6>
+        <input style='display:none;' name='lvl' value='".$character[0]->Level."'></input>
       </div>
       <div class='row no-gutters border border-warning text-center'>
         <h6 class=' col-6 d-inline'>Alignment: <text>".$character[0]->Alignment."</text></h6>
-        <h6 class='d-inlin'>EXP: <textarea name='exp' class='col-6 d-inline custom-select text-center'>".$character[0]->Exp."</textarea></h6>
+        <h6 class='d-inline'>EXP: <textarea name='exp' class='col-6 d-inline custom-select text-center'>".$character[0]->Exp."</textarea></h6>
       </div>
     </div>
   </div>
@@ -88,7 +89,7 @@ echo "
         <h6>Max HP: <text>".$character[0]->Max_HP."</text></h6>
       </div>
       <div class='col-4'>
-        <h6>Temp HP: <text>".SetTempHP($SpellCastingAbility, $character[0]->Level)."</text></h6>
+        <h6>Temp HP: <text name='lvl'>".SetTempHP($SpellCastingAbility, $character[0]->Level)."</text></h6>
       </div>
     </div>
 
@@ -109,7 +110,7 @@ echo "
     <div class='row d-flex col-6 text-center border border-warning'>
       <div class='mx-auto'>
         <h6>Current HP</h6>
-        <textarea name='currentHP' class='col-6 custom-select text-center'>".$character[0]->HP."</textarea>
+        <input name='currentHP' type='number' class='col-6 custom-select text-center' value='".$character[0]->HP."'></input>
       </div>
     </div>
 
@@ -142,7 +143,7 @@ echo "
       </div>
     </div>
 
-    <div class='tab--container row no-gutters col-9 p-0' style='position:absolute; right:0px; overflow:scroll; height:925px;'>
+    <div class='tab--container row no-gutters col-9' style='position:absolute; right:0px; overflow-y:scroll; overflow-x:hidden; height:925px;'>
       <div class='tab--bar col-12'>
           <button type='button' class='btn btn-outline-warning tab--button' data-for-tab='1'>Equipment</button>
           <button type='button' class='btn btn-outline-warning tab--button' data-for-tab='2'>Bag</button>
@@ -177,7 +178,7 @@ echo "
             </li>
           </div>
         </div>
-        <h6><textarea name='equipmentNotes' class='col-12 parchment border-warning' style='height:800px;'>".$notes[0]->Equipment_Note."</textarea></h6>
+        <h6><textarea name='equipmentNote' class='col-12 parchment border-warning' style='height:800px;'>".$notes[0]->Equipment_Note."</textarea></h6>
       </div>
 
 
@@ -186,13 +187,13 @@ echo "
         <!-- BAG TAB -->
           <div class='row no-gutters col-12'>
           <div class='col-12'>
-            <h6 class='row no-gutters'><textarea name='pp' class='col-2 custom-select text-center'></textarea>Pp</h6>
-            <h6 class='row no-gutters'><textarea name='gp' class='col-2 custom-select text-center'></textarea>Gp</h6>
-            <h6 class='row no-gutters'><textarea name='sp' class='col-2 custom-select text-center'></textarea>Sp</h6>
-            <h6 class='row no-gutters'><textarea name='cp' class='col-2 custom-select text-center'></textarea>Cp</h6>
+            <h6 class='row no-gutters'><input type='number' name='pp' class='col-2 custom-select text-center' value='".$bag[0]->Pp."'></input>Pp</h6>
+            <h6 class='row no-gutters'><input type='number' name='gp' class='col-2 custom-select text-center' value='".$bag[0]->Gp."'></input>Gp</h6>
+            <h6 class='row no-gutters'><input type='number' name='sp' class='col-2 custom-select text-center' value='".$bag[0]->Sp."'></input>Sp</h6>
+            <h6 class='row no-gutters'><input type='number' name='cp' class='col-2 custom-select text-center' value='".$bag[0]->Cp."'></input>Cp</h6>
           </div>
 
-          <h6 class='col-12'><textarea name='bagNotes' class='col-12 parchment border-warning' style='height:800px;'>".$notes[0]->Bag_Note."</textarea></h6>
+          <h6 class='col-12'><textarea name='bagNote' class='col-12 parchment border-warning' style='height:800px;'>".$notes[0]->Bag_Note."</textarea></h6>
         </div>
 
       </div>
@@ -253,11 +254,11 @@ echo "
             echo "
           </div>
         </div>
-        <h6><textarea name='spellNotes' class='col-12 parchment border-warning' style='height:500px'>".$notes[0]->Spell_Note."</textarea></h6>
+        <h6><textarea name='spellsNote' class='col-12 parchment border-warning' style='height:500px'>".$notes[0]->Spell_Note."</textarea></h6>
       </div>
 
       <div class='tab--content row no-gutters col-12' data-tab='4'>
-        <h6><textarea name='noteNotes' class='col-12 parchment border-warning' style='height:900px;'>".$notes[0]->Notes_Note."</textarea></h6>
+        <h6><textarea name='notesNote' class='col-12 parchment border-warning' style='height:900px;'>".$notes[0]->Notes_Note."</textarea></h6>
       </div>
 
   </div> <!-- end tab--container -->
@@ -567,10 +568,11 @@ echo "
   ";
 
 echo "
-  <button class='form-control btn btn-outline-warning mt-2' type='submit' name='UpdateCharacterSubmit'>Save</button>
+  <button class='form-control btn btn-outline-warning mt-2' type='submit' name='saveCharacterSubmit'>Save</button>
 </form>
 </div>";
 ?>
+
 
 <!-- <footer> -->
 <?php

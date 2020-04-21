@@ -10,7 +10,7 @@ else
   $character = json_decode(GetCharacterByCode($_GET['characterID']));
 
   $equipped = json_decode(GetCharacterEquipment($character[0]->Code));
-
+  $bag = json_decode(GetCharacterBag($character[0]->Code));
   $armour = json_decode(GetCharacterArmour($equipped[0]->Armour_ID));
   $weapon = json_decode(GetCharacterWeapon($equipped[0]->Weapon_ID));
   $spells = json_decode(GetCharacterSpells($character[0]->Code));
