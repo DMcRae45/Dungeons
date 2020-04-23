@@ -403,6 +403,19 @@ if(isset($_GET['error']))
               </div>
           </div>
         </div>
+
+        <div class='form-row'>
+          <div class='col-12 form-group input-group'>
+            <div class='input-group-prepend'>
+              <span class='input-group-text mt-4' id='inputGroupPrepend'>Equipment Note</span>
+            </div>
+              <input class='form-control mt-4' type='text' id='equipmentNote' name='equipmentNote' placeholder='e.g. Length of Rope as a belt'>
+                <div class='invalid-feedback'>
+                  You cannot Leave This field Empty.
+                </div>
+          </div>
+        </div>
+
         <!-- END FIFTH ROW -->
 
         <div class="form-row">
@@ -476,6 +489,19 @@ if(isset($_GET['error']))
                 </div>
           </div>
         </div>
+
+        <div class='form-row'>
+          <div class='col-12 form-group input-group'>
+            <div class='input-group-prepend'>
+              <span class='input-group-text mt-4' id='inputGroupPrepend'>Spells Note</span>
+            </div>
+              <input class='form-control mt-4' type='text' id='spellsNote' name='spellsNote' placeholder='e.g. Add modifier to eldritch blast damage roll'>
+                <div class='invalid-feedback'>
+                  You cannot Leave This field Empty.
+                </div>
+          </div>
+        </div>
+        </br>
         <!-- END SIXTH ROW -->
 
         <!-- PROFICIENY TABLE -->
@@ -943,8 +969,17 @@ if(isset($_GET['error']))
         </table>
         <!-- END LANGUAGE GRID -->
 
-        <textarea name='notes' class='col-12 parchment border-warning' placeholder='Take some notes on this parchment'></textarea>
-
+        <div class='form-row'>
+          <div class='col-12 form-group input-group'>
+            <div class='input-group-prepend'>
+              <span class='input-group-text mt-4' id='inputGroupPrepend'>Notes</span>
+            </div>
+              <input class='form-control mt-4' type='text' id='notesNote' name='notesNote' placeholder='e.g. Character has a scar over an eye.'>
+                <div class='invalid-feedback'>
+                  You cannot Leave This field Empty.
+                </div>
+          </div>
+        </div>
 
     <button class="form-control btn btn-outline-warning" type="submit" name="createCharacterSubmit">Create</button>
 </form>

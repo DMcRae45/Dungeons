@@ -9,11 +9,9 @@
 
   <a href="index.php"><img src="images/Dungeons.png"></a>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+<div class="" id="navbarSupportedContent">
 
     <ul class="navbar-nav">
 
@@ -36,11 +34,17 @@
                 if(isset($_SESSION['userid']) && isset($_SESSION['username']))
                 {
                   // logged in users can see this part
+                  echo '<a class="dropdown-item" href="index.php">Home</a>';
                   echo '<a class="dropdown-item" href="screen.php">DM Screen</a>';
                   echo '<div class="dropdown-divider"></div>';  // divider between menu items
-                  echo '<a class="dropdown-item" href="allMagicItems.php">Magical Items</a>';
+                  echo '<a class="dropdown-item" href="play.php">Select Character</a>';
+                  echo '<div class="dropdown-divider"></div>';  // divider between menu items
                   echo '<a class="dropdown-item" href="allSpells.php">Spells</a>';
                   echo '<a class="dropdown-item" href="allMonsters.php">Monsters</a>';
+                  echo '<div class="dropdown-divider"></div>';
+                  echo '<a class="dropdown-item" href="RuleReference.php">Rules Reference</a>';
+                  echo '<div class="dropdown-divider"></div>';  // divider between menu items
+                  echo '<a class="dropdown-item" href="../Controller/logout.php">Logout</a>';
                 }
                 else
                 {

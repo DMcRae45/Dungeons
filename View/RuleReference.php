@@ -13,12 +13,12 @@
 			margin: 0;
 			padding: 0;
 		}
-		dt { background-color:#CAAD6B; }
+		dt { background-color:black; }
 		h3 { padding:0; margin:0; background-color:#E0E4C0; text-align:center;}
 		table.noborder, td.noborder { border-style: none;}
 		.nobackground { background:rgba(0,0,0,0);}
-		td { border: 1px solid #CAAD6B;}
-		th { border: 1px solid #CAAD6B; background-color: #CAAD6B;}
+		td { border: 1px solid black;}
+		th { border: 1px solid black; background-color: black;}
 		a { text-decoration: underline !important; font-weight: bold !important;}
 
 		/* For smaller table font */
@@ -64,8 +64,8 @@
 		    padding: .4em .4em .4em 2em;
 		    *padding: .4em;
 		    margin: .5em 0;
-		    background: #CAAD6B;
-		    color: #FFF;
+		    background: #D47E16;
+		    color: black;
 		    text-decoration: none !important;
 		    border-radius: .3em;
 		    transition: all .3s ease-out;
@@ -91,8 +91,8 @@
 	/* This is for the version number in the upper right hand corner */
 		.ribbon {
 		    background: #581A0F;
-		    border-left: 1px groove #CAAD6B;
-    		border-right: 1px groove #CAAD6B;
+		    border-left: 1px groove black;
+    		border-right: 1px groove black;
 		    border-radius: 5px 5px 0px 0px;
 		    box-shadow: 5px 0 0 #581A0F,
 		                -5px 0 0 #581A0F;
@@ -152,7 +152,6 @@
 			position: relative;
 			z-index: 2;
 			top: 0px;
-			background: #fff;
 		}
 
 		.to-top, .to-top a, .to-top a:visited {
@@ -169,7 +168,7 @@
 			letter-spacing: .05em;
 			font-variant: small-caps;
 			font-weight: bold !important;
-		    background: #581A0F;
+		    background: grey;
 
 		}
 		body {

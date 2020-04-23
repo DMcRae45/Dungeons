@@ -78,7 +78,7 @@ function CreateNewUser()
     else // Continue with the Registration
     {
       // Hash the password
-      $password = password_hash($password, PASSWORD_DEFAULT);
+      $passwordHash = password_hash($password, PASSWORD_DEFAULT);
       $passwordConfirm = "";
 
       $query = $connection->prepare
@@ -94,15 +94,29 @@ function CreateNewUser()
       ([
         'email' => $email,
         'username' => $username,
-        'password' => $password
+        'password' => $passwordHash
       ]);
 
       // If rows returned is more than 0 Let us know if it inserted or not.
       $count = $query->rowCount();
       if($count > 0)
       {
-        echo "Insert Successful";
-        //header('location: ../View/index.php');
+        $sql = "SELECT * FROM User WHERE Username = :username";
+
+        $stmt = $connection->prepare($sql);
+        $success = $stmt->execute(['username' => $username]);
+
+        if($success && $stmt->rowCount() > 0)
+        {
+          $result = $stmt->fetch();
+
+          if ($result && password_verify($password, $result['Password']))
+          {
+            $_SESSION['userid'] = $result['User_ID'];
+            $_SESSION['username'] = $result['Username'];
+            header('location: ../View/index.php');
+          }
+        }
       }
       else
       {
@@ -168,6 +182,13 @@ function AttemptUserLogin()
   }
 }
 
+function Logout()
+{
+  session_start(); // Start Session / Resume Current Session
+  session_destroy(); // Destroy Session
+  header("Location: ../View/index.php"); // Redirect to index page
+}
+
 function CreateCharacter($userid)
 {
   if ($_COOKIE['cookiebar'] == "CookieAllowed") // User Has Accepted Cookie policy
@@ -192,18 +213,22 @@ function CreateCharacter($userid)
 
       $armour = (filter_input(INPUT_POST, 'armour', FILTER_SANITIZE_STRING));
       $weapon = (filter_input(INPUT_POST, 'weapon', FILTER_SANITIZE_STRING));
-      $known = (filter_input(INPUT_POST, 'known', FILTER_SANITIZE_STRING));
+      $equipmentNote = (filter_input(INPUT_POST, 'equipmentNote', FILTER_SANITIZE_STRING));
 
       $pp = (filter_input(INPUT_POST, 'pp', FILTER_SANITIZE_STRING));
       $gp = (filter_input(INPUT_POST, 'gp', FILTER_SANITIZE_STRING));
       $sp = (filter_input(INPUT_POST, 'sp', FILTER_SANITIZE_STRING));
       $cp = (filter_input(INPUT_POST, 'cp', FILTER_SANITIZE_STRING));
+      $bagNote = (filter_input(INPUT_POST, 'bagNote', FILTER_SANITIZE_STRING));
 
-      $notes = (filter_input(INPUT_POST, 'notes', FILTER_SANITIZE_STRING));
+      $known = (filter_input(INPUT_POST, 'known', FILTER_SANITIZE_STRING));
+      $spellsNote = (filter_input(INPUT_POST, 'spellsNote', FILTER_SANITIZE_STRING));
 
       $savingThrows = "";
       $proficiencies = "";
       $languages = "";
+
+      $notesNote = (filter_input(INPUT_POST, 'notesNote', FILTER_SANITIZE_STRING));
 
       // for each index in the savingThrows array create a single String
       for($i = 0; $i < sizeof($_POST['savingThrow']); $i++)
@@ -304,8 +329,8 @@ function CreateCharacter($userid)
       {
         EquipItems($code, $armour, $weapon);
         LearnSpells($code, $known);
-        TakeNotes($code, $notes);
-        GiveMoney($code, $Pp, $Gp, $Sp, $Cp);
+        TakeNotes($code, $equipmentNote, $bagNote, $spellsNote, $notesNote);
+        GiveMoney($code, $pp, $gp, $sp, $cp);
         //header('location: ../View/index.php');
       }
       else
@@ -371,7 +396,7 @@ function LearnSpells($code, $known)
   }
 }
 
-function TakeNotes($code, $notes)
+function TakeNotes($code, $equipmentNote, $bagNote, $spellsNote, $notesNote)
 {
   if (isset($_POST["createCharacterSubmit"]))
   {
@@ -380,7 +405,7 @@ function TakeNotes($code, $notes)
     ("
 
     INSERT INTO Notes
-    VALUES(:code, :equipmentNotes, :bagNotes, :spellNotes, :noteNotes)
+    VALUES(:code, :equipmentNotes, :bagNotes, :spellNotes, :notesNote)
 
     ");
 
@@ -388,16 +413,16 @@ function TakeNotes($code, $notes)
     $success = $query->execute
     ([
       'code' => $code,
-      'equipmentNotes' => "Take notes for equipment here",
-      'bagNotes'=> "Take notes for you bag here",
-      'spellNotes'=> "Take notes for spells here",
-      'notes' => $notes
+      'equipmentNotes' => $equipmentNote,
+      'bagNotes'=> $bagNote,
+      'spellNotes'=> $spellsNote,
+      'notesNote' => $notesNote
     ]);
     $connection = NULL;
   }
 }
 
-function GiveMoney()
+function GiveMoney($code, $pp, $gp, $sp, $cp)
 {
   if (isset($_POST["createCharacterSubmit"]))
   {
@@ -888,19 +913,6 @@ function RemoveObject($array)
   return $array;
 }
 
-function Roll()
-{
-  $amount = (filter_input(INPUT_POST, 'amount', FILTER_SANITIZE_NUMBER));
-  $dice = (filter_input(INPUT_POST, 'dice', FILTER_SANITIZE_NUMBER));
-
-  $count = 0;
-  while ($count <= $amount)
-  {
-    $number = Rand(1,$dice);
-    echo $number;
-  }
-}
-
 function DeleteCharacterByCode($code)
 {
   require 'connection.php';
@@ -920,6 +932,15 @@ function DeleteCharacterByCode($code)
     "DELETE FROM Equipment WHERE Equipment_ID = :code"
   );
   $success = $stmtEquipment->execute
+  ([
+    'code' => $code
+  ]);
+  // Delete BAG
+  $stmtBag = $connection->prepare
+  (
+    "DELETE FROM Bag WHERE Bag_ID = :code"
+  );
+  $success = $stmtBag->execute
   ([
     'code' => $code
   ]);
@@ -993,6 +1014,33 @@ function SaveCharacter($code)
       echo "Notes unchanged";
     }
 
+    $stmtEquipment = $connection->prepare
+    ("
+
+    UPDATE Bag SET Pp = :pp, Gp = :gp, Sp = :sp, Cp = :cp
+    WHERE Bag_ID = :code;
+
+    ");
+
+    // Runs and executes the query
+    $successEquipment = $stmtEquipment->execute
+    ([
+      'pp' => $pp,
+      'gp' => $gp,
+      'sp' => $sp,
+      'cp' => $cp,
+      'code' => $code
+    ]);
+
+    if($successEquipment && $stmtEquipment->rowCount() > 0)
+    {
+      echo "bag updated";
+    }
+    else
+    {
+      echo "bag unchanged";
+    }
+
     $stmtCharacter = $connection->prepare
     ("
 
@@ -1023,7 +1071,7 @@ function SaveCharacter($code)
     }
     else
     {
-      echo "Character Unchanged";
+      header('Location: ../View/playerCharacter.php?characterID='.$code);
     }
     $connection = null;
   }
@@ -1069,7 +1117,6 @@ function UpdateCharacter($code)
       $languages = "";
 
       $notesNote = (filter_input(INPUT_POST, 'notesNote', FILTER_SANITIZE_STRING));
-
 
       // for each index in the savingThrows array create a single String
       for($i = 0; $i < sizeof($_POST['savingThrow']); $i++)
@@ -1149,11 +1196,96 @@ function UpdateCharacter($code)
         'code' => $code
       ]);
 
+      if($successNotes && $stmtNotes->rowCount() > 0)
+      {
+        echo "notes updated";
+      }
+      else
+      {
+        echo "notes unchanged";
+      }
+
+      $stmtEquipment = $connection->prepare
+      ("
+
+      UPDATE Equipment SET Armour_ID = :armour, Weapon_ID = :weapon
+      WHERE Equipment_ID = :code;
+
+      ");
+
+      // Runs and executes the query
+      $successEquipment = $stmtEquipment->execute
+      ([
+        'armour' => $armour,
+        'weapon' => $weapon,
+        'code' => $code
+      ]);
+
+      if($successEquipment && $stmtEquipment->rowCount() > 0)
+      {
+        echo "equipment updated";
+      }
+      else
+      {
+        echo "equipment unchanged";
+      }
+
+      $stmtEquipment = $connection->prepare
+      ("
+
+      UPDATE Bag SET Pp = :pp, Gp = :gp, Sp = :sp, Cp = :cp
+      WHERE Bag_ID = :code;
+
+      ");
+
+      // Runs and executes the query
+      $successEquipment = $stmtEquipment->execute
+      ([
+        'pp' => $pp,
+        'gp' => $gp,
+        'sp' => $sp,
+        'cp' => $cp,
+        'code' => $code
+      ]);
+
+      if($successEquipment && $stmtEquipment->rowCount() > 0)
+      {
+        echo "bag updated";
+      }
+      else
+      {
+        echo "bag unchanged";
+      }
+
+      $stmtSpells = $connection->prepare
+      ("
+
+      UPDATE Spellbook SET Known = :known
+      WHERE Spellbook_ID = :code;
+
+      ");
+
+      // Runs and executes the query
+      $successSpells = $stmtSpells->execute
+      ([
+        'known' => $known,
+        'code' => $code
+      ]);
+
+      if($successSpells && $stmtSpells->rowCount() > 0)
+      {
+        echo "spells updated";
+      }
+      else
+      {
+        echo "spells unchanged";
+      }
+
       $newLvl = ExpToLevel($exp);
       $stmtCharacter = $connection->prepare
       ("
 
-      UPDATE Player_Character SET Name = :name, Exp = :exp, Level = :newLvl, Max_HP = :maxHp,
+      UPDATE Player_Character SET Name = :name, Alignment = :alignment, Exp = :exp, Level = :lvl, RaceName = :race, ClassName = :class, AC = :ac, Max_HP = :maxhp, Strength = :str, Dexterity = :dex, Constitution = :con, Intelligence = :int, Wisdom = :wis, Charisma = :cha, Saving_Throws = :savingThrows, Proficiencies = :proficiencies, Language = :languages
       WHERE Code = :code;
 
       ");
@@ -1161,18 +1293,33 @@ function UpdateCharacter($code)
       // Runs and executes the query
       $successCharacter = $stmtCharacter->execute
       ([
+        'name' => $name,
+        'alignment' => $alignment,
         'exp' => $exp,
-        'maxHp' => $maxHp
+        'lvl' => $lvl,
+        'race' => $race,
+        'class' => $class,
+        'ac' => $ac,
+        'maxhp' => $maxHp,
+        'str' => $STR,
+        'dex' => $DEX,
+        'con' => $CON,
+        'int' => $INT,
+        'wis' => $WIS,
+        'cha' => $CHA,
+        'savingThrows' => $savingThrows,
+        'proficiencies' => $proficiencies,
+        'languages' => $languages,
+        'code' => $code
       ]);
 
       if($successCharacter && $stmtCharacter->rowCount() > 0)
       {
-
+        echo "character updated";
       }
       else
       {
-        $error = "error"; // error finding weapons
-        return $error; // error for Controller file
+        echo "character unchanged";
       }
     }
     $connection = null;

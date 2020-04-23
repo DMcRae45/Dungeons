@@ -11,8 +11,11 @@ if(isset($_SESSION['userid']))
   {
     include '../Model/dungeons_API.php';
 
-    UpdateCharacter($_GET['characterID']);
+    $code = $_GET['characterID'];
 
+    UpdateCharacter($code);
+
+    header('Location: ../View/playerCharacter.php?characterID='.$code);
   }
   else
   {

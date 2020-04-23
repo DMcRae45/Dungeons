@@ -15,7 +15,5 @@ else
   session_start();
 
   CreateNewUser();
-
-  header('Location: ../View/index.php');
 }
 ?>

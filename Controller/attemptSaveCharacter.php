@@ -10,7 +10,6 @@ if(isset($_POST["saveCharacterSubmit"]))
   include '../Model/dungeons_API.php';
   $code = $_GET['characterID'];
   SaveCharacter($code);
-//  header('Location: ../View/playerCharacter.php?characterID='.$code);
 }
 else
 {

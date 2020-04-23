@@ -142,7 +142,7 @@ echo "
             <div class='input-group-prepend'>
               <span class='input-group-text mt-4' id='inputGroupPrepend'>EXP</span>
             </div>
-              <input class='form-control mt-4' type='text' id='exp' name='exp' value='".$character[0]->Exp."'>
+              <input class='form-control mt-4' type='number' id='exp' name='exp' value='".$character[0]->Exp."'>
                 <div class='invalid-feedback'>
                   You cannot Leave This field Empty.
                 </div>
@@ -156,7 +156,7 @@ echo "
             <div class='input-group-prepend'>
               <span class='input-group-text mt-4' id='inputGroupPrepend'>AC</span>
             </div>
-              <input class='form-control mt-4' type='text' id='ac' name='ac' value='".$character[0]->AC."'>
+              <input class='form-control mt-4' type='number' id='ac' name='ac' value='".$character[0]->AC."'>
                 <div class='invalid-feedback'>
                   You cannot Leave This field Empty.
                 </div>

@@ -143,7 +143,7 @@ echo "
       </div>
     </div>
 
-    <div class='tab--container row no-gutters col-9' style='position:absolute; right:0px; overflow-y:scroll; overflow-x:hidden; height:925px;'>
+    <div class='tab--container row no-gutters col-9' style='position:absolute; right:0px; overflow-y:scroll; overflow-x:hidden; height:1025px;'>
       <div class='tab--bar col-12'>
           <button type='button' class='btn btn-outline-warning tab--button' data-for-tab='1'>Equipment</button>
           <button type='button' class='btn btn-outline-warning tab--button' data-for-tab='2'>Bag</button>
@@ -201,7 +201,7 @@ echo "
       <div class='tab--content row no-gutters col-12' data-tab='3'>
 
         <!-- SPELL TABS -->
-        <div class='no-gutters d-flex' id='Spells'>
+        <div class='no-gutters' id='Spells'>
           <div class='col-12 row no-gutters'>
             ";
             for ($i=0 ; $i < sizeof($spellsKnown[0]) ; $i++)
@@ -258,7 +258,7 @@ echo "
       </div>
 
       <div class='tab--content row no-gutters col-12' data-tab='4'>
-        <h6><textarea name='notesNote' class='col-12 parchment border-warning' style='height:900px;'>".$notes[0]->Notes_Note."</textarea></h6>
+        <h6><textarea name='notesNote' class='col-12 parchment border-warning' style='height:1100px;'>".$notes[0]->Notes_Note."</textarea></h6>
       </div>
 
   </div> <!-- end tab--container -->
@@ -562,8 +562,15 @@ echo "
         </ul>
       </div>
     </div>
+  </div>
 
-
+  <div class='col-3 border border-warning'>
+  <div class='text-center'>
+    <h6>Languages</h6>
+  </div>
+    <div class='row pl-3 pr-3'>
+      <h6><text>".$character[0]->Language."</text></h6>
+    </div>
   </div>
   ";
 
