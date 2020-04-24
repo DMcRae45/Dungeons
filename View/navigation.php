@@ -10,7 +10,6 @@
   <a href="index.php"><img src="images/Dungeons.png"></a>
 
 
-
 <div class="" id="navbarSupportedContent">
 
     <ul class="navbar-nav">
@@ -77,7 +76,7 @@
       <h6 id='RollResult'></h6>
     </div>
 
-    <div id="openDice">
-      <a class="btn" onclick="openNav()"><img src="images/D20_100.png"></a>
+    <div class='float-right' id="openDice">
+      <a class="btn float-right" onclick="openNav()"><img class ='float-right' src="images/D20_100.png"></a>
     </div>
 </nav>

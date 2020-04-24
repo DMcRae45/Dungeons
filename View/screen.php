@@ -15,7 +15,6 @@
 <!-- </head> -->
 <title>Dungeons - Screen</title>
 <?php
-
 echo "<div class='container-fluid mt-2'>"; // container open
 // Character Row
 include 'displayCharacters.php';

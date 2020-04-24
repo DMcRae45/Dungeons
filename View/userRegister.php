@@ -87,7 +87,7 @@ if(isset($_GET['error']))
           <!-- Terms and Conditions CheckBox -->
           <div class="form-group input-group">
             <div class="input-group-prepend">
-            <a href="TermsAndConditions.php" class="btn input-group-text btn-outline-info">Terms & Conditions</a>
+            <a href="termsAndConditions.php" class="btn input-group-text btn-outline-info">Terms & Conditions</a>
             </div>
             <div class="input-group-text">
               <input type="checkbox" value="" id="invalidCheck" required>
