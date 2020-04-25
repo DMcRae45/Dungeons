@@ -29,6 +29,7 @@ echo "
     <table class='table border border-dark text-center'>
       <thead class='thead-dark'>
           <tr>
+            <th scope='col'>Code</th>
             <th scope='col'>Name</th>
             <th scope='col'>Level</th>
             <th scope='col'>Class</th>
@@ -41,6 +42,7 @@ echo "
         for ($i=0 ; $i < sizeof($characters) ; $i++)
         {
           echo "<tr>";
+          echo "<td><text>".$characters[$i]->Code."</text></td>";
           echo "<td><text>".$characters[$i]->Name."</text></td>";
           echo "<td><text>".$characters[$i]->Level."</text></td>";
           echo "<td><text>".$characters[$i]->ClassName."</text></td>";
